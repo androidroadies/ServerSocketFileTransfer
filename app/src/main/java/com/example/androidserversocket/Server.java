@@ -657,12 +657,15 @@ public class Server extends Activity {
 
                         if (isDevice3 && isLayout1 == true) {
 
-                            cropL1(myBitmap);//4 part
+                            cropL2(myBitmap);//4 part
+//                            cropL1(myBitmap);//4 part
 
                         }
                         if (isDevice3 && isLayout2 == true) {
-                            cropL2(myBitmap);//4 part
+//                            cropL2(myBitmap);//4 part
+                            cropL1(myBitmap);//4 part
                         }
+
                         if (isDevice3 && isLayout3 == true) {
                             cropL3(myBitmap);//4 part
                         }
