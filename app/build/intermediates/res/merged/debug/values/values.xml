@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_light_blue">#EBF5FF</color>
+    <color name="btn_line_blue">#3f5185</color>
+    <color name="colorAccent">#536DFE</color>
+    <color name="colorBackground">#fff3f3f3</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorDivider">#B6B6B6</color>
+    <color name="colorFacebook">#3b5998</color>
+    <color name="colorGoogle">#d34836</color>
+    <color name="colorLightTransperent">#DFFFFFFF</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryLight">#C5CAE9</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#727272</color>
+    <color name="colorTransperent">#00ffffff</color>
+    <color name="colorWhite">#fff</color>
+    <color name="dialog_bg">#f0f0f0</color>
+    <color name="gray">#dddddd</color>
+    <color name="holo_blue_bright">#ff00ddff</color>
+    <color name="light_black">#CC000000</color>
+    <color name="light_black_">#33000000</color>
+    <color name="light_black_AA">#AA000000</color>
+    <color name="light_gray">#AA808080</color>
+    <color name="light_white_">#33FFFFFF</color>
+    <color name="menu_bg">#101F2D</color>
+    <color name="tab_bg">#142029</color>
+    <color name="white">#fff</color>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="photo_height">110dp</dimen>
+    <dimen name="photo_width">110dp</dimen>
+    <drawable name="light_black_">#33000000</drawable>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">AndroidServerSocket</string>
+    <string name="btn_pick">Pick From Gallery</string>
+    <string name="btn_pick_mul">Pick From Gallery (Multiple)</string>
+    <string name="camera">Use Camera</string>
+    <string name="choice">Select your choice</string>
+    <string name="gallery">Use Gallery</string>
+    <string name="hello_world">Hello world!</string>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="btn">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="title_bar">
+        <item name="android:textColor">#d9f3ff</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+</resources>

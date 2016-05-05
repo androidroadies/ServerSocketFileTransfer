@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_launcher.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ball_horizontal.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable-xxhdpi\\ball_horizontal.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ball_vertical.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable-xxhdpi\\ball_vertical.png"
+    }
+]

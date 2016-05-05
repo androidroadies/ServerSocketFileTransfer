@@ -1,0 +1,62 @@
+[
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\on_focus_checkbox.xml",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\on_focus_checkbox.xml"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\checkbox_up.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\checkbox_up.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\screen_4.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\screen_4.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\h_2.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\h_2.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\checkbox_selected.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\checkbox_selected.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\top_bar.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\top_bar.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\v_2.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\v_2.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_hover.9.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\btn_hover.9.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_sel.xml",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\btn_sel.xml"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\no_media.jpg",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\no_media.jpg"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\v_4.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\v_4.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\h_4.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\h_4.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn.9.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\btn.9.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\h_3.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\h_3.png"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\v_3.png",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\v_3.png"
+    }
+]
