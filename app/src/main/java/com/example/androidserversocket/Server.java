@@ -33,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cropimageview.ViewCropImageSlice;
 import testhotspot.WifiApManager;
@@ -52,7 +53,7 @@ public class Server extends Activity {
     ServerSocket serverSocket;
     Button btnServerSend, btnChoose, btnSelectPhoto, btnCreateGroup, btnOneDevice, btnTwoDevice, btnThreeDevice;
     Button btnL1, btnL2, btnL3, btnDone;
-    ImageView img1, img2, img3;
+    ImageView img1, img2, img3,imageView;
 
     Boolean isDevice1 = false, isDevice2 = false, isDevice3 = false;
     Boolean isLayout1 = false, isLayout2 = false, isLayout3 = false;
@@ -64,7 +65,7 @@ public class Server extends Activity {
     String path = "";
 
     RelativeLayout relmain1, rel1, rel2, rel3;
-    LinearLayout linmain1;
+    LinearLayout linmain1,linmain2;
 
     wifiHotSpots hotutil;
     WifiStatus wifiStatus;
@@ -96,6 +97,8 @@ public class Server extends Activity {
         img2 = (ImageView) findViewById(R.id.img2);
         img3 = (ImageView) findViewById(R.id.img3);
 
+        imageView = (ImageView) findViewById(R.id.imageView);
+
         rel1 = (RelativeLayout) findViewById(R.id.rel1);
         rel2 = (RelativeLayout) findViewById(R.id.rel2);
         rel3 = (RelativeLayout) findViewById(R.id.rel3);
@@ -111,6 +114,7 @@ public class Server extends Activity {
 
                 relmain1.setVisibility(View.VISIBLE);
                 linmain1.setVisibility(View.GONE);
+                linmain2.setVisibility(View.GONE);
 
             }
         });
@@ -213,8 +217,11 @@ public class Server extends Activity {
 
         relmain1 = (RelativeLayout) findViewById(R.id.relMain1);
         linmain1 = (LinearLayout) findViewById(R.id.linMain1);
+        linmain2 = (LinearLayout) findViewById(R.id.linMain2);
+
 
         linmain1.setVisibility(View.VISIBLE);
+        linmain2.setVisibility(View.GONE);
         relmain1.setVisibility(View.GONE);
 
         btnDone = (Button) findViewById(R.id.btnDone);
@@ -223,6 +230,20 @@ public class Server extends Activity {
             public void onClick(View v) {
                 relmain1.setVisibility(View.GONE);
                 linmain1.setVisibility(View.VISIBLE);
+                linmain2.setVisibility(View.GONE);
+
+                rel1.setVisibility(View.GONE);
+                rel2.setVisibility(View.GONE);
+                rel3.setVisibility(View.GONE);
+
+                btnL1.setVisibility(View.GONE);
+                btnL2.setVisibility(View.GONE);
+                btnL3.setVisibility(View.GONE);
+
+                btnOneDevice.setBackgroundColor(Color.GRAY);
+                btnTwoDevice.setBackgroundColor(Color.GRAY);
+                btnThreeDevice.setBackgroundColor(Color.GRAY);
+
             }
         });
 
@@ -339,40 +360,80 @@ public class Server extends Activity {
 
                 System.out.println("socket " + socketArray.size());
 
-                SharedPreferences shre1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                if (socketArray.size() > 0) {
+                    SharedPreferences shre1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-                String previouslyEncodedImagep1 = shre1.getString("image_datap1", "");
-                String previouslyEncodedImagep2 = shre1.getString("image_datap2", "");
-                String previouslyEncodedImagep3 = shre1.getString("image_datap3", "");
-                String previouslyEncodedImagep4 = shre1.getString("image_datap4", "");
+                    String previouslyEncodedImagep1 = shre1.getString("image_datap1", "");
+                    String previouslyEncodedImagep2 = shre1.getString("image_datap2", "");
+                    String previouslyEncodedImagep3 = shre1.getString("image_datap3", "");
+                    String previouslyEncodedImagep4 = shre1.getString("image_datap4", "");
 //
-                for (int i = 0; i < socketArray.size(); i++) {
 
-                    System.out.println("array :" + socketArray.get(i));
+                    for (int i = 0; i < socketArray.size(); i++) {
 
-                    if (socketArray.size() == 1) {
-                        SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(socketArray.get(0), previouslyEncodedImagep1);
-                        socketServerReplyThread.run();
+                        System.out.println("array :" + socketArray.get(i));
+
+                        if (socketArray.size() == 1) {
+                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(socketArray.get(0), previouslyEncodedImagep1);
+                            socketServerReplyThread.run();
+
+                            linmain1.setVisibility(View.GONE);
+                            linmain2.setVisibility(View.VISIBLE);
+                            relmain1.setVisibility(View.GONE);
+
+                            if( !previouslyEncodedImagep2.equalsIgnoreCase("") ){
+                                byte[] b2 = Base64.decode(previouslyEncodedImagep2, Base64.DEFAULT);
+                                Bitmap bitmapp2 = BitmapFactory.decodeByteArray(b2, 0, b2.length);
+                                imageView.setImageBitmap(bitmapp2);
+                            }
+
+                        }
+                        if (socketArray.size() == 2) {
+                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(socketArray.get(0), previouslyEncodedImagep1);
+                            socketServerReplyThread.run();
+
+                            socketServerReplyThread = new SocketServerReplyThread(socketArray.get(1), previouslyEncodedImagep2);
+                            socketServerReplyThread.run();
+
+                            linmain1.setVisibility(View.GONE);
+                            linmain2.setVisibility(View.VISIBLE);
+                            relmain1.setVisibility(View.GONE);
+
+                            if( !previouslyEncodedImagep3.equalsIgnoreCase("") ){
+                                byte[] b3 = Base64.decode(previouslyEncodedImagep3, Base64.DEFAULT);
+                                Bitmap bitmapp3 = BitmapFactory.decodeByteArray(b3, 0, b3.length);
+                                imageView.setImageBitmap(bitmapp3);
+                            }
+                        }
+                        if (socketArray.size() == 3) {
+                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(socketArray.get(0), previouslyEncodedImagep1);
+                            socketServerReplyThread.run();
+
+                            socketServerReplyThread = new SocketServerReplyThread(socketArray.get(1), previouslyEncodedImagep2);
+                            socketServerReplyThread.run();
+
+                            socketServerReplyThread = new SocketServerReplyThread(socketArray.get(2), previouslyEncodedImagep3);
+                            socketServerReplyThread.run();
+
+                            linmain1.setVisibility(View.GONE);
+                            linmain2.setVisibility(View.VISIBLE);
+                            relmain1.setVisibility(View.GONE);
+
+
+                            if( !previouslyEncodedImagep4.equalsIgnoreCase("") ){
+                                byte[] b4 = Base64.decode(previouslyEncodedImagep4, Base64.DEFAULT);
+                                Bitmap bitmapp4 = BitmapFactory.decodeByteArray(b4, 0, b4.length);
+                                imageView.setImageBitmap(bitmapp4);
+                            }
+
+                        }
                     }
-                    if (socketArray.size() == 2) {
-                        SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(socketArray.get(0), previouslyEncodedImagep1);
-                        socketServerReplyThread.run();
 
-                        socketServerReplyThread = new SocketServerReplyThread(socketArray.get(1), previouslyEncodedImagep2);
-                        socketServerReplyThread.run();
-                    }
-                    if (socketArray.size() == 3) {
-                        SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(socketArray.get(0), previouslyEncodedImagep1);
-                        socketServerReplyThread.run();
 
-                        socketServerReplyThread = new SocketServerReplyThread(socketArray.get(1), previouslyEncodedImagep2);
-                        socketServerReplyThread.run();
 
-                        socketServerReplyThread = new SocketServerReplyThread(socketArray.get(2), previouslyEncodedImagep3);
-                        socketServerReplyThread.run();
-                    }
+                }else {
+                    Toast.makeText(context,"Please Connect Your Device First.!",Toast.LENGTH_LONG).show();
                 }
-
             }
         });
         infoip.setText(getIpAddress());
@@ -668,6 +729,9 @@ public class Server extends Activity {
 
                         if (isDevice3 && isLayout3 == true) {
                             cropL3(myBitmap);//4 part
+                        }else {
+
+                            Toast.makeText(context,"Choose Device First.!",Toast.LENGTH_LONG).show();
                         }
 //                        cropL1(myBitmap);//4 part
 //                        cropL2(myBitmap);//4 part

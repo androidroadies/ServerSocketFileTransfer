@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,6 +65,8 @@ public class Client extends Activity {
     //    SimpleAsynTask mTask;
     wifiAddresses au;
 
+    LinearLayout lin1,lin2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +78,12 @@ public class Client extends Activity {
         buttonClear = (Button) findViewById(R.id.clear);
         textResponse = (TextView) findViewById(R.id.response);
         imageView = (ImageView) findViewById(R.id.imageView);
+
+        lin1 = (LinearLayout) findViewById(R.id.lin1);
+        lin2 = (LinearLayout) findViewById(R.id.lin2);
+
+        lin1.setVisibility(View.VISIBLE);
+        lin2.setVisibility(View.INVISIBLE);
 
         editTextAddress.setText("192.168.43.1");
 
@@ -143,6 +152,15 @@ public class Client extends Activity {
 			Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 			System.out.println("bitmap post:"  + decodedByte);
 			imageView.setImageBitmap(decodedByte);
+
+            if (decodedByte == null){
+                lin1.setVisibility(View.VISIBLE);
+                lin2.setVisibility(View.INVISIBLE);
+            }else {
+                lin2.setVisibility(View.VISIBLE);
+                lin1.setVisibility(View.INVISIBLE);
+                imageView.setImageBitmap(decodedByte);
+            }
 
             }
         };
