@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -100,8 +101,11 @@ public class Client extends Activity {
             @Override
             public void onClick(View v) {
 
-                joinFriend(wifiStatus, hotutil);
-                hotutil.connectToHotspot("SSID", "");
+//                joinFriend(wifiStatus, hotutil);
+//                hotutil.connectToHotspot("SSID", "");
+
+                startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+
             }
         });
 

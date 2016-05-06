@@ -700,18 +700,22 @@ public class Server extends Activity {
 
                         if (isDevice1 && isLayout1 == true) {
                             cropHorizontal2Part(myBitmap);//2 part
+                            btnServerSend.setVisibility(View.VISIBLE);
                         }
                         if (isDevice1 && isLayout2 == true) {
                             cropvertical2Part(myBitmap);//2 part
+                            btnServerSend.setVisibility(View.VISIBLE);
                         }
 //                        cropHorizontal2Part(myBitmap);//2 part
 //                        cropvertical2Part(myBitmap);//2 part
 
                         if (isDevice2 && isLayout1 == true) {
                             cropHorizontal(myBitmap);//3 part
+                            btnServerSend.setVisibility(View.VISIBLE);
                         }
                         if (isDevice2 && isLayout2 == true) {
                             cropvertical(myBitmap);//3 part
+                            btnServerSend.setVisibility(View.VISIBLE);
                         }
 //                        cropHorizontal(myBitmap);//3 part
 //                        cropvertical(myBitmap);//3 part
@@ -720,19 +724,24 @@ public class Server extends Activity {
 
                             cropL2(myBitmap);//4 part
 //                            cropL1(myBitmap);//4 part
+                            btnServerSend.setVisibility(View.VISIBLE);
 
                         }
                         if (isDevice3 && isLayout2 == true) {
 //                            cropL2(myBitmap);//4 part
                             cropL1(myBitmap);//4 part
+                            btnServerSend.setVisibility(View.VISIBLE);
                         }
 
                         if (isDevice3 && isLayout3 == true) {
                             cropL3(myBitmap);//4 part
-                        }else {
-
-                            Toast.makeText(context,"Choose Device First.!",Toast.LENGTH_LONG).show();
+                            btnServerSend.setVisibility(View.VISIBLE);
                         }
+//                        else {
+//
+//                            Toast.makeText(context,"Choose Device First.!",Toast.LENGTH_LONG).show();
+//                        }
+
 //                        cropL1(myBitmap);//4 part
 //                        cropL2(myBitmap);//4 part
 //                        cropL3(myBitmap);//4 part
@@ -790,8 +799,8 @@ public class Server extends Activity {
 
         edit.commit();
 
-        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
-        startActivity(in);
+//        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
+//        startActivity(in);
 
     }
 
@@ -827,8 +836,8 @@ public class Server extends Activity {
         edit.putString("image_datap2", encodedImageP2);
         edit.commit();
 
-        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
-        startActivity(in);
+//        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
+//        startActivity(in);
     }
 
     /**
@@ -893,8 +902,8 @@ public class Server extends Activity {
         edit.putString("image_datap4", encodedImagep4);
         edit.commit();
 
-        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
-        startActivity(in);
+//        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
+//        startActivity(in);
 
     }
 
@@ -962,8 +971,8 @@ public class Server extends Activity {
         edit.putString("image_datap4", encodedImagep4);
         edit.commit();
 
-        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
-        startActivity(in);
+//        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
+//        startActivity(in);
     }
 
 
@@ -1029,8 +1038,8 @@ public class Server extends Activity {
         edit.putString("image_datap4", encodedImagep4);
         edit.commit();
 
-        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
-        startActivity(in);
+//        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
+//        startActivity(in);
     }
 
 
@@ -1083,8 +1092,8 @@ public class Server extends Activity {
         edit.putString("image_datap3", encodedImagep3);
         edit.commit();
 
-        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
-        startActivity(in);
+//        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
+//        startActivity(in);
     }
 
 
@@ -1138,8 +1147,8 @@ public class Server extends Activity {
         edit.putString("image_datap3", encodedImagep3);
         edit.commit();
 
-        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
-        startActivity(in);
+//        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
+//        startActivity(in);
     }
 
 //	private void storeSliceinPref() {

@@ -1,26 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
+<items version="2" />
 
-    <item
-        jar="F:\Testing\AndroidServerSocket\app\libs\universal-image-loader-1.9.0.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="f667a2f4f27542fe11a6781f5f7ac572d27afcec">
-        <dex dex="F:\Testing\AndroidServerSocket\app\build\intermediates\transforms\dex\debug\folders\1000\2\universal-image-loader-1.9.0_03b8095110dd05c0df4ca561deaca25f165a1605\classes.dex" />
-    </item>
-    <item
-        jar="F:\Testing\AndroidServerSocket\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="f239c70fb88117e0bc82157d027245b68176b4b9">
-        <dex dex="F:\Testing\AndroidServerSocket\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_72e9793485b03a1bfd964d31acebde342e069253\classes.dex" />
-    </item>
-    <item
-        jar="F:\Testing\AndroidServerSocket\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="b376fa28883a76c109f4d5b1948622248b3e36a1">
-        <dex dex="F:\Testing\AndroidServerSocket\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_271e99d2b817dc8d1d90ed307ed22722ed367779\classes.dex" />
-    </item>
-
-</items>

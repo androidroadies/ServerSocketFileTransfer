@@ -36,12 +36,12 @@
         "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\titlebar.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_choose_image.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\dialog_choose_image.xml"
-    },
-    {
         "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\choose_action.xml",
         "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\choose_action.xml"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_choose_image.xml",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\dialog_choose_image.xml"
     },
     {
         "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\send_image.xml",

@@ -32,12 +32,12 @@
         "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\btn_hover.9.png"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_sel.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\btn_sel.xml"
-    },
-    {
         "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\no_media.jpg",
         "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\no_media.jpg"
+    },
+    {
+        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_sel.xml",
+        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\drawable\\btn_sel.xml"
     },
     {
         "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\v_4.png",
