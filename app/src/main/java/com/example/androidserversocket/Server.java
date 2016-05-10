@@ -58,7 +58,7 @@ public class Server extends Activity {
     Boolean isDevice1 = false, isDevice2 = false, isDevice3 = false;
     Boolean isLayout1 = false, isLayout2 = false, isLayout3 = false;
     Socket socket;
-    ArrayList<Socket> socketArray = new ArrayList<Socket>();
+//    ArrayList<Socket> socketArray = new ArrayList<Socket>();
     Context context;
     final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 1;
     final int PICK_IMAGE_FROM_GALLARY = 5;
@@ -358,9 +358,9 @@ public class Server extends Activity {
             @Override
             public void onClick(View v) {
 
-                System.out.println("socket " + socketArray.size());
+                System.out.println("socket " + Appconfig.socketArray.size());
 
-                if (socketArray.size() > 0) {
+                if (Appconfig.socketArray.size() > 0) {
                     SharedPreferences shre1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
                     String previouslyEncodedImagep1 = shre1.getString("image_datap1", "");
@@ -369,12 +369,12 @@ public class Server extends Activity {
                     String previouslyEncodedImagep4 = shre1.getString("image_datap4", "");
 //
 
-                    for (int i = 0; i < socketArray.size(); i++) {
+                    for (int i = 0; i < Appconfig.socketArray.size(); i++) {
 
-                        System.out.println("array :" + socketArray.get(i));
+                        System.out.println("array :" + Appconfig.socketArray.get(i));
 
-                        if (socketArray.size() == 1) {
-                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(socketArray.get(0), previouslyEncodedImagep1);
+                        if (Appconfig.socketArray.size() == 1) {
+                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
                             socketServerReplyThread.run();
 
                             linmain1.setVisibility(View.GONE);
@@ -388,11 +388,11 @@ public class Server extends Activity {
                             }
 
                         }
-                        if (socketArray.size() == 2) {
-                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(socketArray.get(0), previouslyEncodedImagep1);
+                        if (Appconfig.socketArray.size() == 2) {
+                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
                             socketServerReplyThread.run();
 
-                            socketServerReplyThread = new SocketServerReplyThread(socketArray.get(1), previouslyEncodedImagep2);
+                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), previouslyEncodedImagep2);
                             socketServerReplyThread.run();
 
                             linmain1.setVisibility(View.GONE);
@@ -405,14 +405,14 @@ public class Server extends Activity {
                                 imageView.setImageBitmap(bitmapp3);
                             }
                         }
-                        if (socketArray.size() == 3) {
-                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(socketArray.get(0), previouslyEncodedImagep1);
+                        if (Appconfig.socketArray.size() == 3) {
+                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
                             socketServerReplyThread.run();
 
-                            socketServerReplyThread = new SocketServerReplyThread(socketArray.get(1), previouslyEncodedImagep2);
+                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), previouslyEncodedImagep2);
                             socketServerReplyThread.run();
 
-                            socketServerReplyThread = new SocketServerReplyThread(socketArray.get(2), previouslyEncodedImagep3);
+                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(2), previouslyEncodedImagep3);
                             socketServerReplyThread.run();
 
                             linmain1.setVisibility(View.GONE);
@@ -488,14 +488,14 @@ public class Server extends Activity {
                     public void run() {
                         info.setText("I'm waiting here: "
                                 + serverSocket.getLocalPort());
-                        System.out.println("test2 ;");
+                        System.out.println("test2 server;");
                     }
                 });
 
                 while (true) {
                     socket = serverSocket.accept();
 
-                    socketArray.add(count, socket);
+                    Appconfig.socketArray.add(count, socket);
                     count++;
                     message += "#" + count + " from " + socket.getInetAddress()
                             + ":" + socket.getPort() + "\n";
@@ -521,7 +521,7 @@ public class Server extends Activity {
 
     }
 
-    private class SocketServerReplyThread extends Thread {
+    public class SocketServerReplyThread extends Thread {
 
         private Socket hostThreadSocket;
         String strPathSend;

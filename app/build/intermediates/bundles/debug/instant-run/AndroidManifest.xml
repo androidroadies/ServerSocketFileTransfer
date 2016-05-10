@@ -45,6 +45,14 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name="com.example.androidserversocket.ServerText"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.androidserversocket.ClientText"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name="cropimageview.ViewCropImageSlice"
             android:label="@string/app_name" >
         </activity>

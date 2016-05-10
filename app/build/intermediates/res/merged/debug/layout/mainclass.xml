@@ -20,12 +20,24 @@
         android:id="@+id/client"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Client"/>
+        android:text="Client Receive Image"/>
     <Button 
         android:id="@+id/server"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Server"/>
+        android:text="Server Send Image"/>
+
+    <Button
+        android:id="@+id/clientText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Client Receive Text"/>
+    <Button
+        android:id="@+id/serverText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Server Send Text"/>
+
 
     <TextView
         android:id="@+id/response"

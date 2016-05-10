@@ -73,10 +73,10 @@
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content" />-->
 
-    <cropimageview.ScrollTextView
-        android:id="@+id/scrolltext"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"></cropimageview.ScrollTextView>
+    <!--<cropimageview.ScrollTextView-->
+        <!--android:id="@+id/scrolltext"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"></cropimageview.ScrollTextView>-->
 
 
 </LinearLayout>

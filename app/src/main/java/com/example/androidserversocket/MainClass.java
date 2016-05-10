@@ -12,6 +12,7 @@ import android.widget.Button;
 public class MainClass extends Activity{
 
     Button client,server;
+    Button clientText,serverText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +20,29 @@ public class MainClass extends Activity{
 
         client = (Button) findViewById(R.id.client);
         server = (Button) findViewById(R.id.server);
+        clientText = (Button) findViewById(R.id.clientText);
+        serverText = (Button) findViewById(R.id.serverText);
 
+        clientText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent in = new Intent(getApplicationContext(),ClientText.class);
+                startActivity(in);
+
+            }
+        });
+
+        serverText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent inser = new Intent(getApplicationContext(),ServerText.class);
+                startActivity(inser);
+
+
+            }
+        });
         client.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

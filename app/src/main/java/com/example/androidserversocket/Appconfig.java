@@ -2,6 +2,7 @@ package com.example.androidserversocket;
 
 import android.content.Context;
 
+import java.net.Socket;
 import java.util.ArrayList;
 
 
@@ -13,6 +14,7 @@ public class Appconfig {
 //    public static final String stylehotornot = "hotornot";
 //    public static final String styleranking = "ranking";
 //    public static final String styleyesno = "yesno";
+    public static ArrayList<Socket> socketArray = new ArrayList<Socket>();
 
     public static final String option1 = "option1";
     public static final String option2 = "option2";

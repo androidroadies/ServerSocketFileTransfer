@@ -1,12 +1,23 @@
 package cropimageview;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
+import android.preference.PreferenceManager;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 import android.widget.TextView;
+
+import com.example.androidserversocket.Appconfig;
+import com.example.androidserversocket.ReplyThread;
+import com.example.androidserversocket.Server;
+
+import static com.example.androidserversocket.Appconfig.*;
+import static com.example.androidserversocket.Server.*;
 
 /**
  * Created by multidots on 4/14/2016.
@@ -15,9 +26,17 @@ public class ScrollTextView extends TextView {
 
     // scrolling feature
     public Scroller mSlr;
+    int scrollingLen;
+//    Display mDisplay = getContext().getWindowManager().getDefaultDisplay();
+//    final int width  = mDisplay.getWidth();
+//    final int height = mDisplay.getHeight();
+
+    DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+    int width = displayMetrics.widthPixels;
+    int height = displayMetrics.heightPixels;
 
     // milliseconds for a round of scrolling
-    private int mRndDuration = 10000;
+    private int mRndDuration = 8000;
 
     // the X offset when paused
     private int mXPaused = 0;
@@ -25,6 +44,12 @@ public class ScrollTextView extends TextView {
     // whether it's being paused
     private boolean mPaused = true;
 
+    SharedPreferences shre1 = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+    String previouslyEncodedImagep1 = shre1.getString("image_datap1", "");
+    String previouslyEncodedImagep2 = shre1.getString("image_datap2", "");
+    String previouslyEncodedImagep3 = shre1.getString("image_datap3", "");
+    String previouslyEncodedImagep4 = shre1.getString("image_datap4", "");
     /*
     * constructor
     */
@@ -63,10 +88,11 @@ public class ScrollTextView extends TextView {
      */
     public void startScroll() {
         // begin from the very right side
-        mXPaused = -1 * getWidth();
+        mXPaused = - width;
+
         // assume it's paused
         mPaused = true;
-        System.out.println("111 start");
+        System.out.println("111 start :" + width);
         resumeScroll();
     }
 
@@ -88,7 +114,7 @@ public class ScrollTextView extends TextView {
         mSlr = new Scroller(this.getContext(), new LinearInterpolator());
         setScroller(mSlr);
 
-        int scrollingLen = calculateScrollingLen();
+       scrollingLen = calculateScrollingLen();
         System.out.println("111 resume new" + getWidth() + "paused" + mXPaused);
         int distance = scrollingLen - (getWidth() + mXPaused);
         int duration = (new Double(mRndDuration * distance * 1.00000
@@ -108,7 +134,7 @@ public class ScrollTextView extends TextView {
      */
     private int calculateScrollingLen() {
 
-        System.out.println("111 calculate");
+
 
         TextPaint tp = getPaint();
         Rect rect = new Rect();
@@ -116,6 +142,7 @@ public class ScrollTextView extends TextView {
         tp.getTextBounds(strTxt, 0, strTxt.length(), rect);
         int scrollingLen = rect.width() + getWidth();
         rect = null;
+        System.out.println("111 calculate :" + scrollingLen);
         return scrollingLen;
     }
 
@@ -149,12 +176,25 @@ public class ScrollTextView extends TextView {
     public void computeScroll() {
         super.computeScroll();
 
-//        System.out.println("111 compute" + mSlr.getCurrX());
+        System.out.println("111 compute" + mSlr.getCurrX());
+
+        if (mSlr.getCurrX() == 1) {
+            // Send message to second device
+            System.out.println("socket array :" + socketArray.size());
+
+                ReplyThread socketServerReplyThread;
+                socketServerReplyThread = new ReplyThread(socketArray.get(0), "");
+                socketServerReplyThread.run();
+        }
+
+            if (mSlr.getCurrX() == scrollingLen) {
+                //  pauseScroll(); // Not required as of now it puase automatically.
+            }
 
         if (null == mSlr) return;
 
         if (mSlr.isFinished() && (!mPaused)) {
-            pauseScroll();
+//            pauseScroll();
 
 //            Intent in = new Intent(getContext(), ViewCropImageSlice.class);
 //            getContext().startActivity(in);

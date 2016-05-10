@@ -34,10 +34,13 @@ import android.widget.ImageView;
 import com.example.androidserversocket.R;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
 
 public class ViewCropImageSlice extends Activity {
 
     static ImageView imageView1,imageView2,imageView3,imageView4;
+//    ScrollTextView scrolltext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,16 +55,17 @@ public class ViewCropImageSlice extends Activity {
 //        TextView tv = (TextView) this.findViewById(R.id.TextView03);
 //        tv.setSelected(true);  // Set focus to the textview
 
-        ScrollTextView scrolltext=(ScrollTextView) findViewById(R.id.scrolltext);
+//        scrolltext=(ScrollTextView) findViewById(R.id.scrolltext);
+//
+//        scrolltext.setText("123456789");
+//        scrolltext.setTextColor(Color.WHITE);
+//        scrolltext.setTextSize(80);
+//        scrolltext.startScroll();
 
-        scrolltext.setText("123456789");
-        scrolltext.setTextColor(Color.WHITE);
-        scrolltext.setTextSize(80);
-        scrolltext.startScroll();
 
+//        Thread socketServerThread = new Thread(new SocketServerThread());
+//        socketServerThread.start();
 
-
-        System.out.println("111 is finishede" + scrolltext.mSlr.isFinished());
 //        scrolltext.setVisibility(View.INVISIBLE);
 
         SharedPreferences shre1 = PreferenceManager.getDefaultSharedPreferences(this);
@@ -114,6 +118,50 @@ public class ViewCropImageSlice extends Activity {
 //  @OnClick(R.id.main_crop_custom) public void onCustomCropsClick() {
 //    startActivity(new Intent(Cropimage.this, CustomCropActivity.class));
 //  }
+
+    private class SocketServerThread extends Thread {
+
+        static final int SocketServerPORT = 8080;
+        int count = 0;
+
+        @Override
+        public void run() {
+            //                serverSocket = new ServerSocket(SocketServerPORT);
+            ViewCropImageSlice.this.runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+//                        info.setText("I'm waiting here: "
+//                                + serverSocket.getLocalPort());
+                }
+            });
+
+            while (true) {
+//                    socket = serverSocket.accept();
+//
+//                    socketArray.add(count, socket);
+//                    count++;
+//                    message += "#" + count + " from " + socket.getInetAddress()
+//                            + ":" + socket.getPort() + "\n";
+
+                ViewCropImageSlice.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+//                            msg.setText(message);
+//                        System.out.println("111 is pause" + scrolltext.isPaused());
+//                        System.out.println("111 test3 ;");
+                    }
+                });
+
+//					SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(
+//							socket, count);
+//					socketServerReplyThread.run();
+
+            }
+        }
+
+    }
     private static class SampleView extends View {
 
         // CONSTRUCTOR
@@ -145,7 +193,6 @@ public class ViewCropImageSlice extends Activity {
 
             String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
 //            textEncode.setText(encodedImage);
-            System.out.println("test2 ;" + encodedImage.toString());
             SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(getContext());
             SharedPreferences.Editor edit=shre.edit();
             edit.putString("image_data",encodedImage);
