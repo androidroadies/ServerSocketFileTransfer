@@ -180,11 +180,11 @@ public class ScrollTextView extends TextView {
 
         if (mSlr.getCurrX() == 1) {
             // Send message to second device
-            System.out.println("socket array :" + socketArray.size());
-
-                ReplyThread socketServerReplyThread;
-                socketServerReplyThread = new ReplyThread(socketArray.get(0), "");
-                socketServerReplyThread.run();
+//            System.out.println("socket array :" + socketArray.size());
+//
+//                ReplyThread socketServerReplyThread;
+//                socketServerReplyThread = new ReplyThread(socketArray.get(0), "");
+//                socketServerReplyThread.run();
         }
 
             if (mSlr.getCurrX() == scrollingLen) {

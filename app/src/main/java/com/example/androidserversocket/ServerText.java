@@ -647,7 +647,7 @@ private class SocketServerReplyThread extends Thread {
             outputStream = hostThreadSocket.getOutputStream();
             PrintStream printStream = new PrintStream(outputStream);
             printStream.print(msgReply);
-//            printStream.close();//Remove comment
+            printStream.close();//Remove comment
 
             message += "replayed: " + msgReply + "\n";
 
