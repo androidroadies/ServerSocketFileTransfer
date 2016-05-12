@@ -90,7 +90,8 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
             // TODO Auto-generated catch block
             e.printStackTrace();
             response = "IOException: " + e.toString();
-        }finally{
+        }
+        finally{
             if(socket != null){
                 try {
                     socket.close();

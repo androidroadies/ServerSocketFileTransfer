@@ -130,14 +130,14 @@ public class ClientText extends Activity {
         @Override
         public void response(final String result) {
 
-//            System.out.println("result final :" + result.toString());
+            System.out.println("result final :" + result.toString());
             textResponse.setText(result);
 
             scrolltext.setText(result);
             scrolltext.setTextColor(Color.BLACK);
             scrolltext.setTextSize(80);
 
-//            scrolltext.startScroll();
+            scrolltext.startScroll();
 
 //            ClientText.this.runOnUiThread(new Runnable() {
 //

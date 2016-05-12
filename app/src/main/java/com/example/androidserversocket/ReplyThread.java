@@ -27,13 +27,13 @@ public class ReplyThread extends Thread {
     @Override
     public void run() {
         OutputStream outputStream;
-        String msgReply = "send";
+        String msgReply = "Hello from Android, you are #";
 
         try {
             outputStream = hostThreadSocket.getOutputStream();
             PrintStream printStream = new PrintStream(outputStream);
             printStream.print(msgReply);
-//            printStream.close();
+            printStream.close();
 
 
         } catch (IOException e) {

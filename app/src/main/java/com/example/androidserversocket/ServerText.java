@@ -354,8 +354,8 @@ public class ServerText extends Activity {
             @Override
             public void onClick(View v) {
 
-                hotutil.setHotSpot("SSID", "");
-                inviteFriend(hotutil);
+//                hotutil.setHotSpot("SSID", "");
+//                inviteFriend(hotutil);
             }
         });
 
@@ -374,7 +374,7 @@ public class ServerText extends Activity {
             @Override
             public void onClick(View v) {
 
-                System.out.println("socket " + Appconfig.socketArray.size());
+                System.out.println("111 socket server size" + Appconfig.socketArray.size());
 
                 if (Appconfig.socketArray.size() > 0) {
                     SharedPreferences shre1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -389,8 +389,8 @@ public class ServerText extends Activity {
 
 
                         if (Appconfig.socketArray.size() == 1) {
-                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
-                            socketServerReplyThread.run();
+//                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
+//                            socketServerReplyThread.run();
 
                             linmain1.setVisibility(View.GONE);
                             linmain2.setVisibility(View.VISIBLE);
@@ -409,11 +409,11 @@ public class ServerText extends Activity {
 
                         }
                         if (Appconfig.socketArray.size() == 2) {
-                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
-                            socketServerReplyThread.run();
-
-                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), previouslyEncodedImagep2);
-                            socketServerReplyThread.run();
+//                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
+//                            socketServerReplyThread.run();
+//
+//                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), previouslyEncodedImagep2);
+//                            socketServerReplyThread.run();
 
                             linmain1.setVisibility(View.GONE);
                             linmain2.setVisibility(View.VISIBLE);
@@ -426,14 +426,14 @@ public class ServerText extends Activity {
 //                            }
                         }
                         if (Appconfig.socketArray.size() == 3) {
-                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
-                            socketServerReplyThread.run();
-
-                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), previouslyEncodedImagep2);
-                            socketServerReplyThread.run();
-
-                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(2), previouslyEncodedImagep3);
-                            socketServerReplyThread.run();
+//                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
+//                            socketServerReplyThread.run();
+//
+//                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), previouslyEncodedImagep2);
+//                            socketServerReplyThread.run();
+//
+//                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(2), previouslyEncodedImagep3);
+//                            socketServerReplyThread.run();
 
                             linmain1.setVisibility(View.GONE);
                             linmain2.setVisibility(View.VISIBLE);

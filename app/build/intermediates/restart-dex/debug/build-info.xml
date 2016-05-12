@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="x86,armeabi-v7a"
-    api-level="19"
+    abi="armeabi-v7a,armeabi"
+    api-level="22"
     density="tvdpi"
     format="7"
-    timestamp="23320728373662" >
+    timestamp="101079986940949" >
 
     <task
         name="javac"
@@ -19,11 +19,18 @@
         name="verifier"
         duration="0" />
 
-    <build timestamp="23088469864962" >
+    <build timestamp="100892382903993" >
         <artifact
             location="F:\Testing\AndroidServerSocket\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
-    <build timestamp="23320728373662" />
+    <build
+        timestamp="101055782923917"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="F:\Testing\AndroidServerSocket\app\build\intermediates\builds\debug\101055782923917\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build timestamp="101079986940949" />
 
 </instant-run>

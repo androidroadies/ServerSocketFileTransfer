@@ -16,6 +16,8 @@ import com.example.androidserversocket.Appconfig;
 import com.example.androidserversocket.ReplyThread;
 import com.example.androidserversocket.Server;
 
+import java.net.Socket;
+
 import static com.example.androidserversocket.Appconfig.*;
 import static com.example.androidserversocket.Server.*;
 
@@ -36,7 +38,7 @@ public class ScrollTextView extends TextView {
     int height = displayMetrics.heightPixels;
 
     // milliseconds for a round of scrolling
-    private int mRndDuration = 8000;
+    private int mRndDuration = 5000;
 
     // the X offset when paused
     private int mXPaused = 0;
@@ -119,10 +121,10 @@ public class ScrollTextView extends TextView {
         int distance = scrollingLen - (getWidth() + mXPaused);
         int duration = (new Double(mRndDuration * distance * 1.00000
                 / scrollingLen)).intValue();
-        System.out.println("111 resume 11 : " + scrollingLen +" distance" + distance + "duration :" + duration);
+        System.out.println("111 resume 11 : " + mXPaused +" distance" + distance + "duration :" + duration +"scrolling length :" + scrollingLen);
         setVisibility(VISIBLE);
-        mSlr.startScroll(mXPaused, 0, distance, 0, duration);
-//        mSlr.startScroll(-getWidth(), 0, getWidth(), 0, duration);
+//        mSlr.startScroll(mXPaused, 0, distance, 0, duration);//Actual remove comment
+        mSlr.startScroll(mXPaused, 0, distance, 0, 10000);
         invalidate();
         mPaused = false;
     }
@@ -177,15 +179,33 @@ public class ScrollTextView extends TextView {
         super.computeScroll();
 
         System.out.println("111 compute" + mSlr.getCurrX());
-
-        if (mSlr.getCurrX() == 1) {
+//        System.out.println("111 compute socket" +socketArray.size());
+        if (mSlr.getCurrX() == 0 || mSlr.getCurrX() == 1 || mSlr.getCurrX() == 2 || mSlr.getCurrX() == 3) {
             // Send message to second device
-//            System.out.println("socket array :" + socketArray.size());
+            System.out.println("111 socket array scroll text:" + socketArray.get(0));
 //
+            for (int i = 0; i < socketArray.size(); i++) {
+                ReplyThread socketServerReplyThread;
+                socketServerReplyThread = new ReplyThread(socketArray.get(0), "");
+                socketServerReplyThread.run();
+            }
+
+        }
+//        else if (mSlr.getCurrX() == 1) {
+//            // Send message to second device
+////            System.out.println("socket array :" + socketArray.size());
+////
+//            ReplyThread socketServerReplyThread;
+//            socketServerReplyThread = new ReplyThread(socketArray.get(0), "");
+//            socketServerReplyThread.run();
+//        }else if (mSlr.getCurrX() == 2) {
+//            // Send message to second device
+////            System.out.println("socket array :" + socketArray.size());
+////
 //                ReplyThread socketServerReplyThread;
 //                socketServerReplyThread = new ReplyThread(socketArray.get(0), "");
 //                socketServerReplyThread.run();
-        }
+//        }
 
             if (mSlr.getCurrX() == scrollingLen) {
                 //  pauseScroll(); // Not required as of now it puase automatically.
