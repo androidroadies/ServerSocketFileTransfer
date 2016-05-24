@@ -29,6 +29,7 @@ public class ReplyThread extends Thread {
         OutputStream outputStream;
         String msgReply = "Hello from Android, you are #";
 
+        System.out.println("111 reply thread");
         try {
             outputStream = hostThreadSocket.getOutputStream();
             PrintStream printStream = new PrintStream(outputStream);

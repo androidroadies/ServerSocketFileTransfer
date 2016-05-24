@@ -124,7 +124,7 @@ public class ScrollTextView extends TextView {
         System.out.println("111 resume 11 : " + mXPaused +" distance" + distance + "duration :" + duration +"scrolling length :" + scrollingLen);
         setVisibility(VISIBLE);
 //        mSlr.startScroll(mXPaused, 0, distance, 0, duration);//Actual remove comment
-        mSlr.startScroll(mXPaused, 0, distance, 0, 10000);
+        mSlr.startScroll(mXPaused, 0, distance, 0, 4000);
         invalidate();
         mPaused = false;
     }
@@ -178,12 +178,10 @@ public class ScrollTextView extends TextView {
     public void computeScroll() {
         super.computeScroll();
 
-        System.out.println("111 compute" + mSlr.getCurrX());
+//        System.out.println("111 compute" + mSlr.getCurrX());
 //        System.out.println("111 compute socket" +socketArray.size());
-        if (mSlr.getCurrX() == 0 || mSlr.getCurrX() == 1 || mSlr.getCurrX() == 2 || mSlr.getCurrX() == 3) {
+        if (mSlr.getCurrX() == 0 || mSlr.getCurrX() == 1 || mSlr.getCurrX() == 2 || mSlr.getCurrX() == 3 || mSlr.getCurrX() == 4 || mSlr.getCurrX() == -1 || mSlr.getCurrX() == -2 || mSlr.getCurrX() == -3 || mSlr.getCurrX() == -4) {
             // Send message to second device
-            System.out.println("111 socket array scroll text:" + socketArray.get(0));
-//
             for (int i = 0; i < socketArray.size(); i++) {
                 ReplyThread socketServerReplyThread;
                 socketServerReplyThread = new ReplyThread(socketArray.get(0), "");
@@ -208,7 +206,8 @@ public class ScrollTextView extends TextView {
 //        }
 
             if (mSlr.getCurrX() == scrollingLen) {
-                //  pauseScroll(); // Not required as of now it puase automatically.
+                  //pauseScroll(); // Not required as of now it puase automatically.
+                this.startScroll();
             }
 
         if (null == mSlr) return;

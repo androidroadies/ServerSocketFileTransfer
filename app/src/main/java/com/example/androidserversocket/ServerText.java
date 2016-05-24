@@ -396,7 +396,7 @@ public class ServerText extends Activity {
                             linmain2.setVisibility(View.VISIBLE);
                             relmain1.setVisibility(View.GONE);
 
-                            scrolltext.setText(previouslyEncodedImagep1);
+                            scrolltext.setText("Hello from Android, you are #");
                             scrolltext.setTextColor(Color.BLACK);
                             scrolltext.setTextSize(80);
                             scrolltext.startScroll();
@@ -414,6 +414,11 @@ public class ServerText extends Activity {
 //
 //                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), previouslyEncodedImagep2);
 //                            socketServerReplyThread.run();
+
+                            scrolltext.setText("Hello from Android, you are #");
+                            scrolltext.setTextColor(Color.BLACK);
+                            scrolltext.setTextSize(80);
+                            scrolltext.startScroll();
 
                             linmain1.setVisibility(View.GONE);
                             linmain2.setVisibility(View.VISIBLE);
@@ -434,6 +439,11 @@ public class ServerText extends Activity {
 //
 //                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(2), previouslyEncodedImagep3);
 //                            socketServerReplyThread.run();
+
+                            scrolltext.setText("Hello from Android, you are #");
+                            scrolltext.setTextColor(Color.BLACK);
+                            scrolltext.setTextSize(80);
+                            scrolltext.startScroll();
 
                             linmain1.setVisibility(View.GONE);
                             linmain2.setVisibility(View.VISIBLE);
