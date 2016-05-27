@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "outputFile": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 98
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 146
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
@@ -49,7 +49,7 @@
                     "endOffset": 192
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -68,7 +68,7 @@
                     "endOffset": 244
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
@@ -87,7 +87,7 @@
                     "endOffset": 286
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -106,7 +106,7 @@
                     "endOffset": 333
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
@@ -125,7 +125,7 @@
                     "endOffset": 381
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -144,7 +144,7 @@
                     "endOffset": 427
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
@@ -163,7 +163,7 @@
                     "endOffset": 485
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
@@ -182,7 +182,7 @@
                     "endOffset": 532
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -201,7 +201,7 @@
                     "endOffset": 583
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -220,7 +220,7 @@
                     "endOffset": 635
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -239,7 +239,7 @@
                     "endOffset": 686
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -258,7 +258,7 @@
                     "endOffset": 739
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -277,7 +277,7 @@
                     "endOffset": 792
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
@@ -296,7 +296,7 @@
                     "endOffset": 834
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -315,7 +315,7 @@
                     "endOffset": 878
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 29,
                         "startColumn": 4,
@@ -334,7 +334,7 @@
                     "endOffset": 917
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 22,
                         "startColumn": 4,
@@ -353,7 +353,7 @@
                     "endOffset": 970
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
@@ -372,7 +372,7 @@
                     "endOffset": 1018
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 25,
                         "startColumn": 4,
@@ -391,7 +391,7 @@
                     "endOffset": 1067
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 27,
                         "startColumn": 4,
@@ -410,7 +410,7 @@
                     "endOffset": 1118
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 26,
                         "startColumn": 4,
@@ -429,7 +429,7 @@
                     "endOffset": 1165
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
@@ -448,7 +448,7 @@
                     "endOffset": 1214
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 28,
                         "startColumn": 4,
@@ -467,7 +467,7 @@
                     "endOffset": 1256
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
@@ -486,7 +486,7 @@
                     "endOffset": 1297
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 23,
                         "startColumn": 4,
@@ -505,7 +505,7 @@
                     "endOffset": 1334
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
@@ -524,13 +524,13 @@
                     "endOffset": 1392
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\dimens.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\dimens.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
-                        "startOffset": 89,
+                        "startOffset": 92,
                         "endColumn": 57,
-                        "endOffset": 142
+                        "endOffset": 145
                     }
                 }
             },
@@ -543,13 +543,13 @@
                     "endOffset": 1448
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\dimens.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\dimens.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 147,
+                        "startOffset": 151,
                         "endColumn": 55,
-                        "endOffset": 198
+                        "endOffset": 202
                     }
                 }
             },
@@ -562,13 +562,13 @@
                     "endOffset": 1493
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\dimens.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\dimens.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 248,
+                        "startOffset": 255,
                         "endColumn": 44,
-                        "endOffset": 288
+                        "endOffset": 295
                     }
                 }
             },
@@ -581,13 +581,13 @@
                     "endOffset": 1537
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\dimens.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\dimens.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
-                        "startOffset": 204,
+                        "startOffset": 210,
                         "endColumn": 43,
-                        "endOffset": 243
+                        "endOffset": 249
                     }
                 }
             },
@@ -600,7 +600,7 @@
                     "endOffset": 1592
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\colors.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 31,
                         "startColumn": 4,
@@ -619,13 +619,13 @@
                     "endOffset": 1645
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\strings.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 113,
+                        "startOffset": 117,
                         "endColumn": 52,
-                        "endOffset": 161
+                        "endOffset": 165
                     }
                 }
             },
@@ -638,13 +638,13 @@
                     "endOffset": 1702
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\strings.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
-                        "startOffset": 56,
+                        "startOffset": 59,
                         "endColumn": 56,
-                        "endOffset": 108
+                        "endOffset": 111
                     }
                 }
             },
@@ -657,13 +657,13 @@
                     "endOffset": 1757
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\strings.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
-                        "startOffset": 369,
+                        "startOffset": 380,
                         "endColumn": 54,
-                        "endOffset": 419
+                        "endOffset": 430
                     }
                 }
             },
@@ -676,13 +676,13 @@
                     "endOffset": 1827
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\strings.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
-                        "startOffset": 424,
+                        "startOffset": 436,
                         "endColumn": 69,
-                        "endOffset": 489
+                        "endOffset": 501
                     }
                 }
             },
@@ -695,13 +695,13 @@
                     "endOffset": 1873
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\strings.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
-                        "startOffset": 274,
+                        "startOffset": 282,
                         "endColumn": 45,
-                        "endOffset": 315
+                        "endOffset": 323
                     }
                 }
             },
@@ -714,13 +714,13 @@
                     "endOffset": 1927
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\strings.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 220,
+                        "startOffset": 227,
                         "endColumn": 53,
-                        "endOffset": 269
+                        "endOffset": 276
                     }
                 }
             },
@@ -733,13 +733,13 @@
                     "endOffset": 1975
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\strings.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
-                        "startOffset": 320,
+                        "startOffset": 329,
                         "endColumn": 47,
-                        "endOffset": 363
+                        "endOffset": 372
                     }
                 }
             },
@@ -752,13 +752,13 @@
                     "endOffset": 2028
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\strings.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
-                        "startOffset": 166,
+                        "startOffset": 171,
                         "endColumn": 52,
-                        "endOffset": 214
+                        "endOffset": 219
                     }
                 }
             },
@@ -772,14 +772,14 @@
                     "endOffset": 2319
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\styles.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
-                        "startOffset": 186,
+                        "startOffset": 192,
                         "endLine": 12,
                         "endColumn": 12,
-                        "endOffset": 472
+                        "endOffset": 484
                     }
                 }
             },
@@ -793,14 +793,14 @@
                     "endOffset": 2479
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\styles.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
-                        "startOffset": 510,
+                        "startOffset": 525,
                         "endLine": 17,
                         "endColumn": 12,
-                        "endOffset": 665
+                        "endOffset": 682
                     }
                 }
             },
@@ -814,14 +814,14 @@
                     "endOffset": 2619
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\styles.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
-                        "startOffset": 671,
+                        "startOffset": 690,
                         "endLine": 22,
                         "endColumn": 12,
-                        "endOffset": 806
+                        "endOffset": 828
                     }
                 }
             },
@@ -835,14 +835,14 @@
                     "endOffset": 2765
                 },
                 "from": {
-                    "file": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\values\\styles.xml",
+                    "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,
-                        "startOffset": 812,
+                        "startOffset": 836,
                         "endLine": 27,
                         "endColumn": 12,
-                        "endOffset": 953
+                        "endOffset": 980
                     }
                 }
             }

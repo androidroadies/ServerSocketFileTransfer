@@ -15,8 +15,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 /**
  * Created by multidots on 4/22/2016.
@@ -26,10 +28,10 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
     String dstAddress;
     int dstPort;
     String response = "";
-
+    public static ArrayList<String > list=new ArrayList<>();
     private OnPostCallComplete onpostcallcomplete;
 
-    MyClientTask1(String addr, int port,OnPostCallComplete onPostCallComplete){
+    MyClientTask1(String addr, int port, OnPostCallComplete onPostCallComplete) {
         dstAddress = addr;
         dstPort = port;
         this.onpostcallcomplete = onPostCallComplete;
@@ -53,26 +55,35 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
         try {
             socket = new Socket(dstAddress, dstPort);
 
-            ByteArrayOutputStream byteArrayOutputStream =
-                    new ByteArrayOutputStream(8192000);
-            byte[] buffer = new byte[8192000];
+//            ByteArrayOutputStream byteArrayOutputStream =
+//                    new ByteArrayOutputStream(8192000);
+//            byte[] buffer = new byte[8192000];
+//
+//            int bytesRead;
+//            InputStream inputStream = socket.getInputStream();
+//
+//            BufferedReader r = new BufferedReader(new InputStreamReader(inputStream));
+//
+//            StringBuilder total = new StringBuilder();
+//            String line;
+//            while ((line = r.readLine()) != null) {
+//                total.append(line).append('\n');
+//            }
+//
+////            Bitmap b = BitmapFactory.decodeStream(new FlushedInputStream(inputStream));
+//            System.out.println("total :" + total);
 
-            int bytesRead;
-            InputStream inputStream = socket.getInputStream();
-
-            BufferedReader r = new BufferedReader(new InputStreamReader(inputStream));
-
-            StringBuilder total = new StringBuilder();
-            String line;
-            while ((line = r.readLine()) != null) {
-                total.append(line).append('\n');
+            ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream()); //Error Line!
+            try {
+                Object object = objectInput.readObject();
+                list = (ArrayList<String>) object;
+            }catch (Exception e){
+                e.printStackTrace();
             }
-
-//            Bitmap b = BitmapFactory.decodeStream(new FlushedInputStream(inputStream));
-            System.out.println("total :" + total);
-
-            response = total.toString();
-				/*
+//            response = total.toString();
+            response = list.get(0);
+            System.out.println("height received :"+list.get(1));
+                /*
 				 * notice:
 				 * inputStream.read() will block if no data return
 				 */
@@ -80,8 +91,6 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
 //                byteArrayOutputStream.write(buffer, 0, bytesRead);
 //                response += byteArrayOutputStream.toString("UTF-8");
 //            }
-
-
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -90,9 +99,8 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
             // TODO Auto-generated catch block
             e.printStackTrace();
             response = "IOException: " + e.toString();
-        }
-        finally{
-            if(socket != null){
+        } finally {
+            if (socket != null) {
                 try {
                     socket.close();
                 } catch (IOException e) {
@@ -118,17 +126,18 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
 //            public void run() {
 //					startActivity(myintent);
 //					finish();
-                try {
-                    onpostcallcomplete.response(response);
+        try {
+            onpostcallcomplete.response(response);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 //            }
 //        }, 1000);
 
         super.onPostExecute(result);
     }
+
     public interface OnPostCallComplete {
         void response(String result) throws JSONException;
     }

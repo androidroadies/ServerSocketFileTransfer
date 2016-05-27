@@ -7,19 +7,13 @@ import android.preference.PreferenceManager;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 import android.widget.TextView;
 
-import com.example.androidserversocket.Appconfig;
 import com.example.androidserversocket.ReplyThread;
-import com.example.androidserversocket.Server;
 
-import java.net.Socket;
-
-import static com.example.androidserversocket.Appconfig.*;
-import static com.example.androidserversocket.Server.*;
+import static com.example.androidserversocket.Appconfig.socketArray;
 
 /**
  * Created by multidots on 4/14/2016.
@@ -52,6 +46,7 @@ public class ScrollTextView extends TextView {
     String previouslyEncodedImagep2 = shre1.getString("image_datap2", "");
     String previouslyEncodedImagep3 = shre1.getString("image_datap3", "");
     String previouslyEncodedImagep4 = shre1.getString("image_datap4", "");
+
     /*
     * constructor
     */
@@ -90,7 +85,7 @@ public class ScrollTextView extends TextView {
      */
     public void startScroll() {
         // begin from the very right side
-        mXPaused = - width;
+        mXPaused = -width;
 
         // assume it's paused
         mPaused = true;
@@ -116,12 +111,12 @@ public class ScrollTextView extends TextView {
         mSlr = new Scroller(this.getContext(), new LinearInterpolator());
         setScroller(mSlr);
 
-       scrollingLen = calculateScrollingLen();
+        scrollingLen = calculateScrollingLen();
         System.out.println("111 resume new" + getWidth() + "paused" + mXPaused);
         int distance = scrollingLen - (getWidth() + mXPaused);
         int duration = (new Double(mRndDuration * distance * 1.00000
                 / scrollingLen)).intValue();
-        System.out.println("111 resume 11 : " + mXPaused +" distance" + distance + "duration :" + duration +"scrolling length :" + scrollingLen);
+        System.out.println("111 resume 11 : " + mXPaused + " distance" + distance + "duration :" + duration + "scrolling length :" + scrollingLen);
         setVisibility(VISIBLE);
 //        mSlr.startScroll(mXPaused, 0, distance, 0, duration);//Actual remove comment
         mSlr.startScroll(mXPaused, 0, distance, 0, 4000);
@@ -135,7 +130,6 @@ public class ScrollTextView extends TextView {
      * @return the scrolling length in pixels
      */
     private int calculateScrollingLen() {
-
 
 
         TextPaint tp = getPaint();
@@ -178,7 +172,7 @@ public class ScrollTextView extends TextView {
     public void computeScroll() {
         super.computeScroll();
 
-//        System.out.println("111 compute" + mSlr.getCurrX());
+        System.out.println("111 compute" + mSlr.getCurrX());
 //        System.out.println("111 compute socket" +socketArray.size());
         if (mSlr.getCurrX() == 0 || mSlr.getCurrX() == 1 || mSlr.getCurrX() == 2 || mSlr.getCurrX() == 3 || mSlr.getCurrX() == 4 || mSlr.getCurrX() == -1 || mSlr.getCurrX() == -2 || mSlr.getCurrX() == -3 || mSlr.getCurrX() == -4) {
             // Send message to second device
@@ -205,10 +199,10 @@ public class ScrollTextView extends TextView {
 //                socketServerReplyThread.run();
 //        }
 
-            if (mSlr.getCurrX() == scrollingLen) {
-                  //pauseScroll(); // Not required as of now it puase automatically.
-                this.startScroll();
-            }
+        if (mSlr.getCurrX() == scrollingLen) {
+            //pauseScroll(); // Not required as of now it puase automatically.
+            this.startScroll();
+        }
 
         if (null == mSlr) return;
 

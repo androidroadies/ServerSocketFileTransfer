@@ -1,3 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="9ffb36fddc380040f354124b37bf08fb0f3524a8">
+        <dex dex="F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_31cc21ffb8fbc41116d9378336621c5fa8d9c1f9\classes.dex" />
+    </item>
+    <item
+        jar="F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\libs\universal-image-loader-1.9.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f667a2f4f27542fe11a6781f5f7ac572d27afcec">
+        <dex dex="F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\build\intermediates\transforms\dex\debug\folders\1000\2\universal-image-loader-1.9.0_e456a59108005f00bba065968708b5ea1700f471\classes.dex" />
+    </item>
+    <item
+        jar="F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="7e6ec2da186904dca96c3c96f51d6ad476e44a09">
+        <dex dex="F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_fce22e5f565882b467937e010d7944c2124c0fee\classes.dex" />
+    </item>
+
+</items>

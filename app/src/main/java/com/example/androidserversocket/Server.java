@@ -1,20 +1,6 @@
 package com.example.androidserversocket;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,9 +10,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.app.Activity;
 import android.preference.PreferenceManager;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,7 +21,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import cropimageview.ViewCropImageSlice;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+
 import testhotspot.WifiApManager;
 import wifi.api.WifiStatus;
 import wifi.api.wifiAddresses;
@@ -53,19 +57,19 @@ public class Server extends Activity {
     ServerSocket serverSocket;
     Button btnServerSend, btnChoose, btnSelectPhoto, btnCreateGroup, btnOneDevice, btnTwoDevice, btnThreeDevice;
     Button btnL1, btnL2, btnL3, btnDone;
-    ImageView img1, img2, img3,imageView;
+    ImageView img1, img2, img3, imageView;
 
     Boolean isDevice1 = false, isDevice2 = false, isDevice3 = false;
     Boolean isLayout1 = false, isLayout2 = false, isLayout3 = false;
     Socket socket;
-//    ArrayList<Socket> socketArray = new ArrayList<Socket>();
+    //    ArrayList<Socket> socketArray = new ArrayList<Socket>();
     Context context;
     final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 1;
     final int PICK_IMAGE_FROM_GALLARY = 5;
     String path = "";
 
     RelativeLayout relmain1, rel1, rel2, rel3;
-    LinearLayout linmain1,linmain2;
+    LinearLayout linmain1, linmain2;
 
     wifiHotSpots hotutil;
     WifiStatus wifiStatus;
@@ -381,7 +385,7 @@ public class Server extends Activity {
                             linmain2.setVisibility(View.VISIBLE);
                             relmain1.setVisibility(View.GONE);
 
-                            if( !previouslyEncodedImagep2.equalsIgnoreCase("") ){
+                            if (!previouslyEncodedImagep2.equalsIgnoreCase("")) {
                                 byte[] b2 = Base64.decode(previouslyEncodedImagep2, Base64.DEFAULT);
                                 Bitmap bitmapp2 = BitmapFactory.decodeByteArray(b2, 0, b2.length);
                                 imageView.setImageBitmap(bitmapp2);
@@ -399,7 +403,7 @@ public class Server extends Activity {
                             linmain2.setVisibility(View.VISIBLE);
                             relmain1.setVisibility(View.GONE);
 
-                            if( !previouslyEncodedImagep3.equalsIgnoreCase("") ){
+                            if (!previouslyEncodedImagep3.equalsIgnoreCase("")) {
                                 byte[] b3 = Base64.decode(previouslyEncodedImagep3, Base64.DEFAULT);
                                 Bitmap bitmapp3 = BitmapFactory.decodeByteArray(b3, 0, b3.length);
                                 imageView.setImageBitmap(bitmapp3);
@@ -420,7 +424,7 @@ public class Server extends Activity {
                             relmain1.setVisibility(View.GONE);
 
 
-                            if( !previouslyEncodedImagep4.equalsIgnoreCase("") ){
+                            if (!previouslyEncodedImagep4.equalsIgnoreCase("")) {
                                 byte[] b4 = Base64.decode(previouslyEncodedImagep4, Base64.DEFAULT);
                                 Bitmap bitmapp4 = BitmapFactory.decodeByteArray(b4, 0, b4.length);
                                 imageView.setImageBitmap(bitmapp4);
@@ -430,9 +434,8 @@ public class Server extends Activity {
                     }
 
 
-
-                }else {
-                    Toast.makeText(context,"Please Connect Your Device First.!",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Please Connect Your Device First.!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -492,6 +495,7 @@ public class Server extends Activity {
                     }
                 });
 
+
                 while (true) {
                     socket = serverSocket.accept();
 
@@ -507,6 +511,7 @@ public class Server extends Activity {
                             msg.setText(message);
                         }
                     });
+
 
 //					SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(
 //							socket, count);
@@ -559,11 +564,20 @@ public class Server extends Activity {
             String msgReply = strPathSend;
 
             System.out.println("test3 ;");
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            ((Activity) Server.this).getWindowManager().getDefaultDisplay()
+                    .getMetrics(displayMetrics);
+            int heightPixels = displayMetrics.heightPixels;
             try {
-                outputStream = hostThreadSocket.getOutputStream();
-                PrintStream printStream = new PrintStream(outputStream);
-                printStream.print(msgReply);
-                printStream.close();
+                ArrayList<String > list=new ArrayList<>();
+                list.add(msgReply);
+                list.add(String.valueOf(heightPixels));
+                ObjectOutputStream objectOutput = new ObjectOutputStream(hostThreadSocket.getOutputStream());
+                objectOutput.writeObject(list);
+//                outputStream = hostThreadSocket.getOutputStream();
+//                PrintStream printStream = new PrintStream(outputStream);
+//                printStream.print(msgReply);
+//                printStream.close();
 
                 message += msgReply;
 

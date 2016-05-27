@@ -1,74 +1,74 @@
 [
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activitymain.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\activitymain.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\send_image.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\send_image.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\client_text.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\client_text.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\gallery.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\gallery.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\server.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\server.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\net_list_row.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\net_list_row.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\server_text.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\server_text.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\client_text.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\client_text.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\received_image.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\received_image.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\received_text.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\received_text.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\received_text.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\received_text.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\received_image.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\received_image.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\send_text.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\send_text.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\server_text.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\server_text.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\client.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\client.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\titlebar.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\titlebar.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\main.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activitymain.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\activitymain.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\crop_image.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\crop_image.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_choose_image.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\dialog_choose_image.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\titlebar.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\titlebar.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\gallery_item.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\gallery_item.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_choose_image.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\dialog_choose_image.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\server.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\server.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\choose_action.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\choose_action.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\main.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\send_image.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\send_image.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\choose_action.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\choose_action.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\gallery.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\gallery.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\crop_image.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\crop_image.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\net_list_row.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\net_list_row.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mainclass.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\mainclass.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\gallery_item.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\gallery_item.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\client.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\client.xml"
     },
     {
-        "merged": "F:\\Testing\\AndroidServerSocket\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mainclass.xml",
-        "source": "F:\\Testing\\AndroidServerSocket\\app\\src\\main\\res\\layout\\mainclass.xml"
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\send_text.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\layout\\send_text.xml"
     }
 ]
