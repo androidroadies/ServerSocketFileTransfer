@@ -11,11 +11,14 @@ import android.util.Base64;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
     String dstAddress;
     int dstPort;
     String response = "";
-    public static ArrayList<String > list=new ArrayList<>();
+    public static ArrayList<String> list = new ArrayList<>();
     private OnPostCallComplete onpostcallcomplete;
 
     MyClientTask1(String addr, int port, OnPostCallComplete onPostCallComplete) {
@@ -77,14 +80,29 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
             try {
                 Object object = objectInput.readObject();
                 list = (ArrayList<String>) object;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 //            response = total.toString();
             response = list.get(0);
-            System.out.println("height received :"+list.get(1));
+            System.out.println("height received :" + list.get(1));
+
+            while (true) {
+                if (Client.isInform) {
+                    Client.isInform = false;
+                    //send message to server...
+                    OutputStream os = socket.getOutputStream();
+                    OutputStreamWriter osw = new OutputStreamWriter(os);
+                    BufferedWriter bw = new BufferedWriter(osw);
+                    String msgReply = "Image received";
+                    bw.write(msgReply);
+                    bw.flush();
+                    System.out.println("message sent to server...");
+                    break;
+                }
+            }
                 /*
-				 * notice:
+                 * notice:
 				 * inputStream.read() will block if no data return
 				 */
 //            while ((bytesRead = inputStream.read(buffer)) != -1){

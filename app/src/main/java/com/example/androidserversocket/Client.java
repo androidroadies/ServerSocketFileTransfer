@@ -19,6 +19,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -76,6 +78,8 @@ public class Client extends Activity {
 
     LinearLayout lin1, lin2;
     private Client mContext;
+    private Button btnInformServer;
+    public static Boolean isInform=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +93,14 @@ public class Client extends Activity {
         buttonClear = (Button) findViewById(R.id.clear);
         textResponse = (TextView) findViewById(R.id.response);
         imageView = (ImageView) findViewById(R.id.imageView);
+        btnInformServer =(Button)findViewById(R.id.client_btn_inform_server);
+        btnInformServer.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isInform=true;
+            }
+        });
+
 
         lin1 = (LinearLayout) findViewById(R.id.lin1);
         lin2 = (LinearLayout) findViewById(R.id.lin2);
@@ -168,6 +180,13 @@ public class Client extends Activity {
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             System.out.println("bitmap post:" + decodedByte);
             imageView.setImageBitmap(decodedByte);
+            imageView.post(new Runnable() {
+                @Override
+                public void run() {
+                    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_fade_out);
+                    imageView.startAnimation(anim);
+                }
+            });
 
             if (decodedByte == null) {
                 lin1.setVisibility(View.VISIBLE);
@@ -247,6 +266,7 @@ public class Client extends Activity {
         @Override
         protected void onPostExecute(String result) {
             imageView.setImageBitmap(decodedByte);
+
             //setimage(response.toString());
 
 //			new Handler().postDelayed(new Runnable(){

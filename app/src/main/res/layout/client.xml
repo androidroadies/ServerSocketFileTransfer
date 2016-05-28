@@ -82,5 +82,14 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
              />
+
     </LinearLayout>
+    <Button
+        android:id="@+id/client_btn_inform_server"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="inform server"
+        android:layout_margin="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

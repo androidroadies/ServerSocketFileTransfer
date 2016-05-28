@@ -21,12 +21,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -479,6 +481,7 @@ public class Server extends Activity {
     private class SocketServerThread extends Thread {
 
         static final int SocketServerPORT = 8080;
+        String receivedMessage = "";
         int count = 0;
 
         @Override
@@ -503,6 +506,12 @@ public class Server extends Activity {
                     count++;
                     message += "#" + count + " from " + socket.getInetAddress()
                             + ":" + socket.getPort() + "\n";
+//                    //                    for receiving message from client
+//                    InputStream is = socket.getInputStream();
+//                    InputStreamReader isr = new InputStreamReader(is);
+//                    BufferedReader br = new BufferedReader(isr);
+//                    receivedMessage = br.readLine();
+//                    System.out.println("Message received..."+receivedMessage);
 
                     Server.this.runOnUiThread(new Runnable() {
 
@@ -511,7 +520,17 @@ public class Server extends Activity {
                             msg.setText(message);
                         }
                     });
+                    InputStream inputStream = socket.getInputStream();
+                    InputStreamReader isr = new InputStreamReader(inputStream);
+                    BufferedReader br = new BufferedReader(isr);
+                    final String receivedMessage = br.readLine();
 
+                    Server.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(Server.this,""+receivedMessage+" by client",Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
 //					SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(
 //							socket, count);
@@ -541,7 +560,6 @@ public class Server extends Activity {
         @Override
         public void run() {
 
-
             byte[] bytes;
             byte[] buffer = new byte[8192000];
             int bytesRead;
@@ -569,7 +587,8 @@ public class Server extends Activity {
                     .getMetrics(displayMetrics);
             int heightPixels = displayMetrics.heightPixels;
             try {
-                ArrayList<String > list=new ArrayList<>();
+
+                ArrayList<String> list = new ArrayList<>();
                 list.add(msgReply);
                 list.add(String.valueOf(heightPixels));
                 ObjectOutputStream objectOutput = new ObjectOutputStream(hostThreadSocket.getOutputStream());
@@ -578,15 +597,12 @@ public class Server extends Activity {
 //                PrintStream printStream = new PrintStream(outputStream);
 //                printStream.print(msgReply);
 //                printStream.close();
-
                 message += msgReply;
-
                 Server.this.runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
                         msg.setText(message);
-
                     }
                 });
 
