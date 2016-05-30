@@ -145,11 +145,13 @@ public class Client extends Activity {
         });
     }
 
+    public static boolean isFromClientImage=false;
     OnClickListener buttonConnectOnClickListener =
             new OnClickListener() {
 
                 @Override
                 public void onClick(View arg0) {
+                    isFromClientImage =true;
                     myClientTask1 = new MyClientTask1(
                             editTextAddress.getText().toString().trim(),
                             8080, ao);
@@ -180,13 +182,13 @@ public class Client extends Activity {
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             System.out.println("bitmap post:" + decodedByte);
             imageView.setImageBitmap(decodedByte);
-            imageView.post(new Runnable() {
-                @Override
-                public void run() {
-                    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_fade_out);
-                    imageView.startAnimation(anim);
-                }
-            });
+//            imageView.post(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_fade_out);
+//                    imageView.startAnimation(anim);
+//                }
+//            });
 
             if (decodedByte == null) {
                 lin1.setVisibility(View.VISIBLE);

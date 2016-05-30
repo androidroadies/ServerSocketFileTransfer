@@ -26,11 +26,13 @@ import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.InetAddress;
@@ -542,6 +544,18 @@ public class ServerText extends Activity {
                         }
                     });
 
+//                    InputStream inputStream = socket.getInputStream();
+//                    InputStreamReader isr = new InputStreamReader(inputStream);
+//                    BufferedReader br = new BufferedReader(isr);
+//                    final String receivedMessage = br.readLine();
+//                    System.out.println("Received message from client:"+receivedMessage);
+//
+//                    ServerText.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(ServerText.this,""+receivedMessage+" by client Text",Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
 //					SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(
 //							socket, count);
 //					socketServerReplyThread.run();

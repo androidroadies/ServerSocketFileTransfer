@@ -76,30 +76,49 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
 ////            Bitmap b = BitmapFactory.decodeStream(new FlushedInputStream(inputStream));
 //            System.out.println("total :" + total);
 
-            ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream()); //Error Line!
-            try {
-                Object object = objectInput.readObject();
-                list = (ArrayList<String>) object;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-//            response = total.toString();
-            response = list.get(0);
-            System.out.println("height received :" + list.get(1));
-
-            while (true) {
-                if (Client.isInform) {
-                    Client.isInform = false;
-                    //send message to server...
-                    OutputStream os = socket.getOutputStream();
-                    OutputStreamWriter osw = new OutputStreamWriter(os);
-                    BufferedWriter bw = new BufferedWriter(osw);
-                    String msgReply = "Image received";
-                    bw.write(msgReply);
-                    bw.flush();
-                    System.out.println("message sent to server...");
-                    break;
+            if (Client.isFromClientImage) {
+                Client.isFromClientImage=false;
+                ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream()); //Error Line!
+                try {
+                    Object object = objectInput.readObject();
+                    list = (ArrayList<String>) object;
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+//            response = total.toString();
+                response = list.get(0);
+                System.out.println("height received :" + list.get(1));
+
+//                while (true) {
+//                    if (Client.isInform) {
+//                        Client.isInform = false;
+//                        //send message to server...
+//                        OutputStream os = socket.getOutputStream();
+//                        OutputStreamWriter osw = new OutputStreamWriter(os);
+//                        BufferedWriter bw = new BufferedWriter(osw);
+//                        String msgReply = "Image received";
+//                        bw.write(msgReply);
+//                        bw.flush();
+//                        System.out.println("message sent to server...");
+//                        break;
+////                    }
+//                }
+            }else if (ClientText.isFromClientText){
+                ClientText.isFromClientText=false;
+//                //send message to server...
+//                OutputStream os = socket.getOutputStream();
+//                OutputStreamWriter osw = new OutputStreamWriter(os);
+//                BufferedWriter bw = new BufferedWriter(osw);
+//                String msgReply = "Text received";
+//                bw.write(msgReply);
+//                bw.flush();
+//                System.out.println("message sent to server...");
+
+                //Receive message from server
+                InputStream inputStream = socket.getInputStream();
+                InputStreamReader isr = new InputStreamReader(inputStream);
+                BufferedReader br = new BufferedReader(isr);
+                response = br.readLine();
             }
                 /*
                  * notice:

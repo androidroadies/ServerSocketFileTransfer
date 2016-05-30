@@ -55,6 +55,7 @@ public class ClientText extends Activity {
 
     LinearLayout lin1,lin2;
     ScrollTextView scrolltext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,11 +114,13 @@ public class ClientText extends Activity {
         });
     }
 
+    public static boolean isFromClientText=false;
     OnClickListener buttonConnectOnClickListener =
             new OnClickListener() {
 
                 @Override
                 public void onClick(View arg0) {
+                    isFromClientText =true;
                     myClientTask1 = new MyClientTask1(
                             editTextAddress.getText().toString().trim(),
                             8080, ao);

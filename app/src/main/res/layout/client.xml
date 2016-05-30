@@ -90,6 +90,7 @@
         android:layout_height="wrap_content"
         android:text="inform server"
         android:layout_margin="16dp"
+        android:visibility="gone"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

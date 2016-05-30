@@ -520,17 +520,17 @@ public class Server extends Activity {
                             msg.setText(message);
                         }
                     });
-                    InputStream inputStream = socket.getInputStream();
-                    InputStreamReader isr = new InputStreamReader(inputStream);
-                    BufferedReader br = new BufferedReader(isr);
-                    final String receivedMessage = br.readLine();
-
-                    Server.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(Server.this,""+receivedMessage+" by client",Toast.LENGTH_SHORT).show();
-                        }
-                    });
+//                    InputStream inputStream = socket.getInputStream();
+//                    InputStreamReader isr = new InputStreamReader(inputStream);
+//                    BufferedReader br = new BufferedReader(isr);
+//                    final String receivedMessage = br.readLine();
+//
+//                    Server.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(Server.this,""+receivedMessage+" by client",Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
 
 //					SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(
 //							socket, count);
