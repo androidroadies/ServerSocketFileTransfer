@@ -8,42 +8,46 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorDivider"/>
+        android:background="@color/colorDivider" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginLeft="25dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
         <Button
             android:id="@+id/usecamera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryLight"
             android:layout_margin="10dp"
-            android:text="@string/camera"/>
+            android:background="@color/btn_choose_action"
+            android:text="@string/camera"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/usegallery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryLight"
             android:layout_margin="10dp"
-            android:text="@string/gallery"/>
+            android:background="@color/btn_choose_action"
+            android:text="@string/gallery"
+            android:textColor="@android:color/white" />
     </LinearLayout>
+
     <LinearLayout
-        android:gravity="right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="right"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/dialogButtonCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Cancel"
             android:background="#00ffffff"
-            />
+            android:text=" Cancel" />
 
     </LinearLayout>
 

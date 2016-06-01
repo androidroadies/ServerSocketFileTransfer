@@ -28,7 +28,8 @@
     <color name="light_black_">#33000000</color>
     <color name="light_white_">#33FFFFFF</color>
     <color name="dialog_bg">#f0f0f0</color>
-
+    <color name="btn_choose_action">#f4683b</color>
+    <color name="btn_unselected">#7b7b7b</color>
     <drawable name="light_black_">#33000000</drawable>
 
 </resources>

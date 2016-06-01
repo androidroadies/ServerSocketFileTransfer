@@ -21,19 +21,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.ServerSocket;
@@ -57,7 +51,7 @@ public class Server extends Activity {
     TextView info, infoip, msg;
     String message = "";
     ServerSocket serverSocket;
-    Button btnServerSend, btnChoose, btnSelectPhoto, btnCreateGroup, btnOneDevice, btnTwoDevice, btnThreeDevice;
+    Button btnServerSend, btnSlideShow, btnSelectPhoto, btnCreateGroup, btnOneDevice, btnTwoDevice, btnThreeDevice;
     Button btnL1, btnL2, btnL3, btnDone;
     ImageView img1, img2, img3, imageView;
 
@@ -81,6 +75,7 @@ public class Server extends Activity {
 
     //    SimpleAsynTask mTask;
     wifiAddresses au;
+    private TextView tvPleaseSelectDevice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +92,7 @@ public class Server extends Activity {
         info = (TextView) findViewById(R.id.info);
         infoip = (TextView) findViewById(R.id.infoip);
         msg = (TextView) findViewById(R.id.msg);
-
+        tvPleaseSelectDevice = (TextView) findViewById(R.id.server_tv_please_select_device);
 
         img1 = (ImageView) findViewById(R.id.img1);
         img2 = (ImageView) findViewById(R.id.img2);
@@ -113,24 +108,34 @@ public class Server extends Activity {
         rel2.setVisibility(View.GONE);
         rel3.setVisibility(View.GONE);
 
-        btnChoose = (Button) findViewById(R.id.btnChoose);
-        btnChoose.setOnClickListener(new View.OnClickListener() {
+        relmain1 = (RelativeLayout) findViewById(R.id.relMain1);
+        linmain1 = (LinearLayout) findViewById(R.id.linMain1);
+        linmain2 = (LinearLayout) findViewById(R.id.linMain2);
+
+        relmain1.setVisibility(View.VISIBLE);
+        linmain1.setVisibility(View.GONE);
+        linmain2.setVisibility(View.GONE);
+
+        btnSlideShow = (Button) findViewById(R.id.btnSlideShow);
+        btnSlideShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                relmain1.setVisibility(View.VISIBLE);
-                linmain1.setVisibility(View.GONE);
-                linmain2.setVisibility(View.GONE);
+//                relmain1.setVisibility(View.VISIBLE);
+//                linmain1.setVisibility(View.GONE);
+//                linmain2.setVisibility(View.GONE);
 
             }
         });
+
         // Layout 1 for Horizontal device.
         btnL1 = (Button) findViewById(R.id.btnOneLayout);
+        btnL1.setBackgroundColor(Color.GRAY);
         btnL1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                btnL1.setBackgroundColor(Color.CYAN);
+                btnL1.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
                 btnL2.setBackgroundColor(Color.GRAY);
                 btnL3.setBackgroundColor(Color.GRAY);
 
@@ -161,12 +166,13 @@ public class Server extends Activity {
         });
         // Layout 1 for Vertical device.
         btnL2 = (Button) findViewById(R.id.btnTwoLayout);
+        btnL2.setBackgroundColor(Color.GRAY);
         btnL2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 btnL1.setBackgroundColor(Color.GRAY);
-                btnL2.setBackgroundColor(Color.CYAN);
+                btnL2.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
                 btnL3.setBackgroundColor(Color.GRAY);
 
                 rel1.setVisibility(View.GONE);
@@ -194,13 +200,14 @@ public class Server extends Activity {
             }
         });
         btnL3 = (Button) findViewById(R.id.btnThreeLayout);
+        btnL3.setBackgroundColor(Color.GRAY);
         btnL3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 btnL1.setBackgroundColor(Color.GRAY);
                 btnL2.setBackgroundColor(Color.GRAY);
-                btnL3.setBackgroundColor(Color.CYAN);
+                btnL3.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
 
                 rel1.setVisibility(View.GONE);
                 rel2.setVisibility(View.GONE);
@@ -216,26 +223,12 @@ public class Server extends Activity {
             }
         });
 
-
-        btnL1.setVisibility(View.GONE);
-        btnL2.setVisibility(View.GONE);
-        btnL3.setVisibility(View.GONE);
-
-        relmain1 = (RelativeLayout) findViewById(R.id.relMain1);
-        linmain1 = (LinearLayout) findViewById(R.id.linMain1);
-        linmain2 = (LinearLayout) findViewById(R.id.linMain2);
-
-
-        linmain1.setVisibility(View.VISIBLE);
-        linmain2.setVisibility(View.GONE);
-        relmain1.setVisibility(View.GONE);
-
         btnDone = (Button) findViewById(R.id.btnDone);
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 relmain1.setVisibility(View.GONE);
-                linmain1.setVisibility(View.VISIBLE);
+                linmain1.setVisibility(View.GONE);
                 linmain2.setVisibility(View.GONE);
 
                 rel1.setVisibility(View.GONE);
@@ -250,15 +243,17 @@ public class Server extends Activity {
                 btnTwoDevice.setBackgroundColor(Color.GRAY);
                 btnThreeDevice.setBackgroundColor(Color.GRAY);
 
+                tvPleaseSelectDevice.setVisibility(View.VISIBLE);
             }
         });
 
         btnOneDevice = (Button) findViewById(R.id.btnOneDevice);
+        btnOneDevice.setBackgroundColor(Color.GRAY);
         btnOneDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                btnOneDevice.setBackgroundColor(Color.CYAN);
+                btnOneDevice.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
                 btnTwoDevice.setBackgroundColor(Color.GRAY);
                 btnThreeDevice.setBackgroundColor(Color.GRAY);
 
@@ -281,12 +276,13 @@ public class Server extends Activity {
             }
         });
         btnTwoDevice = (Button) findViewById(R.id.btnTwoDevice);
+        btnTwoDevice.setBackgroundColor(Color.GRAY);
         btnTwoDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 btnOneDevice.setBackgroundColor(Color.GRAY);
-                btnTwoDevice.setBackgroundColor(Color.CYAN);
+                btnTwoDevice.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
                 btnThreeDevice.setBackgroundColor(Color.GRAY);
 
                 btnL1.setVisibility(View.VISIBLE);
@@ -310,13 +306,14 @@ public class Server extends Activity {
             }
         });
         btnThreeDevice = (Button) findViewById(R.id.btnThreeDevice);
+        btnThreeDevice.setBackgroundColor(Color.GRAY);
         btnThreeDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 btnOneDevice.setBackgroundColor(Color.GRAY);
                 btnTwoDevice.setBackgroundColor(Color.GRAY);
-                btnThreeDevice.setBackgroundColor(Color.CYAN);
+                btnThreeDevice.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
 
                 btnL1.setVisibility(View.VISIBLE);
                 btnL2.setVisibility(View.VISIBLE);
@@ -505,7 +502,7 @@ public class Server extends Activity {
                     Appconfig.socketArray.add(count, socket);
                     count++;
                     message += "#" + count + " from " + socket.getInetAddress()
-                            + ":" + socket.getPort() + "\n";
+                            + ":" + socket.getPort() + " is now connected.\n";
 //                    //                    for receiving message from client
 //                    InputStream is = socket.getInputStream();
 //                    InputStreamReader isr = new InputStreamReader(is);
@@ -518,6 +515,10 @@ public class Server extends Activity {
                         @Override
                         public void run() {
                             msg.setText(message);
+                            tvPleaseSelectDevice.setVisibility(View.GONE);
+                            relmain1.setVisibility(View.GONE);
+                            linmain2.setVisibility(View.GONE);
+                            linmain1.setVisibility(View.VISIBLE);
                         }
                     });
 //                    InputStream inputStream = socket.getInputStream();
@@ -1193,4 +1194,11 @@ public class Server extends Activity {
 //		Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
 //		startActivity(in);
 //	}
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

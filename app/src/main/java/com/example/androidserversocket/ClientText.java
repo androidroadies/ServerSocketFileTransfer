@@ -34,12 +34,14 @@ import wifi.api.wifiHotSpots;
 import wifi.datatransfer.WifiSocket;
 
 
-/** We use this class for recieve image from Server*/
+/**
+ * We use this class for recieve image from Server
+ */
 public class ClientText extends Activity {
 
     TextView textResponse;
     EditText editTextAddress, editTextPort;
-    Button buttonConnect, buttonClear,btnJoinGroup;
+    Button buttonConnect, buttonClear, btnJoinGroup;
     ImageView imageView;
     MyClientTask1 myClientTask1;
     Bitmap decodedByte;
@@ -53,8 +55,9 @@ public class ClientText extends Activity {
     //    SimpleAsynTask mTask;
     wifiAddresses au;
 
-    LinearLayout lin1,lin2;
+    LinearLayout lin1, lin2;
     ScrollTextView scrolltext;
+    private TextView tvWaitText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +69,10 @@ public class ClientText extends Activity {
         buttonConnect = (Button) findViewById(R.id.connect);
         buttonClear = (Button) findViewById(R.id.clear);
         textResponse = (TextView) findViewById(R.id.response);
+        tvWaitText = (TextView) findViewById(R.id.client_text_tv_wait_text);
         imageView = (ImageView) findViewById(R.id.imageView);
 
-        scrolltext=(ScrollTextView) findViewById(R.id.scrolltext);
+        scrolltext = (ScrollTextView) findViewById(R.id.scrolltext);
 
 
         lin1 = (LinearLayout) findViewById(R.id.lin1);
@@ -114,13 +118,15 @@ public class ClientText extends Activity {
         });
     }
 
-    public static boolean isFromClientText=false;
+    public static boolean isFromClientText = false;
     OnClickListener buttonConnectOnClickListener =
             new OnClickListener() {
 
                 @Override
                 public void onClick(View arg0) {
-                    isFromClientText =true;
+                    lin1.setVisibility(View.GONE);
+                    tvWaitText.setVisibility(View.VISIBLE);
+                    isFromClientText = true;
                     myClientTask1 = new MyClientTask1(
                             editTextAddress.getText().toString().trim(),
                             8080, ao);
@@ -133,6 +139,7 @@ public class ClientText extends Activity {
         @Override
         public void response(final String result) {
 
+            tvWaitText.setVisibility(View.GONE);
             System.out.println("result final :" + result.toString());
             textResponse.setText(result);
 
@@ -157,41 +164,41 @@ public class ClientText extends Activity {
 //			System.out.println("bitmap post:"  + decodedByte);
 //			imageView.setImageBitmap(decodedByte);
 
-            if (result.toString() == null){
+            if (result.toString() == null) {
                 lin1.setVisibility(View.VISIBLE);
                 lin2.setVisibility(View.INVISIBLE);
-            }else {
+            } else {
                 lin2.setVisibility(View.VISIBLE);
                 lin1.setVisibility(View.INVISIBLE);
 //                imageView.setImageBitmap(decodedByte);
             }
 
-            }
-        };
+        }
+    };
 
-        public class MyClientTask extends AsyncTask<String, String, String> {
+    public class MyClientTask extends AsyncTask<String, String, String> {
 
-            String dstAddress;
-            int dstPort;
-            String response = "";
+        String dstAddress;
+        int dstPort;
+        String response = "";
 
-            MyClientTask(String addr) {
-                dstAddress = addr;
+        MyClientTask(String addr) {
+            dstAddress = addr;
 //			dstPort = port;
+        }
+
+        @Override
+        protected String doInBackground(String... arg0) {
+
+            Socket socket = null;
+            try {
+                byte[] decodedString = Base64.decode(dstAddress, Base64.DEFAULT);
+
+                decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                System.out.println("bitmap :" + decodedByte);
+            } catch (Exception e) {
+                System.out.println("exception :" + e);
             }
-
-            @Override
-            protected String doInBackground(String... arg0) {
-
-                Socket socket = null;
-                try {
-                    byte[] decodedString = Base64.decode(dstAddress, Base64.DEFAULT);
-
-                    decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                    System.out.println("bitmap :" + decodedByte);
-                } catch (Exception e) {
-                    System.out.println("exception :" + e);
-                }
 
 //			try {
 //				socket = new Socket(dstAddress, dstPort);
@@ -231,13 +238,13 @@ public class ClientText extends Activity {
 //					}
 //				}
 //			}
-                return null;
-            }
+            return null;
+        }
 
-            @Override
-            protected void onPostExecute(String result) {
-                imageView.setImageBitmap(decodedByte);
-                //setimage(response.toString());
+        @Override
+        protected void onPostExecute(String result) {
+            imageView.setImageBitmap(decodedByte);
+            //setimage(response.toString());
 
 //			new Handler().postDelayed(new Runnable(){
 //				@Override
@@ -249,16 +256,16 @@ public class ClientText extends Activity {
 //			}, 8000);
 
 //			textResponse.setText(response);
-                super.onPostExecute(result);
+            super.onPostExecute(result);
 //			MyClientTask1 myClientTask = new MyClientTask1(
 //					"192.168.43.157",
 //					8080);
 //			myClientTask.execute();
-            }
-
         }
 
-        private void setimage(String str) {
+    }
+
+    private void setimage(String str) {
 
 //        String str1 =";
 //            byte[] decodedString = Base64.decode(str1, Base64.DEFAULT);
@@ -278,11 +285,12 @@ public class ClientText extends Activity {
 //		}, 3000);
 
 
-            imageView.setImageBitmap(decodedByte);
-        }
+        imageView.setImageBitmap(decodedByte);
+    }
 
     /**
      * Using this methos user can find our Network and join automatically or you can connect our network from wifi. Our Netwrok name is " SSID ".
+     *
      * @param wifiStatus
      * @param hotutil
      */
@@ -357,4 +365,9 @@ public class ClientText extends Activity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
+}

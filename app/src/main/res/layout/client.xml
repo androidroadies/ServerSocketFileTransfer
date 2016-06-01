@@ -28,33 +28,45 @@
             android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:hint="dstAddress" />
+            android:hint="dstAddress"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/port"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:hint="dstPort" />
+            android:hint="dstPort"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/connect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Receive Connect..." />
+            android:background="@color/btn_choose_action"
+            android:text="Receive Connect..."
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/clear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Clear" />
+            android:layout_marginTop="10dp"
+            android:background="@color/btn_choose_action"
+            android:text="Clear"
+            android:visibility="gone"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnJoinGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Join (SSID)" />
+            android:layout_marginTop="10dp"
+            android:background="@color/btn_choose_action"
+            android:text="Join (SSID)"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
 
 
         <ScrollView
@@ -68,6 +80,18 @@
         </ScrollView>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/client_image_tv_wait_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:text="Wait! Your image will appear here."
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/btn_choose_action"
+        android:visibility="gone" />
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/lin2"
@@ -80,17 +104,17 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
-             />
+            android:scaleType="fitXY" />
 
     </LinearLayout>
+
     <Button
         android:id="@+id/client_btn_inform_server"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="inform server"
-        android:layout_margin="16dp"
-        android:visibility="gone"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_margin="16dp"
+        android:text="inform server"
+        android:visibility="gone" />
 </RelativeLayout>

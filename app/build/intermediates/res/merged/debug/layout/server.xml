@@ -24,31 +24,49 @@
             android:id="@+id/btnCreateGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CreateGroup" />
+            android:background="@color/btn_choose_action"
+            android:text="CreateGroup"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btnServerSend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="Broadcast Image" />
+            android:layout_marginTop="10dp"
+            android:background="@color/btn_choose_action"
+            android:text="Broadcast Image"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
 
+        <!--previously this button was choose device-->
         <Button
-            android:id="@+id/btnChoose"
+            android:id="@+id/btnSlideShow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choose Device" />
+            android:layout_marginTop="10dp"
+            android:background="@color/btn_choose_action"
+            android:text="Slide Show"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnSelectPhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select Single Image" />
+            android:layout_marginTop="10dp"
+            android:background="@color/btn_choose_action"
+            android:text="Select Single Image"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
 
         <ImageView
             android:id="@+id/imgset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,11 +77,13 @@
         <TextView
             android:id="@+id/info"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorSecondaryText" />
 
         <TextView
             android:id="@+id/infoip"
             android:layout_width="wrap_content"
+            android:textColor="@color/colorSecondaryText"
             android:layout_height="wrap_content" />
 
         <ScrollView
@@ -73,10 +93,21 @@
             <TextView
                 android:id="@+id/msg"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@android:color/holo_green_dark" />
         </ScrollView>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/server_tv_please_select_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Please connect device to broadcast image."
+        android:textColor="@color/btn_choose_action"
+        android:visibility="gone" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/relMain1"
@@ -92,58 +123,77 @@
 
         <Button
             android:id="@+id/btnDone"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Done"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="30dp"
-            android:layout_marginEnd="30dp" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/btn_choose_action"
+            android:text="Next >"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Select Number of device to connect." />
+            android:text="Select Number of device to connect."
+            android:textColor="@color/btn_choose_action" />
 
-        <Button
-            android:id="@+id/btnOneDevice"
-            style="?android:attr/buttonStyleSmall"
+        <LinearLayout
+            android:id="@+id/rl_btn_device_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView5"
-            android:layout_marginTop="30dp"
-            android:text="1" />
-
-        <Button
-            android:id="@+id/btnTwoDevice"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/btnOneDevice"
             android:layout_centerHorizontal="true"
-            android:text="2" />
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnThreeDevice"
-            style="?android:attr/buttonStyleSmall"
+            <Button
+                android:id="@+id/btnOneDevice"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textAppearance="?android:attr/textAppearanceButton"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btnTwoDevice"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="2"
+                android:textAppearance="?android:attr/textAppearanceButton"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btnThreeDevice"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="3"
+                android:textAppearance="?android:attr/textAppearanceButton"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/server_tv_device_instruction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/btnTwoDevice"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:text="3" />
+            android:layout_below="@+id/rl_btn_device_selector"
+            android:layout_centerHorizontal="true"
+            android:text="(Exclude your device while selecting number)"
+            android:textColor="@android:color/holo_green_dark" />
 
         <LinearLayout
             android:id="@+id/linLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnOneDevice"
-            android:layout_margin="10dp"
+            android:layout_below="@+id/server_tv_device_instruction"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <Button
@@ -153,7 +203,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView5"
                 android:layout_weight="1"
-                android:text="Layout 1" />
+                android:background="@color/btn_choose_action"
+                android:text="Layout 1"
+                android:textAppearance="?android:attr/textAppearanceButton"
+                android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/btnTwoLayout"
@@ -162,8 +215,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/btnOneDevice"
                 android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="Layout 2" />
+                android:background="@color/btn_choose_action"
+                android:text="Layout 2"
+                android:textAppearance="?android:attr/textAppearanceButton"
+                android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/btnThreeLayout"
@@ -173,8 +230,12 @@
                 android:layout_alignBottom="@+id/btnTwoDevice"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="Layout 3" />
+                android:background="@color/btn_choose_action"
+                android:text="Layout 3"
+                android:textAppearance="?android:attr/textAppearanceButton"
+                android:textColor="@android:color/white" />
 
             <!--<Button-->
             <!--android:id="@+id/btnFourLayout"-->
@@ -327,8 +388,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            />
+            android:scaleType="fitXY" />
     </LinearLayout>
 
 </RelativeLayout>

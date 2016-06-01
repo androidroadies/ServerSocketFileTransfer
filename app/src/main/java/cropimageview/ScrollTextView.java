@@ -11,6 +11,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 import android.widget.TextView;
 
+import com.example.androidserversocket.ClientText;
 import com.example.androidserversocket.ReplyThread;
 
 import static com.example.androidserversocket.Appconfig.socketArray;
@@ -23,6 +24,7 @@ public class ScrollTextView extends TextView {
     // scrolling feature
     public Scroller mSlr;
     int scrollingLen;
+    Boolean isFirstTime = true;
 //    Display mDisplay = getContext().getWindowManager().getDefaultDisplay();
 //    final int width  = mDisplay.getWidth();
 //    final int height = mDisplay.getHeight();
@@ -176,13 +178,38 @@ public class ScrollTextView extends TextView {
 //        System.out.println("111 compute socket" +socketArray.size());
         if (mSlr.getCurrX() == 0 || mSlr.getCurrX() == 1 || mSlr.getCurrX() == 2 || mSlr.getCurrX() == 3 || mSlr.getCurrX() == 4 || mSlr.getCurrX() == -1 || mSlr.getCurrX() == -2 || mSlr.getCurrX() == -3 || mSlr.getCurrX() == -4) {
             // Send message to second device
-            for (int i = 0; i < socketArray.size(); i++) {
-                ReplyThread socketServerReplyThread;
-                socketServerReplyThread = new ReplyThread(socketArray.get(0), "");
+//            for (int i = 0; i < socketArray.size(); i++) {
+            if (socketArray.size() == 1) {
+                System.out.println("test 1...");
+                ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(0), getText().toString());
+                socketServerReplyThread.run();
+            } else if (socketArray.size() == 2) {
+                System.out.println("test 2...");
+                if (isFirstTime) {
+                    System.out.println("IN FIRST TIME");
+                    ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(0), getText().toString());
+                    socketServerReplyThread.run();
+                    isFirstTime = false;
+                } else {
+                    System.out.println("NOT FIRST TIME");
+                    ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(1), getText().toString());
+                    socketServerReplyThread.run();
+                    isFirstTime = true;
+                }
+            } else if (socketArray.size() == 3) {
+                System.out.println("test 3...");
+                ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(0), getText().toString());
+                socketServerReplyThread.run();
+
+                socketServerReplyThread = new ReplyThread(socketArray.get(1), getText().toString());
+                socketServerReplyThread.run();
+
+                socketServerReplyThread = new ReplyThread(socketArray.get(2), getText().toString());
                 socketServerReplyThread.run();
             }
-
         }
+
+//        }
 //        else if (mSlr.getCurrX() == 1) {
 //            // Send message to second device
 ////            System.out.println("socket array :" + socketArray.size());

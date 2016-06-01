@@ -4,10 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Client">
+
     <TextView
         android:id="@+id/response"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/lin1"
@@ -31,38 +33,50 @@
             android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:hint="dstAddress" />
+            android:hint="dstAddress"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/port"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:hint="dstPort" />
+            android:hint="dstPort"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/connect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Receive Connect..." />
+            android:background="@color/btn_choose_action"
+            android:text="Receive Connect..."
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/clear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Clear" />
+            android:layout_marginTop="10dp"
+            android:background="@color/btn_choose_action"
+            android:text="Clear"
+            android:visibility="gone"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnJoinGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Join (SSID)" />
+            android:layout_marginTop="10dp"
+            android:background="@color/btn_choose_action"
+            android:text="Join (SSID)"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
 
         <!--<cropimageview.ScrollTextView-->
-            <!--android:id="@+id/scrolltext"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content">-->
+        <!--android:id="@+id/scrolltext"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content">-->
         <!--</cropimageview.ScrollTextView>-->
 
         <ScrollView
@@ -70,12 +84,22 @@
             android:layout_height="match_parent">
 
             <!--<TextView-->
-                <!--android:id="@+id/response"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
+            <!--android:id="@+id/response"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
         </ScrollView>
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/client_text_tv_wait_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:text="Wait! Your text will appear here."
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/btn_choose_action"
+        android:visibility="gone" />
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/lin2"
@@ -87,13 +111,12 @@
         <cropimageview.ScrollTextView
             android:id="@+id/scrolltext"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-        </cropimageview.ScrollTextView>
+            android:layout_height="wrap_content"></cropimageview.ScrollTextView>
 
         <!--<TextView-->
-            <!--android:id="@+id/response"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
+        <!--android:id="@+id/response"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
 
     </LinearLayout>
 </RelativeLayout>

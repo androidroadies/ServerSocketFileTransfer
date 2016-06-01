@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,34 +9,34 @@
     android:orientation="vertical"
     tools:context=".Client" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:autoLink="web"
-        android:textStyle="bold" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:autoLink="web"-->
+        <!--android:textStyle="bold" />-->
 
-    <Button 
-        android:id="@+id/client"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Client Receive Image"/>
-    <Button 
-        android:id="@+id/server"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Server Send Image"/>
+    <!--<Button -->
+        <!--android:id="@+id/client"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Client Receive Image"/>-->
+    <!--<Button -->
+        <!--android:id="@+id/server"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Server Send Image"/>-->
 
-    <Button
-        android:id="@+id/clientText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Client Receive Text"/>
-    <Button
-        android:id="@+id/serverText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Server Send Text"/>
+    <!--<Button-->
+        <!--android:id="@+id/clientText"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Client Receive Text"/>-->
+    <!--<Button-->
+        <!--android:id="@+id/serverText"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Server Send Text"/>-->
 
 
     <TextView
@@ -44,4 +44,79 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_btn_choose_action"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:text="Choose the action you want to perform."
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RelativeLayout
+        android:id="@+id/rl_btn_choose_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:id="@+id/client"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/btn_choose_action"
+            android:padding="10dp"
+            android:text="Receive Image"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/server"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/client"
+            android:layout_alignLeft="@+id/client"
+            android:layout_alignRight="@+id/client"
+            android:layout_alignStart="@+id/client"
+            android:layout_below="@+id/client"
+            android:layout_marginTop="16dp"
+            android:background="@color/btn_choose_action"
+            android:text="Send Image"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/clientText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/server"
+            android:layout_alignLeft="@+id/server"
+            android:layout_alignRight="@+id/server"
+            android:layout_alignStart="@+id/server"
+            android:layout_below="@+id/server"
+            android:layout_marginTop="16dp"
+            android:background="@color/btn_choose_action"
+            android:text="Receive Text"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/serverText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/clientText"
+            android:layout_alignLeft="@+id/clientText"
+            android:layout_alignRight="@+id/clientText"
+            android:layout_alignStart="@+id/clientText"
+            android:layout_below="@+id/clientText"
+            android:layout_marginTop="16dp"
+            android:background="@color/btn_choose_action"
+            android:text="Send Text"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+</RelativeLayout>

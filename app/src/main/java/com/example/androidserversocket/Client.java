@@ -79,7 +79,8 @@ public class Client extends Activity {
     LinearLayout lin1, lin2;
     private Client mContext;
     private Button btnInformServer;
-    public static Boolean isInform=false;
+    public static Boolean isInform = false;
+    private TextView tvWaitText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,12 +93,13 @@ public class Client extends Activity {
         buttonConnect = (Button) findViewById(R.id.connect);
         buttonClear = (Button) findViewById(R.id.clear);
         textResponse = (TextView) findViewById(R.id.response);
+        tvWaitText = (TextView) findViewById(R.id.client_image_tv_wait_text);
         imageView = (ImageView) findViewById(R.id.imageView);
-        btnInformServer =(Button)findViewById(R.id.client_btn_inform_server);
+        btnInformServer = (Button) findViewById(R.id.client_btn_inform_server);
         btnInformServer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                isInform=true;
+                isInform = true;
             }
         });
 
@@ -145,13 +147,15 @@ public class Client extends Activity {
         });
     }
 
-    public static boolean isFromClientImage=false;
+    public static boolean isFromClientImage = false;
     OnClickListener buttonConnectOnClickListener =
             new OnClickListener() {
 
                 @Override
                 public void onClick(View arg0) {
-                    isFromClientImage =true;
+                    lin1.setVisibility(View.GONE);
+                    tvWaitText.setVisibility(View.VISIBLE);
+                    isFromClientImage = true;
                     myClientTask1 = new MyClientTask1(
                             editTextAddress.getText().toString().trim(),
                             8080, ao);
@@ -163,8 +167,8 @@ public class Client extends Activity {
 
         @Override
         public void response(final String result) {
-            if (MyClientTask1.list !=null && MyClientTask1.list.size()!=0){
-                setImageWidthHeight(imageView,MyClientTask1.list.get(1));
+            if (MyClientTask1.list != null && MyClientTask1.list.size() != 0) {
+                setImageWidthHeight(imageView, MyClientTask1.list.get(1));
             }
 //            System.out.println("result final :" + result.toString());
             textResponse.setText(result);
@@ -398,4 +402,9 @@ public class Client extends Activity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

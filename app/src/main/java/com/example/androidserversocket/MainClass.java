@@ -16,10 +16,10 @@ import wifi.datatransfer.WifiSocket;
 /**
  * Created by multidots on 4/22/2016.
  */
-public class MainClass extends Activity{
+public class MainClass extends Activity {
 
-    Button client,server;
-    Button clientText,serverText;
+    Button client, server;
+    Button clientText, serverText;
 
     wifiHotSpots hotutil;
     WifiStatus wifiStatus;
@@ -29,6 +29,7 @@ public class MainClass extends Activity{
 
     //    SimpleAsynTask mTask;
     wifiAddresses au;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,7 @@ public class MainClass extends Activity{
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(getApplicationContext(),ClientText.class);
+                Intent in = new Intent(getApplicationContext(), ClientText.class);
                 startActivity(in);
 
             }
@@ -61,7 +62,7 @@ public class MainClass extends Activity{
                 hotutil.setHotSpot("SSID", "");
                 inviteFriend(hotutil);
 
-                Intent inser = new Intent(getApplicationContext(),ServerText.class);
+                Intent inser = new Intent(getApplicationContext(), ServerText.class);
                 startActivity(inser);
 
 
@@ -71,7 +72,7 @@ public class MainClass extends Activity{
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(getApplicationContext(),Client.class);
+                Intent in = new Intent(getApplicationContext(), Client.class);
                 startActivity(in);
 
             }
@@ -80,8 +81,10 @@ public class MainClass extends Activity{
         server.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hotutil.setHotSpot("SSID", "");
+                inviteFriend(hotutil);
 
-                Intent inser = new Intent(getApplicationContext(),Server.class);
+                Intent inser = new Intent(getApplicationContext(), Server.class);
                 startActivity(inser);
 
 
@@ -90,6 +93,14 @@ public class MainClass extends Activity{
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Appconfig.socketArray.size()>0)
+            Appconfig.socketArray.clear();
+    }
+
     /**
      * Start our hotspoy here and ask other user to join our Network Default ip is 192.168.43.1
      *

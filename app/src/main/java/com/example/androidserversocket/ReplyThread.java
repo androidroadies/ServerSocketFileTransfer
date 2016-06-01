@@ -27,7 +27,7 @@ public class ReplyThread extends Thread {
     @Override
     public void run() {
         OutputStream outputStream;
-        String msgReply = "Hello from Android, you are #";
+        String msgReply = strPathSend;
 
         System.out.println("111 reply thread");
         try {

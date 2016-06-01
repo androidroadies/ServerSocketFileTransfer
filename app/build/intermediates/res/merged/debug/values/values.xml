@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="bg_light_blue">#EBF5FF</color>
+    <color name="btn_choose_action">#f4683b</color>
     <color name="btn_line_blue">#3f5185</color>
+    <color name="btn_unselected">#7b7b7b</color>
     <color name="colorAccent">#536DFE</color>
     <color name="colorBackground">#fff3f3f3</color>
     <color name="colorBlack">#000</color>

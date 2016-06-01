@@ -9,30 +9,23 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.TextPaint;
-import android.util.AttributeSet;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.InetAddress;
@@ -40,7 +33,6 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 
 //import cropimageview.ScrollTextView;
@@ -62,19 +54,19 @@ public class ServerText extends Activity {
     ServerSocket serverSocket;
     Button btnServerSend, btnChoose, btnSelectPhoto, btnCreateGroup, btnOneDevice, btnTwoDevice, btnThreeDevice;
     Button btnL1, btnL2, btnL3, btnDone;
-    ImageView img1, img2, img3,imageView;
+    ImageView img1, img2, img3, imageView;
 
     Boolean isDevice1 = false, isDevice2 = false, isDevice3 = false;
     Boolean isLayout1 = false, isLayout2 = false, isLayout3 = false;
     Socket socket;
-//    ArrayList<Socket> socketArray = new ArrayList<Socket>();
+    //    ArrayList<Socket> socketArray = new ArrayList<Socket>();
     Context context;
     final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 1;
     final int PICK_IMAGE_FROM_GALLARY = 5;
     String path = "";
 
     RelativeLayout relmain1, rel1, rel2, rel3;
-    LinearLayout linmain1,linmain2;
+    LinearLayout linmain1, linmain2;
 
     wifiHotSpots hotutil;
     WifiStatus wifiStatus;
@@ -86,6 +78,10 @@ public class ServerText extends Activity {
     wifiAddresses au;
 
     ScrollTextView scrolltext;
+    private TextView tvPleaseSelectDevice;
+    private EditText edTextScroll;
+    private Button btnNextForText;
+    private String selectedText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +90,7 @@ public class ServerText extends Activity {
 
         context = ServerText.this;
 
-        scrolltext=(ScrollTextView) findViewById(R.id.scrolltext);
+        scrolltext = (ScrollTextView) findViewById(R.id.scrolltext);
 
 //        scrolltext.setTextColor(Color.WHITE);
 //        scrolltext.setTextSize(80);
@@ -108,11 +104,16 @@ public class ServerText extends Activity {
         info = (TextView) findViewById(R.id.info);
         infoip = (TextView) findViewById(R.id.infoip);
         msg = (TextView) findViewById(R.id.msg);
-
+        tvPleaseSelectDevice = (TextView) findViewById(R.id.server_tv_please_select_device);
+        edTextScroll = (EditText) findViewById(R.id.server_text_ed_text_to_scroll);
 
         img1 = (ImageView) findViewById(R.id.img1);
         img2 = (ImageView) findViewById(R.id.img2);
         img3 = (ImageView) findViewById(R.id.img3);
+
+        setImageWidthHeight(img1);
+        setImageWidthHeight(img2);
+        setImageWidthHeight(img3);
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
@@ -124,7 +125,17 @@ public class ServerText extends Activity {
         rel2.setVisibility(View.GONE);
         rel3.setVisibility(View.GONE);
 
-        btnChoose = (Button) findViewById(R.id.btnChoose);
+        relmain1 = (RelativeLayout) findViewById(R.id.relMain1);
+        linmain1 = (LinearLayout) findViewById(R.id.linMain1);
+        linmain2 = (LinearLayout) findViewById(R.id.linMain2);
+
+        relmain1.setVisibility(View.VISIBLE);
+        linmain1.setVisibility(View.GONE);
+        linmain2.setVisibility(View.GONE);
+
+
+
+ /*       btnChoose = (Button) findViewById(R.id.btnSlideShow);
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,14 +145,16 @@ public class ServerText extends Activity {
                 linmain2.setVisibility(View.GONE);
 
             }
-        });
+        });*/
+
         // Layout 1 for Horizontal device.
         btnL1 = (Button) findViewById(R.id.btnOneLayout);
+        btnL1.setBackgroundColor(Color.GRAY);
         btnL1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                btnL1.setBackgroundColor(Color.CYAN);
+                btnL1.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
                 btnL2.setBackgroundColor(Color.GRAY);
                 btnL3.setBackgroundColor(Color.GRAY);
 
@@ -172,12 +185,13 @@ public class ServerText extends Activity {
         });
         // Layout 1 for Vertical device.
         btnL2 = (Button) findViewById(R.id.btnTwoLayout);
+        btnL2.setBackgroundColor(Color.GRAY);
         btnL2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 btnL1.setBackgroundColor(Color.GRAY);
-                btnL2.setBackgroundColor(Color.CYAN);
+                btnL2.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
                 btnL3.setBackgroundColor(Color.GRAY);
 
                 rel1.setVisibility(View.GONE);
@@ -205,13 +219,14 @@ public class ServerText extends Activity {
             }
         });
         btnL3 = (Button) findViewById(R.id.btnThreeLayout);
+        btnL3.setBackgroundColor(Color.GRAY);
         btnL3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 btnL1.setBackgroundColor(Color.GRAY);
                 btnL2.setBackgroundColor(Color.GRAY);
-                btnL3.setBackgroundColor(Color.CYAN);
+                btnL3.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
 
                 rel1.setVisibility(View.GONE);
                 rel2.setVisibility(View.GONE);
@@ -232,21 +247,12 @@ public class ServerText extends Activity {
         btnL2.setVisibility(View.GONE);
         btnL3.setVisibility(View.GONE);
 
-        relmain1 = (RelativeLayout) findViewById(R.id.relMain1);
-        linmain1 = (LinearLayout) findViewById(R.id.linMain1);
-        linmain2 = (LinearLayout) findViewById(R.id.linMain2);
-
-
-        linmain1.setVisibility(View.VISIBLE);
-        linmain2.setVisibility(View.GONE);
-        relmain1.setVisibility(View.GONE);
-
         btnDone = (Button) findViewById(R.id.btnDone);
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 relmain1.setVisibility(View.GONE);
-                linmain1.setVisibility(View.VISIBLE);
+                linmain1.setVisibility(View.GONE);
                 linmain2.setVisibility(View.GONE);
 
                 rel1.setVisibility(View.GONE);
@@ -261,15 +267,33 @@ public class ServerText extends Activity {
                 btnTwoDevice.setBackgroundColor(Color.GRAY);
                 btnThreeDevice.setBackgroundColor(Color.GRAY);
 
+                if (msg.getText().toString().trim().length() > 0) {
+                    tvPleaseSelectDevice.setVisibility(View.GONE);
+                    linmain1.setVisibility(View.VISIBLE);
+                } else {
+                    tvPleaseSelectDevice.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        btnNextForText = (Button) findViewById(R.id.server_text_btn_next_text_selected);
+        btnNextForText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedText = edTextScroll.getText().toString().trim();
+                linmain1.setVisibility(View.VISIBLE);
+                edTextScroll.setVisibility(View.GONE);
+                btnNextForText.setVisibility(View.GONE);
             }
         });
 
         btnOneDevice = (Button) findViewById(R.id.btnOneDevice);
+        btnOneDevice.setBackgroundColor(Color.GRAY);
         btnOneDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                btnOneDevice.setBackgroundColor(Color.CYAN);
+                btnOneDevice.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
                 btnTwoDevice.setBackgroundColor(Color.GRAY);
                 btnThreeDevice.setBackgroundColor(Color.GRAY);
 
@@ -292,12 +316,13 @@ public class ServerText extends Activity {
             }
         });
         btnTwoDevice = (Button) findViewById(R.id.btnTwoDevice);
+        btnTwoDevice.setBackgroundColor(Color.GRAY);
         btnTwoDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 btnOneDevice.setBackgroundColor(Color.GRAY);
-                btnTwoDevice.setBackgroundColor(Color.CYAN);
+                btnTwoDevice.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
                 btnThreeDevice.setBackgroundColor(Color.GRAY);
 
                 btnL1.setVisibility(View.VISIBLE);
@@ -321,13 +346,14 @@ public class ServerText extends Activity {
             }
         });
         btnThreeDevice = (Button) findViewById(R.id.btnThreeDevice);
+        btnThreeDevice.setBackgroundColor(Color.GRAY);
         btnThreeDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 btnOneDevice.setBackgroundColor(Color.GRAY);
                 btnTwoDevice.setBackgroundColor(Color.GRAY);
-                btnThreeDevice.setBackgroundColor(Color.CYAN);
+                btnThreeDevice.setBackgroundColor(getResources().getColor(R.color.btn_choose_action));
 
                 btnL1.setVisibility(View.VISIBLE);
                 btnL2.setVisibility(View.VISIBLE);
@@ -377,31 +403,31 @@ public class ServerText extends Activity {
             public void onClick(View v) {
 
                 System.out.println("111 socket server size" + Appconfig.socketArray.size());
+                if (selectedText.length() > 0) {
+                    if (Appconfig.socketArray.size() > 0) {
+                        SharedPreferences shre1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-                if (Appconfig.socketArray.size() > 0) {
-                    SharedPreferences shre1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-                    String previouslyEncodedImagep1 = shre1.getString("image_datap1", "");
-                    String previouslyEncodedImagep2 = shre1.getString("image_datap2", "");
-                    String previouslyEncodedImagep3 = shre1.getString("image_datap3", "");
-                    String previouslyEncodedImagep4 = shre1.getString("image_datap4", "");
+                        String previouslyEncodedImagep1 = shre1.getString("image_datap1", "");
+                        String previouslyEncodedImagep2 = shre1.getString("image_datap2", "");
+                        String previouslyEncodedImagep3 = shre1.getString("image_datap3", "");
+                        String previouslyEncodedImagep4 = shre1.getString("image_datap4", "");
 //
 
-                    for (int i = 0; i < Appconfig.socketArray.size(); i++) {
+                        for (int i = 0; i < Appconfig.socketArray.size(); i++) {
 
 
-                        if (Appconfig.socketArray.size() == 1) {
+                            if (Appconfig.socketArray.size() == 1) {
 //                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
 //                            socketServerReplyThread.run();
 
-                            linmain1.setVisibility(View.GONE);
-                            linmain2.setVisibility(View.VISIBLE);
-                            relmain1.setVisibility(View.GONE);
+                                linmain1.setVisibility(View.GONE);
+                                linmain2.setVisibility(View.VISIBLE);
+                                relmain1.setVisibility(View.GONE);
 
-                            scrolltext.setText("Hello from Android, you are #");
-                            scrolltext.setTextColor(Color.BLACK);
-                            scrolltext.setTextSize(80);
-                            scrolltext.startScroll();
+                                scrolltext.setText(selectedText);
+                                scrolltext.setTextColor(Color.BLACK);
+                                scrolltext.setTextSize(80);
+                                scrolltext.startScroll();
 
 //                            if( !previouslyEncodedImagep2.equalsIgnoreCase("") ){
 //                                byte[] b2 = Base64.decode(previouslyEncodedImagep2, Base64.DEFAULT);
@@ -409,30 +435,30 @@ public class ServerText extends Activity {
 //                                imageView.setImageBitmap(bitmapp2);
 //                            }
 
-                        }
-                        if (Appconfig.socketArray.size() == 2) {
+                            }
+                            if (Appconfig.socketArray.size() == 2) {
 //                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
 //                            socketServerReplyThread.run();
 //
 //                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), previouslyEncodedImagep2);
 //                            socketServerReplyThread.run();
 
-                            scrolltext.setText("Hello from Android, you are #");
-                            scrolltext.setTextColor(Color.BLACK);
-                            scrolltext.setTextSize(80);
-                            scrolltext.startScroll();
+                                scrolltext.setText(selectedText);
+                                scrolltext.setTextColor(Color.BLACK);
+                                scrolltext.setTextSize(80);
+                                scrolltext.startScroll();
 
-                            linmain1.setVisibility(View.GONE);
-                            linmain2.setVisibility(View.VISIBLE);
-                            relmain1.setVisibility(View.GONE);
+                                linmain1.setVisibility(View.GONE);
+                                linmain2.setVisibility(View.VISIBLE);
+                                relmain1.setVisibility(View.GONE);
 
 //                            if( !previouslyEncodedImagep3.equalsIgnoreCase("") ){
 //                                byte[] b3 = Base64.decode(previouslyEncodedImagep3, Base64.DEFAULT);
 //                                Bitmap bitmapp3 = BitmapFactory.decodeByteArray(b3, 0, b3.length);
 //                                imageView.setImageBitmap(bitmapp3);
 //                            }
-                        }
-                        if (Appconfig.socketArray.size() == 3) {
+                            }
+                            if (Appconfig.socketArray.size() == 3) {
 //                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
 //                            socketServerReplyThread.run();
 //
@@ -442,14 +468,14 @@ public class ServerText extends Activity {
 //                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(2), previouslyEncodedImagep3);
 //                            socketServerReplyThread.run();
 
-                            scrolltext.setText("Hello from Android, you are #");
-                            scrolltext.setTextColor(Color.BLACK);
-                            scrolltext.setTextSize(80);
-                            scrolltext.startScroll();
+                                scrolltext.setText(selectedText);
+                                scrolltext.setTextColor(Color.BLACK);
+                                scrolltext.setTextSize(80);
+                                scrolltext.startScroll();
 
-                            linmain1.setVisibility(View.GONE);
-                            linmain2.setVisibility(View.VISIBLE);
-                            relmain1.setVisibility(View.GONE);
+                                linmain1.setVisibility(View.GONE);
+                                linmain2.setVisibility(View.VISIBLE);
+                                relmain1.setVisibility(View.GONE);
 
 
 //                            if( !previouslyEncodedImagep4.equalsIgnoreCase("") ){
@@ -458,13 +484,15 @@ public class ServerText extends Activity {
 //                                imageView.setImageBitmap(bitmapp4);
 //                            }
 
+                            }
                         }
+
+
+                    } else {
+                        Toast.makeText(context, "Please Connect Your Device First.!", Toast.LENGTH_LONG).show();
                     }
-
-
-
-                }else {
-                    Toast.makeText(context,"Please Connect Your Device First.!",Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(context, "Please Enter Some Text First.!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -475,8 +503,25 @@ public class ServerText extends Activity {
         socketServerThread.start();
     }
 
-    private void pictext() {
+    public void setImageWidthHeight(View v) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) ServerText.this).getWindowManager().getDefaultDisplay()
+                .getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+        int cachedHeight = (int) (width * 9 / 16);
+        ViewGroup.LayoutParams params = v.getLayoutParams();
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.height = cachedHeight;
+        v.setLayoutParams(params);
+    }
 
+    private void pictext() {
+        if (selectedText.trim().length() > 0) {
+            edTextScroll.setText(selectedText);
+        }
+        linmain1.setVisibility(View.GONE);
+        edTextScroll.setVisibility(View.VISIBLE);
+        btnNextForText.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -534,13 +579,19 @@ public class ServerText extends Activity {
                     Appconfig.socketArray.add(count, socket);
                     count++;
                     message += "#" + count + " from " + socket.getInetAddress()
-                            + ":" + socket.getPort() + "\n";
+                            + ":" + socket.getPort() + " is now connected.\n";
 
                     ServerText.this.runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
                             msg.setText(message);
+//                            if (tvPleaseSelectDevice.getVisibility() == View.VISIBLE) {
+                            tvPleaseSelectDevice.setVisibility(View.GONE);
+                            relmain1.setVisibility(View.GONE);
+                            linmain2.setVisibility(View.GONE);
+                            linmain1.setVisibility(View.VISIBLE);
+//                            }
                         }
                     });
 
@@ -569,7 +620,7 @@ public class ServerText extends Activity {
 
     }
 
-//    private class SocketServerReplyThread extends Thread {
+    //    private class SocketServerReplyThread extends Thread {
 //
 //        private Socket hostThreadSocket;
 //        String strPathSend;
@@ -643,37 +694,51 @@ public class ServerText extends Activity {
 //
 //
 //    }
-private class SocketServerReplyThread extends Thread {
+    private class SocketServerReplyThread extends Thread {
 
-    private Socket hostThreadSocket;
-//    int cnt;
-    String strPathSend;
+        private Socket hostThreadSocket;
+        //    int cnt;
+        String strPathSend;
 
-    SocketServerReplyThread(Socket socket, String strPath) {
-        hostThreadSocket = socket;
+        SocketServerReplyThread(Socket socket, String strPath) {
+            hostThreadSocket = socket;
 //        cnt = c;
-        strPathSend = strPath;
-    }
+            strPathSend = strPath;
+        }
 
-    @Override
-    public void run() {
-        OutputStream outputStream;
-        String msgReply = "Hello from Android, you are #";
+        @Override
+        public void run() {
+            OutputStream outputStream;
+            String msgReply = "Hello from Android, you are #";
 
-        SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor edit = shre.edit();
-        edit.putString("image_datap1", msgReply);
-        edit.putString("image_datap2", msgReply);
-        edit.putString("image_datap3", msgReply);
-        edit.putString("image_datap4", msgReply);
-        edit.commit();
-        try {
-            outputStream = hostThreadSocket.getOutputStream();
-            PrintStream printStream = new PrintStream(outputStream);
-            printStream.print(msgReply);
-            printStream.close();//Remove comment
+            SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor edit = shre.edit();
+            edit.putString("image_datap1", msgReply);
+            edit.putString("image_datap2", msgReply);
+            edit.putString("image_datap3", msgReply);
+            edit.putString("image_datap4", msgReply);
+            edit.commit();
+            try {
+                outputStream = hostThreadSocket.getOutputStream();
+                PrintStream printStream = new PrintStream(outputStream);
+                printStream.print(msgReply);
+                printStream.close();//Remove comment
 
-            message += "replayed: " + msgReply + "\n";
+                message += "replayed: " + msgReply + "\n";
+
+                ServerText.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        msg.setText(message);
+                    }
+                });
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                message += "Something wrong! " + e.toString() + "\n";
+            }
 
             ServerText.this.runOnUiThread(new Runnable() {
 
@@ -682,23 +747,10 @@ private class SocketServerReplyThread extends Thread {
                     msg.setText(message);
                 }
             });
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            message += "Something wrong! " + e.toString() + "\n";
         }
 
-        ServerText.this.runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-                msg.setText(message);
-            }
-        });
     }
 
-}
     private String getIpAddress() {
         String ip = "";
         try {
@@ -1254,4 +1306,9 @@ private class SocketServerReplyThread extends Thread {
 //        startActivity(in);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
