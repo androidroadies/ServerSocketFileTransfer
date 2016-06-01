@@ -179,6 +179,7 @@ public class ScrollTextView extends TextView {
         if (mSlr.getCurrX() == 0 || mSlr.getCurrX() == 1 || mSlr.getCurrX() == 2 || mSlr.getCurrX() == 3 || mSlr.getCurrX() == 4 || mSlr.getCurrX() == -1 || mSlr.getCurrX() == -2 || mSlr.getCurrX() == -3 || mSlr.getCurrX() == -4) {
             // Send message to second device
 //            for (int i = 0; i < socketArray.size(); i++) {
+
             if (socketArray.size() == 1) {
                 System.out.println("test 1...");
                 ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(0), getText().toString());
