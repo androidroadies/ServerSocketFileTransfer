@@ -14,6 +14,9 @@ import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -97,6 +100,10 @@ public class Server extends Activity {
         img1 = (ImageView) findViewById(R.id.img1);
         img2 = (ImageView) findViewById(R.id.img2);
         img3 = (ImageView) findViewById(R.id.img3);
+
+        setImageWidthHeight(img1);
+        setImageWidthHeight(img2);
+        setImageWidthHeight(img3);
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
@@ -388,6 +395,13 @@ public class Server extends Activity {
                                 byte[] b2 = Base64.decode(previouslyEncodedImagep2, Base64.DEFAULT);
                                 Bitmap bitmapp2 = BitmapFactory.decodeByteArray(b2, 0, b2.length);
                                 imageView.setImageBitmap(bitmapp2);
+                                /*imageView.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_fade_out);
+                                        imageView.startAnimation(anim);
+                                    }
+                                });*/
                             }
 
                         }
@@ -406,6 +420,13 @@ public class Server extends Activity {
                                 byte[] b3 = Base64.decode(previouslyEncodedImagep3, Base64.DEFAULT);
                                 Bitmap bitmapp3 = BitmapFactory.decodeByteArray(b3, 0, b3.length);
                                 imageView.setImageBitmap(bitmapp3);
+                               /* imageView.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_fade_out);
+                                        imageView.startAnimation(anim);
+                                    }
+                                });*/
                             }
                         }
                         if (Appconfig.socketArray.size() == 3) {
@@ -427,6 +448,13 @@ public class Server extends Activity {
                                 byte[] b4 = Base64.decode(previouslyEncodedImagep4, Base64.DEFAULT);
                                 Bitmap bitmapp4 = BitmapFactory.decodeByteArray(b4, 0, b4.length);
                                 imageView.setImageBitmap(bitmapp4);
+                                /*imageView.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_fade_out);
+                                        imageView.startAnimation(anim);
+                                    }
+                                });*/
                             }
 
                         }
@@ -444,7 +472,17 @@ public class Server extends Activity {
         Thread socketServerThread = new Thread(new SocketServerThread());
         socketServerThread.start();
     }
-
+    public void setImageWidthHeight(View v) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) Server.this).getWindowManager().getDefaultDisplay()
+                .getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+        int cachedHeight = (int) (width * 9 / 16);
+        ViewGroup.LayoutParams params = v.getLayoutParams();
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.height = cachedHeight;
+        v.setLayoutParams(params);
+    }
     /**
      * Start our hotspoy here and ask other user to join our Network Default ip is 192.168.43.1
      *

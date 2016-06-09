@@ -661,9 +661,9 @@
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 117,
+                        "startOffset": 107,
                         "endColumn": 52,
-                        "endOffset": 165
+                        "endOffset": 155
                     }
                 }
             },
@@ -672,8 +672,8 @@
                     "startLine": 37,
                     "startColumn": 4,
                     "startOffset": 1751,
-                    "endColumn": 56,
-                    "endOffset": 1803
+                    "endColumn": 46,
+                    "endOffset": 1793
                 },
                 "from": {
                     "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
@@ -681,8 +681,8 @@
                         "startLine": 3,
                         "startColumn": 4,
                         "startOffset": 59,
-                        "endColumn": 56,
-                        "endOffset": 111
+                        "endColumn": 46,
+                        "endOffset": 101
                     }
                 }
             },
@@ -690,18 +690,18 @@
                 "to": {
                     "startLine": 38,
                     "startColumn": 4,
-                    "startOffset": 1808,
+                    "startOffset": 1798,
                     "endColumn": 54,
-                    "endOffset": 1858
+                    "endOffset": 1848
                 },
                 "from": {
                     "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
-                        "startOffset": 380,
+                        "startOffset": 370,
                         "endColumn": 54,
-                        "endOffset": 430
+                        "endOffset": 420
                     }
                 }
             },
@@ -709,18 +709,18 @@
                 "to": {
                     "startLine": 39,
                     "startColumn": 4,
-                    "startOffset": 1863,
+                    "startOffset": 1853,
                     "endColumn": 69,
-                    "endOffset": 1928
+                    "endOffset": 1918
                 },
                 "from": {
                     "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
-                        "startOffset": 436,
+                        "startOffset": 426,
                         "endColumn": 69,
-                        "endOffset": 501
+                        "endOffset": 491
                     }
                 }
             },
@@ -728,18 +728,18 @@
                 "to": {
                     "startLine": 40,
                     "startColumn": 4,
-                    "startOffset": 1933,
+                    "startOffset": 1923,
                     "endColumn": 45,
-                    "endOffset": 1974
+                    "endOffset": 1964
                 },
                 "from": {
                     "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
-                        "startOffset": 282,
+                        "startOffset": 272,
                         "endColumn": 45,
-                        "endOffset": 323
+                        "endOffset": 313
                     }
                 }
             },
@@ -747,18 +747,18 @@
                 "to": {
                     "startLine": 41,
                     "startColumn": 4,
-                    "startOffset": 1979,
+                    "startOffset": 1969,
                     "endColumn": 53,
-                    "endOffset": 2028
+                    "endOffset": 2018
                 },
                 "from": {
                     "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 227,
+                        "startOffset": 217,
                         "endColumn": 53,
-                        "endOffset": 276
+                        "endOffset": 266
                     }
                 }
             },
@@ -766,18 +766,18 @@
                 "to": {
                     "startLine": 42,
                     "startColumn": 4,
-                    "startOffset": 2033,
+                    "startOffset": 2023,
                     "endColumn": 47,
-                    "endOffset": 2076
+                    "endOffset": 2066
                 },
                 "from": {
                     "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
-                        "startOffset": 329,
+                        "startOffset": 319,
                         "endColumn": 47,
-                        "endOffset": 372
+                        "endOffset": 362
                     }
                 }
             },
@@ -785,18 +785,18 @@
                 "to": {
                     "startLine": 43,
                     "startColumn": 4,
-                    "startOffset": 2081,
+                    "startOffset": 2071,
                     "endColumn": 52,
-                    "endOffset": 2129
+                    "endOffset": 2119
                 },
                 "from": {
                     "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
-                        "startOffset": 171,
+                        "startOffset": 161,
                         "endColumn": 52,
-                        "endOffset": 219
+                        "endOffset": 209
                     }
                 }
             },
@@ -804,10 +804,10 @@
                 "to": {
                     "startLine": 44,
                     "startColumn": 4,
-                    "startOffset": 2134,
+                    "startOffset": 2124,
                     "endLine": 50,
                     "endColumn": 12,
-                    "endOffset": 2420
+                    "endOffset": 2410
                 },
                 "from": {
                     "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\styles.xml",
@@ -825,10 +825,10 @@
                 "to": {
                     "startLine": 51,
                     "startColumn": 4,
-                    "startOffset": 2425,
+                    "startOffset": 2415,
                     "endLine": 53,
                     "endColumn": 12,
-                    "endOffset": 2580
+                    "endOffset": 2570
                 },
                 "from": {
                     "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\styles.xml",
@@ -846,10 +846,10 @@
                 "to": {
                     "startLine": 54,
                     "startColumn": 4,
-                    "startOffset": 2585,
+                    "startOffset": 2575,
                     "endLine": 57,
                     "endColumn": 12,
-                    "endOffset": 2720
+                    "endOffset": 2710
                 },
                 "from": {
                     "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\styles.xml",
@@ -867,10 +867,10 @@
                 "to": {
                     "startLine": 58,
                     "startColumn": 4,
-                    "startOffset": 2725,
+                    "startOffset": 2715,
                     "endLine": 61,
                     "endColumn": 12,
-                    "endOffset": 2866
+                    "endOffset": 2856
                 },
                 "from": {
                     "file": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\values\\styles.xml",

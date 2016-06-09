@@ -185,6 +185,7 @@ public class Client extends Activity {
             byte[] decodedString = Base64.decode(result.toString(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             System.out.println("bitmap post:" + decodedByte);
+            tvWaitText.setVisibility(View.GONE);
             imageView.setImageBitmap(decodedByte);
 //            imageView.post(new Runnable() {
 //                @Override

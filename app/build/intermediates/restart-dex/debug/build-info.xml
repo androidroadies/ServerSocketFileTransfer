@@ -4,26 +4,27 @@
     api-level="19"
     density="hdpi"
     format="7"
-    timestamp="8099321631398" >
+    timestamp="18222944068578"
+    token="3690805822990165348" >
 
     <task
         name="javac"
-        duration="503" />
+        duration="2231" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="535" />
+        duration="1586" />
     <task
         name="verifier"
-        duration="2094" />
+        duration="251" />
 
     <artifact
         location="F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\build\outputs\apk\app-debug.apk"
         type="MAIN" />
 
-    <build timestamp="8099321631398" >
+    <build timestamp="18222944068578" >
         <artifact
             location="F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
