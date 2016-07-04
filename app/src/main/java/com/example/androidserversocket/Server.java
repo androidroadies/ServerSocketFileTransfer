@@ -9,10 +9,12 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -106,7 +108,18 @@ public class Server extends Activity {
         setImageWidthHeight(img3);
 
         imageView = (ImageView) findViewById(R.id.imageView);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) Server.this).getWindowManager().getDefaultDisplay()
+                .getMetrics(displayMetrics);
+        int heightPixels = displayMetrics.heightPixels;
 
+        if (heightPixels > 855 && heightPixels < 1300) {
+            setImageWidthHeight(imageView, 820);
+        } else if (heightPixels > 750 && heightPixels < 855) {
+            setImageWidthHeight(imageView, 750);
+        } else {
+            setImageWidthHeight(imageView, heightPixels - 450);
+        }
         rel1 = (RelativeLayout) findViewById(R.id.rel1);
         rel2 = (RelativeLayout) findViewById(R.id.rel2);
         rel3 = (RelativeLayout) findViewById(R.id.rel3);
@@ -395,6 +408,19 @@ public class Server extends Activity {
                                 byte[] b2 = Base64.decode(previouslyEncodedImagep2, Base64.DEFAULT);
                                 Bitmap bitmapp2 = BitmapFactory.decodeByteArray(b2, 0, b2.length);
                                 imageView.setImageBitmap(bitmapp2);
+
+//                                Display display = getWindowManager().getDefaultDisplay();
+//                                DisplayMetrics metrics = new DisplayMetrics();
+//
+//                                display.getMetrics(metrics);
+//
+//                                int widthScreen = metrics.widthPixels;
+//                                int heightScreen = metrics.heightPixels;
+//
+//                                imageView.getLayoutParams().height = (int) (heightScreen * 0.65);//it set the height of image 10% of your screen
+//                                imageView.getLayoutParams().width = widthScreen ;
+
+
                                 /*imageView.post(new Runnable() {
                                     @Override
                                     public void run() {
@@ -420,7 +446,19 @@ public class Server extends Activity {
                                 byte[] b3 = Base64.decode(previouslyEncodedImagep3, Base64.DEFAULT);
                                 Bitmap bitmapp3 = BitmapFactory.decodeByteArray(b3, 0, b3.length);
                                 imageView.setImageBitmap(bitmapp3);
-                               /* imageView.post(new Runnable() {
+
+//                                Display display = getWindowManager().getDefaultDisplay();
+//                                DisplayMetrics metrics = new DisplayMetrics();
+//
+//                                display.getMetrics(metrics);
+//
+//                                int widthScreen = metrics.widthPixels;
+//                                int heightScreen = metrics.heightPixels;
+//
+//                                imageView.getLayoutParams().height = (int) (heightScreen * 0.65);//it set the height of image 10% of your screen
+//                                imageView.getLayoutParams().width = widthScreen;
+
+                                /* imageView.post(new Runnable() {
                                     @Override
                                     public void run() {
                                         Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_fade_out);
@@ -448,6 +486,18 @@ public class Server extends Activity {
                                 byte[] b4 = Base64.decode(previouslyEncodedImagep4, Base64.DEFAULT);
                                 Bitmap bitmapp4 = BitmapFactory.decodeByteArray(b4, 0, b4.length);
                                 imageView.setImageBitmap(bitmapp4);
+
+//                                Display display = getWindowManager().getDefaultDisplay();
+//                                DisplayMetrics metrics = new DisplayMetrics();
+//
+//                                display.getMetrics(metrics);
+//
+//                                int widthScreen = metrics.widthPixels;
+//                                int heightScreen = metrics.heightPixels;
+//
+//                                imageView.getLayoutParams().height = (int) (heightScreen * 0.65);//it set the height of image 10% of your screen
+//                                imageView.getLayoutParams().width = widthScreen;
+
                                 /*imageView.post(new Runnable() {
                                     @Override
                                     public void run() {
@@ -472,6 +522,7 @@ public class Server extends Activity {
         Thread socketServerThread = new Thread(new SocketServerThread());
         socketServerThread.start();
     }
+
     public void setImageWidthHeight(View v) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) Server.this).getWindowManager().getDefaultDisplay()
@@ -483,6 +534,7 @@ public class Server extends Activity {
         params.height = cachedHeight;
         v.setLayoutParams(params);
     }
+
     /**
      * Start our hotspoy here and ask other user to join our Network Default ip is 192.168.43.1
      *
@@ -625,8 +677,15 @@ public class Server extends Activity {
             ((Activity) Server.this).getWindowManager().getDefaultDisplay()
                     .getMetrics(displayMetrics);
             int heightPixels = displayMetrics.heightPixels;
+            System.out.println("height of server:" + heightPixels);
+            if (heightPixels > 855 && heightPixels < 1300) {
+                heightPixels = 800;
+            } else if (heightPixels > 750 && heightPixels < 855) {
+                heightPixels = 800;
+            } else {
+                heightPixels = 800;
+            }
             try {
-
                 ArrayList<String> list = new ArrayList<>();
                 list.add(msgReply);
                 list.add(String.valueOf(heightPixels));
@@ -844,8 +903,12 @@ public class Server extends Activity {
 
         Bitmap croppedBmp = Bitmap.createBitmap(bitmapOrg, 0, 0, bitmapOrg.getWidth(), bitmapOrg.getHeight() * 1 / 2);
 
+        Matrix matrix=new Matrix();
+        matrix.postRotate(90);
+        Bitmap finalCroppedBmp=Bitmap.createBitmap(croppedBmp, 0, 0, croppedBmp.getWidth(), croppedBmp.getHeight(), matrix, true);
+
         ByteArrayOutputStream baosP1 = new ByteArrayOutputStream();
-        croppedBmp.compress(Bitmap.CompressFormat.JPEG, 100, baosP1);
+        finalCroppedBmp.compress(Bitmap.CompressFormat.JPEG, 100, baosP1);
         byte[] bP1 = baosP1.toByteArray();
         String encodedImagep1 = Base64.encodeToString(bP1, Base64.DEFAULT);
 //
@@ -855,8 +918,10 @@ public class Server extends Activity {
 //
         Bitmap croppedBmp2 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 1 / 2, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 2);
 
+        Bitmap finalCroppedBmp2=Bitmap.createBitmap(croppedBmp2, 0, 0, croppedBmp2.getWidth(), croppedBmp2.getHeight(), matrix, true);
+
         ByteArrayOutputStream baosP2 = new ByteArrayOutputStream();
-        croppedBmp2.compress(Bitmap.CompressFormat.JPEG, 100, baosP2);
+        finalCroppedBmp2.compress(Bitmap.CompressFormat.JPEG, 100, baosP2);
         byte[] bp2 = baosP2.toByteArray();
         String encodedImageP2 = Base64.encodeToString(bp2, Base64.DEFAULT);
 
@@ -1059,9 +1124,12 @@ public class Server extends Activity {
         // 0, 0, image.size.width , image.size.height/4)
 
         Bitmap croppedBmp = Bitmap.createBitmap(bitmapOrg, 0, 0, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 4);
+        Matrix matrix=new Matrix();
+        matrix.postRotate(90);
 
+        Bitmap finalCroppedBmp=Bitmap.createBitmap(croppedBmp, 0, 0, croppedBmp.getWidth(), croppedBmp.getHeight(), matrix, true);
         ByteArrayOutputStream baosP1 = new ByteArrayOutputStream();
-        croppedBmp.compress(Bitmap.CompressFormat.JPEG, 100, baosP1);
+        finalCroppedBmp.compress(Bitmap.CompressFormat.JPEG, 100, baosP1);
         byte[] bP1 = baosP1.toByteArray();
         String encodedImagep1 = Base64.encodeToString(bP1, Base64.DEFAULT);
 //
@@ -1070,9 +1138,9 @@ public class Server extends Activity {
 //            // 0, (image.size.height) * 1/4, image.size.width, image.size.height/4.0));
 //
         Bitmap croppedBmp2 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 1 / 4, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 4);
-
+        Bitmap finalCroppedBmp2=Bitmap.createBitmap(croppedBmp2, 0, 0, croppedBmp2.getWidth(), croppedBmp2.getHeight(), matrix, true);
         ByteArrayOutputStream baosP2 = new ByteArrayOutputStream();
-        croppedBmp2.compress(Bitmap.CompressFormat.JPEG, 100, baosP2);
+        finalCroppedBmp2.compress(Bitmap.CompressFormat.JPEG, 100, baosP2);
         byte[] bp2 = baosP2.toByteArray();
         String encodedImageP2 = Base64.encodeToString(bp2, Base64.DEFAULT);
 ////
@@ -1081,9 +1149,9 @@ public class Server extends Activity {
 //            // (0, (image.size.height) * 1/2, image.size.width, image.size.height/ 4.0));
 //
         Bitmap croppedBmp3 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 1 / 2, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 4);
-
+        Bitmap finalCroppedBmp3=Bitmap.createBitmap(croppedBmp3, 0, 0, croppedBmp3.getWidth(), croppedBmp3.getHeight(), matrix, true);
         ByteArrayOutputStream baosP3 = new ByteArrayOutputStream();
-        croppedBmp3.compress(Bitmap.CompressFormat.JPEG, 100, baosP3);
+        finalCroppedBmp3.compress(Bitmap.CompressFormat.JPEG, 100, baosP3);
         byte[] bp3 = baosP3.toByteArray();
         String encodedImagep3 = Base64.encodeToString(bp3, Base64.DEFAULT);
 //
@@ -1092,9 +1160,9 @@ public class Server extends Activity {
 //            // (0, (image.size.height) * 3/4, image.size.width, image.size.height/ 4.0));
 //
         Bitmap croppedBmp4 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 3 / 4, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 4);
-
+        Bitmap finalCroppedBmp4=Bitmap.createBitmap(croppedBmp4, 0, 0, croppedBmp4.getWidth(), croppedBmp4.getHeight(), matrix, true);
         ByteArrayOutputStream baosP4 = new ByteArrayOutputStream();
-        croppedBmp4.compress(Bitmap.CompressFormat.JPEG, 100, baosP4);
+        finalCroppedBmp4.compress(Bitmap.CompressFormat.JPEG, 100, baosP4);
         byte[] bp4 = baosP4.toByteArray();
         String encodedImagep4 = Base64.encodeToString(bp4, Base64.DEFAULT);
 
@@ -1126,8 +1194,12 @@ public class Server extends Activity {
 
         Bitmap croppedBmp = Bitmap.createBitmap(bitmapOrg, 0, 0, bitmapOrg.getWidth(), bitmapOrg.getHeight() * 1 / 3);
 
+        Matrix matrix=new Matrix();
+        matrix.postRotate(90);
+
+        Bitmap finalCroppedBmp=Bitmap.createBitmap(croppedBmp, 0, 0, croppedBmp.getWidth(), croppedBmp.getHeight(), matrix, true);
         ByteArrayOutputStream baosP1 = new ByteArrayOutputStream();
-        croppedBmp.compress(Bitmap.CompressFormat.JPEG, 100, baosP1);
+        finalCroppedBmp.compress(Bitmap.CompressFormat.JPEG, 100, baosP1);
         byte[] bP1 = baosP1.toByteArray();
         String encodedImagep1 = Base64.encodeToString(bP1, Base64.DEFAULT);
 //
@@ -1137,8 +1209,9 @@ public class Server extends Activity {
 //
         Bitmap croppedBmp2 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 1 / 3, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 3);
 
+        Bitmap finalCroppedBmp2=Bitmap.createBitmap(croppedBmp2, 0, 0, croppedBmp2.getWidth(), croppedBmp2.getHeight(), matrix, true);
         ByteArrayOutputStream baosP2 = new ByteArrayOutputStream();
-        croppedBmp2.compress(Bitmap.CompressFormat.JPEG, 100, baosP2);
+        finalCroppedBmp2.compress(Bitmap.CompressFormat.JPEG, 100, baosP2);
         byte[] bp2 = baosP2.toByteArray();
         String encodedImageP2 = Base64.encodeToString(bp2, Base64.DEFAULT);
 ////
@@ -1148,8 +1221,9 @@ public class Server extends Activity {
 //
         Bitmap croppedBmp3 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 2 / 3, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 3);
 
+        Bitmap finalCroppedBmp3=Bitmap.createBitmap(croppedBmp3, 0, 0, croppedBmp3.getWidth(), croppedBmp3.getHeight(), matrix, true);
         ByteArrayOutputStream baosP3 = new ByteArrayOutputStream();
-        croppedBmp3.compress(Bitmap.CompressFormat.JPEG, 100, baosP3);
+        finalCroppedBmp3.compress(Bitmap.CompressFormat.JPEG, 100, baosP3);
         byte[] bp3 = baosP3.toByteArray();
         String encodedImagep3 = Base64.encodeToString(bp3, Base64.DEFAULT);
 
@@ -1165,6 +1239,18 @@ public class Server extends Activity {
 //        startActivity(in);
     }
 
+    /**
+     * For setting up image width and height
+     *
+     * @param v
+     * @param height
+     */
+    public static void setImageWidthHeight(View v, int height) {
+        ViewGroup.LayoutParams videoLayoutParams = v.getLayoutParams();
+        videoLayoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        videoLayoutParams.height = height;
+        v.setLayoutParams(videoLayoutParams);
+    }
 
     /**
      * This method use for slice image for 3 devices.

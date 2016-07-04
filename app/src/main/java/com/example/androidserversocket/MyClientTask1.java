@@ -1,18 +1,11 @@
 package com.example.androidserversocket;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.util.Base64;
 
 import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -105,14 +98,14 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
 //                }
             }else if (ClientText.isFromClientText){
                 ClientText.isFromClientText=false;
-//                //send message to server...
-//                OutputStream os = socket.getOutputStream();
-//                OutputStreamWriter osw = new OutputStreamWriter(os);
-//                BufferedWriter bw = new BufferedWriter(osw);
-//                String msgReply = "Text received";
-//                bw.write(msgReply);
-//                bw.flush();
-//                System.out.println("message sent to server...");
+                //send message to server...
+                OutputStream os = socket.getOutputStream();
+                OutputStreamWriter osw = new OutputStreamWriter(os);
+                BufferedWriter bw = new BufferedWriter(osw);
+                String msgReply = "Text received";
+                bw.write(msgReply);
+                bw.flush();
+                System.out.println("message sent to server...");
 
                 //Receive message from server
                 InputStream inputStream = socket.getInputStream();

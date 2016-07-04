@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
@@ -168,7 +169,30 @@ public class Client extends Activity {
         @Override
         public void response(final String result) {
             if (MyClientTask1.list != null && MyClientTask1.list.size() != 0) {
-                setImageWidthHeight(imageView, MyClientTask1.list.get(1));
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                ((Activity) Client.this).getWindowManager().getDefaultDisplay()
+                        .getMetrics(displayMetrics);
+                int heightPixels = displayMetrics.heightPixels;
+
+                if (heightPixels > 855 && heightPixels < 1300) {
+                    if (Integer.parseInt(MyClientTask1.list.get(1)) > heightPixels) {
+                        setImageWidthHeight(imageView, heightPixels);
+                    } else {
+                        setImageWidthHeight(imageView, Integer.parseInt(MyClientTask1.list.get(1)));
+                    }
+                } else if (heightPixels > 750 && heightPixels < 855) {
+                    setImageWidthHeight(imageView, Integer.parseInt(MyClientTask1.list.get(1)) - 70);
+                } else {
+                    if (Integer.parseInt(MyClientTask1.list.get(1)) > 750 && Integer.parseInt(MyClientTask1.list.get(1)) > 750) {
+                        setImageWidthHeight(imageView, heightPixels - 450);
+                    } else {
+                        if (heightPixels > 2250 && heightPixels < 2400) {
+                            setImageWidthHeight(imageView, heightPixels - 600);
+                        } else {
+                            setImageWidthHeight(imageView, heightPixels - 500);
+                        }
+                    }
+                }
             }
 //            System.out.println("result final :" + result.toString());
             textResponse.setText(result);
@@ -184,6 +208,25 @@ public class Client extends Activity {
 
             byte[] decodedString = Base64.decode(result.toString(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+            DisplayMetrics metrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+//            DisplayMetrics metrics = context.getApplicationContext().getResources().getDisplayMetrics();
+//            BitmapFactory.Options options = new BitmapFactory.Options();
+//            options.inScreenDensity = metrics.densityDpi;
+//            options.inTargetDensity =  metrics.densityDpi;
+//            options.inDensity = DisplayMetrics.DENSITY_DEFAULT;
+
+            float scaleWidth = metrics.scaledDensity;
+            float scaleHeight = metrics.scaledDensity;
+
+// create a matrix for the manipulation
+            Matrix matrix = new Matrix();
+// resize the bit map
+            matrix.postScale(scaleWidth, scaleHeight);
+            Bitmap finalBitmap = Bitmap.createBitmap(decodedByte, 0, 0, decodedByte.getWidth(), decodedByte.getHeight(), matrix, true);
+
             System.out.println("bitmap post:" + decodedByte);
             tvWaitText.setVisibility(View.GONE);
             imageView.setImageBitmap(decodedByte);
@@ -296,10 +339,10 @@ public class Client extends Activity {
 
     }
 
-    public static void setImageWidthHeight(View v, String height) {
+    public static void setImageWidthHeight(View v, int height) {
         ViewGroup.LayoutParams videoLayoutParams = v.getLayoutParams();
         videoLayoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        videoLayoutParams.height = Integer.parseInt(height);
+        videoLayoutParams.height = height;
         v.setLayoutParams(videoLayoutParams);
     }
 
