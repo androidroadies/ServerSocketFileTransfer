@@ -183,7 +183,7 @@ public class Client extends Activity {
                 } else if (heightPixels > 750 && heightPixels < 855) {
                     setImageWidthHeight(imageView, Integer.parseInt(MyClientTask1.list.get(1)) - 70);
                 } else {
-                    if (Integer.parseInt(MyClientTask1.list.get(1)) > 750 && Integer.parseInt(MyClientTask1.list.get(1)) > 750) {
+                    if (Integer.parseInt(MyClientTask1.list.get(1)) > 750 && Integer.parseInt(MyClientTask1.list.get(1)) < 2200 ) {
                         setImageWidthHeight(imageView, heightPixels - 450);
                     } else {
                         if (heightPixels > 2250 && heightPixels < 2400) {

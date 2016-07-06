@@ -15,7 +15,8 @@ public class Appconfig {
 //    public static final String styleranking = "ranking";
 //    public static final String styleyesno = "yesno";
     public static ArrayList<Socket> socketArray = new ArrayList<Socket>();
-
+    public static int sendCount=0;
+    public static String TEXTSTRING="";
     public static final String option1 = "option1";
     public static final String option2 = "option2";
     public static final String option3 = "option3";

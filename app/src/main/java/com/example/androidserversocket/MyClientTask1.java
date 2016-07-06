@@ -98,20 +98,25 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
 //                }
             }else if (ClientText.isFromClientText){
                 ClientText.isFromClientText=false;
-                //send message to server...
-                OutputStream os = socket.getOutputStream();
-                OutputStreamWriter osw = new OutputStreamWriter(os);
-                BufferedWriter bw = new BufferedWriter(osw);
-                String msgReply = "Text received";
-                bw.write(msgReply);
-                bw.flush();
-                System.out.println("message sent to server...");
 
                 //Receive message from server
                 InputStream inputStream = socket.getInputStream();
                 InputStreamReader isr = new InputStreamReader(inputStream);
                 BufferedReader br = new BufferedReader(isr);
                 response = br.readLine();
+
+//                //send message to server...
+//                Socket textSocket = new Socket(dstAddress, 9000);
+//                OutputStream os = textSocket.getOutputStream();
+//                OutputStreamWriter osw = new OutputStreamWriter(os);
+//                BufferedWriter bw = new BufferedWriter(osw);
+//                String msgReply = "true";
+//                bw.write(msgReply);
+//                bw.flush();
+//                textSocket.close();
+
+                System.out.println("message sent to server...");
+
             }
                 /*
                  * notice:

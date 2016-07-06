@@ -181,13 +181,14 @@ public class ScrollTextView extends TextView {
         if (mSlr.getCurrX() == 0 || mSlr.getCurrX() == 1 || mSlr.getCurrX() == 2 || mSlr.getCurrX() == 3 || mSlr.getCurrX() == 4 || mSlr.getCurrX() == -1 || mSlr.getCurrX() == -2 || mSlr.getCurrX() == -3 || mSlr.getCurrX() == -4) {
             // Send message to second device
 //            for (int i = 0; i < socketArray.size(); i++) {
+            System.out.println("Socket Array:"+socketArray.toString());
             System.out.println("Socket Array Size:" + socketArray.size());
             if (socketArray.size() == 1) {
                 System.out.println("test 1...");
                 ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(0), getText().toString());
                 socketServerReplyThread.run();
             } else if (socketArray.size() == 2) {
-                System.out.println("test 2...");
+                /*System.out.println("test 2...");
                 if (isFirstTime) {
                     System.out.println("IN FIRST TIME");
                     ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(0), getText().toString());
@@ -198,9 +199,12 @@ public class ScrollTextView extends TextView {
                     ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(1), getText().toString());
                     socketServerReplyThread.run();
                     isFirstTime = true;
-                }
+                }*/
+                System.out.println("test 2...");
+                ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(0), getText().toString());
+                socketServerReplyThread.run();
             } else if (socketArray.size() == 3) {
-                System.out.println("test 3...");
+                /*System.out.println("test 3...");
                 ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(0), getText().toString());
                 socketServerReplyThread.run();
 
@@ -208,6 +212,9 @@ public class ScrollTextView extends TextView {
                 socketServerReplyThread.run();
 
                 socketServerReplyThread = new ReplyThread(socketArray.get(2), getText().toString());
+                socketServerReplyThread.run();*/
+                System.out.println("test 3...");
+                ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(0), getText().toString());
                 socketServerReplyThread.run();
             }
         }

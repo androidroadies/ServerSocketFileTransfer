@@ -620,6 +620,8 @@ public class ServerText extends Activity {
 
     }
 
+
+
     //    private class SocketServerReplyThread extends Thread {
 //
 //        private Socket hostThreadSocket;
