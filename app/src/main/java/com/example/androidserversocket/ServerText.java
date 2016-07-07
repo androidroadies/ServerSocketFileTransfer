@@ -35,13 +35,14 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Enumeration;
 
-//import cropimageview.ScrollTextView;
 import cropimageview.ScrollTextView;
 import testhotspot.WifiApManager;
 import wifi.api.WifiStatus;
 import wifi.api.wifiAddresses;
 import wifi.api.wifiHotSpots;
 import wifi.datatransfer.WifiSocket;
+
+//import cropimageview.ScrollTextView;
 
 /**
  * We use this class for send images to our network connected devices means Client
@@ -405,89 +406,14 @@ public class ServerText extends Activity {
                 System.out.println("111 socket server size" + Appconfig.socketArray.size());
                 if (selectedText.length() > 0) {
                     if (Appconfig.socketArray.size() > 0) {
-                        SharedPreferences shre1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        linmain1.setVisibility(View.GONE);
+                        linmain2.setVisibility(View.VISIBLE);
+                        relmain1.setVisibility(View.GONE);
 
-                        String previouslyEncodedImagep1 = shre1.getString("image_datap1", "");
-                        String previouslyEncodedImagep2 = shre1.getString("image_datap2", "");
-                        String previouslyEncodedImagep3 = shre1.getString("image_datap3", "");
-                        String previouslyEncodedImagep4 = shre1.getString("image_datap4", "");
-//
-
-                        for (int i = 0; i < Appconfig.socketArray.size(); i++) {
-
-
-                            if (Appconfig.socketArray.size() == 1) {
-//                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
-//                            socketServerReplyThread.run();
-
-                                linmain1.setVisibility(View.GONE);
-                                linmain2.setVisibility(View.VISIBLE);
-                                relmain1.setVisibility(View.GONE);
-
-                                scrolltext.setText(selectedText);
-                                scrolltext.setTextColor(Color.BLACK);
-                                scrolltext.setTextSize(80);
-                                scrolltext.startScroll();
-
-//                            if( !previouslyEncodedImagep2.equalsIgnoreCase("") ){
-//                                byte[] b2 = Base64.decode(previouslyEncodedImagep2, Base64.DEFAULT);
-//                                Bitmap bitmapp2 = BitmapFactory.decodeByteArray(b2, 0, b2.length);
-//                                imageView.setImageBitmap(bitmapp2);
-//                            }
-
-                            }
-                            if (Appconfig.socketArray.size() == 2) {
-//                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
-//                            socketServerReplyThread.run();
-//
-//                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), previouslyEncodedImagep2);
-//                            socketServerReplyThread.run();
-
-                                scrolltext.setText(selectedText);
-                                scrolltext.setTextColor(Color.BLACK);
-                                scrolltext.setTextSize(80);
-                                scrolltext.startScroll();
-
-                                linmain1.setVisibility(View.GONE);
-                                linmain2.setVisibility(View.VISIBLE);
-                                relmain1.setVisibility(View.GONE);
-
-//                            if( !previouslyEncodedImagep3.equalsIgnoreCase("") ){
-//                                byte[] b3 = Base64.decode(previouslyEncodedImagep3, Base64.DEFAULT);
-//                                Bitmap bitmapp3 = BitmapFactory.decodeByteArray(b3, 0, b3.length);
-//                                imageView.setImageBitmap(bitmapp3);
-//                            }
-                            }
-                            if (Appconfig.socketArray.size() == 3) {
-//                            SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), previouslyEncodedImagep1);
-//                            socketServerReplyThread.run();
-//
-//                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), previouslyEncodedImagep2);
-//                            socketServerReplyThread.run();
-//
-//                            socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(2), previouslyEncodedImagep3);
-//                            socketServerReplyThread.run();
-
-                                scrolltext.setText(selectedText);
-                                scrolltext.setTextColor(Color.BLACK);
-                                scrolltext.setTextSize(80);
-                                scrolltext.startScroll();
-
-                                linmain1.setVisibility(View.GONE);
-                                linmain2.setVisibility(View.VISIBLE);
-                                relmain1.setVisibility(View.GONE);
-
-
-//                            if( !previouslyEncodedImagep4.equalsIgnoreCase("") ){
-//                                byte[] b4 = Base64.decode(previouslyEncodedImagep4, Base64.DEFAULT);
-//                                Bitmap bitmapp4 = BitmapFactory.decodeByteArray(b4, 0, b4.length);
-//                                imageView.setImageBitmap(bitmapp4);
-//                            }
-
-                            }
-                        }
-
-
+                        scrolltext.setText(selectedText);
+                        scrolltext.setTextColor(Color.BLACK);
+                        scrolltext.setTextSize(80);
+                        scrolltext.startScroll();
                     } else {
                         Toast.makeText(context, "Please Connect Your Device First.!", Toast.LENGTH_LONG).show();
                     }

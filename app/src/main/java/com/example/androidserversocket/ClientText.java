@@ -26,7 +26,7 @@ import android.widget.Toast;
 import java.net.Socket;
 import java.util.List;
 
-import cropimageview.ScrollTextView;
+import cropimageview.ScrollTextViewClient;
 import testhotspot.WifiApManager;
 import wifi.api.WifiStatus;
 import wifi.api.wifiAddresses;
@@ -56,7 +56,7 @@ public class ClientText extends Activity {
     wifiAddresses au;
 
     LinearLayout lin1, lin2;
-    ScrollTextView scrolltext;
+    ScrollTextViewClient scrolltext;
     private TextView tvWaitText;
 
     @Override
@@ -72,8 +72,7 @@ public class ClientText extends Activity {
         tvWaitText = (TextView) findViewById(R.id.client_text_tv_wait_text);
         imageView = (ImageView) findViewById(R.id.imageView);
 
-        scrolltext = (ScrollTextView) findViewById(R.id.scrolltext);
-
+        scrolltext = (ScrollTextViewClient) findViewById(R.id.scrolltext);
 
         lin1 = (LinearLayout) findViewById(R.id.lin1);
         lin2 = (LinearLayout) findViewById(R.id.lin2);
@@ -149,21 +148,6 @@ public class ClientText extends Activity {
 
             scrolltext.startScroll();
 
-//            ClientText.this.runOnUiThread(new Runnable() {
-//
-//                @Override
-//                public void run() {
-//                    textResponse.setText(result);
-//
-//                }
-//            });
-//            setimage(result.toString());
-
-//			byte[] decodedString = Base64.decode(result.toString(), Base64.DEFAULT);
-//			Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-//			System.out.println("bitmap post:"  + decodedByte);
-//			imageView.setImageBitmap(decodedByte);
-
             if (result.toString() == null) {
                 lin1.setVisibility(View.VISIBLE);
                 lin2.setVisibility(View.INVISIBLE);
@@ -176,117 +160,6 @@ public class ClientText extends Activity {
         }
     };
 
-    public class MyClientTask extends AsyncTask<String, String, String> {
-
-        String dstAddress;
-        int dstPort;
-        String response = "";
-
-        MyClientTask(String addr) {
-            dstAddress = addr;
-//			dstPort = port;
-        }
-
-        @Override
-        protected String doInBackground(String... arg0) {
-
-            Socket socket = null;
-            try {
-                byte[] decodedString = Base64.decode(dstAddress, Base64.DEFAULT);
-
-                decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                System.out.println("bitmap :" + decodedByte);
-            } catch (Exception e) {
-                System.out.println("exception :" + e);
-            }
-
-//			try {
-//				socket = new Socket(dstAddress, dstPort);
-//
-//				ByteArrayOutputStream byteArrayOutputStream =
-//		                new ByteArrayOutputStream(8192000);
-//				byte[] buffer = new byte[8192000];
-//
-//				System.out.println("test1 ;");
-//				int bytesRead;
-//				InputStream inputStream = socket.getInputStream();
-//
-//				/*
-//				 * notice:
-//				 * inputStream.read() will block if no data return
-//				 */
-//	            while ((bytesRead = inputStream.read(buffer)) != -1){
-//	                byteArrayOutputStream.write(buffer, 0, bytesRead);
-//	                response += byteArrayOutputStream.toString("UTF-8");
-//	            }
-//
-//			} catch (UnknownHostException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//				response = "UnknownHostException: " + e.toString();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//				response = "IOException: " + e.toString();
-//			}finally{
-//				if(socket != null){
-//					try {
-//						socket.close();
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//				}
-//			}
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            imageView.setImageBitmap(decodedByte);
-            //setimage(response.toString());
-
-//			new Handler().postDelayed(new Runnable(){
-//				@Override
-//				public void run() {
-////					startActivity(myintent);
-////					finish();
-////					setimage(response.toString());
-//				}
-//			}, 8000);
-
-//			textResponse.setText(response);
-            super.onPostExecute(result);
-//			MyClientTask1 myClientTask = new MyClientTask1(
-//					"192.168.43.157",
-//					8080);
-//			myClientTask.execute();
-        }
-
-    }
-
-    private void setimage(String str) {
-
-//        String str1 =";
-//            byte[] decodedString = Base64.decode(str1, Base64.DEFAULT);
-//            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-//            System.out.println("bitmap :" + decodedByte);
-
-//		new Handler().postDelayed(new Runnable(){
-//			@Override
-//			public void run() {
-//				if (decodedByte == null){
-//					byte[] decodedString1 = Base64.decode(textResponse.getText().toString(), Base64.NO_WRAP);
-//					Bitmap decodedByte1 = BitmapFactory.decodeByteArray(decodedString1, 0, decodedString1.length);
-//					System.out.println("bitmap in:"  + decodedByte1);
-//					imageView.setImageBitmap(decodedByte1);
-//				}
-//			}
-//		}, 3000);
-
-
-        imageView.setImageBitmap(decodedByte);
-    }
 
     /**
      * Using this methos user can find our Network and join automatically or you can connect our network from wifi. Our Netwrok name is " SSID ".

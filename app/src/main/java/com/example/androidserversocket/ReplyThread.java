@@ -25,7 +25,7 @@ public class ReplyThread extends Thread {
     public void run() {
         OutputStream outputStream;
         String msgReply = strPathSend;
-        Appconfig.TEXTSTRING=msgReply;
+        Appconfig.TEXTSTRING = msgReply;
         System.out.println("111 reply thread");
         try {
             outputStream = hostThreadSocket.getOutputStream();
@@ -33,16 +33,17 @@ public class ReplyThread extends Thread {
             printStream.print(msgReply);
             printStream.close();
 
-//            new SendToServer().start();
+            new Thread(new ReceiveFromClient()).start();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    class SendToServer extends Thread {
+    class ReceiveFromClient extends Thread {
         private ServerSocket socketServer;
         private Socket socket;
+
         @Override
         public void run() {
             super.run();
@@ -57,17 +58,23 @@ public class ReplyThread extends Thread {
                     System.out.println("AFTER INput stream--------");
                     BufferedReader br = new BufferedReader(isr);
                     System.out.println("RECEIVED TEXT--------:" + br.readLine());
-                    String res=br.readLine().toString();
-                    if (res.equals("true")) {
-                        hostThreadSocket=Appconfig.socketArray.get(Appconfig.sendCount);
-                        OutputStream os= hostThreadSocket.getOutputStream();
+//                    if (br.readLine().equals("true")) {
+                    System.out.println(Appconfig.socketArray.size() + ":" + Appconfig.sendCount);
+                    if (Appconfig.sendCount < Appconfig.socketArray.size()) {
+                        System.out.println("Called New...");
+                        socket = Appconfig.socketArray.get(Appconfig.sendCount);
+                        OutputStream os = socket.getOutputStream();
                         PrintStream printStream = new PrintStream(os);
                         printStream.print(Appconfig.TEXTSTRING);
                         printStream.close();
                         Appconfig.sendCount++;
-                        if (Appconfig.socketArray.size()==Appconfig.sendCount)
-                            Appconfig.sendCount=0;
+                    }else {
+                        Appconfig.sendCount=1;
                     }
+//                        Appconfig.sendCount++;
+//                        if (Appconfig.socketArray.size()==Appconfig.sendCount){}
+//                            Appconfig.sendCount=0;
+//                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

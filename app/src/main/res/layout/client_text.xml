@@ -108,10 +108,10 @@
         android:orientation="vertical"
         tools:context=".Client">
 
-        <cropimageview.ScrollTextView
+        <cropimageview.ScrollTextViewClient
             android:id="@+id/scrolltext"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"></cropimageview.ScrollTextView>
+            android:layout_height="wrap_content"></cropimageview.ScrollTextViewClient>
 
         <!--<TextView-->
         <!--android:id="@+id/response"-->
