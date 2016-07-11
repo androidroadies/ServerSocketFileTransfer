@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@color/btn_choose_action"
+            android:background="@drawable/rounded_rectangle"
             android:text="Broadcast Image"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="@android:color/white"
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@color/btn_choose_action"
+            android:background="@drawable/rounded_rectangle"
             android:text="Slide Show"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="@android:color/white" />

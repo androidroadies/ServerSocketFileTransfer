@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:background="@color/btn_choose_action"
+            android:background="@drawable/rounded_rectangle"
             android:padding="10dp"
             android:text="Receive Image"
             android:textAppearance="?android:attr/textAppearanceButton"
@@ -83,7 +83,7 @@
             android:layout_alignStart="@+id/client"
             android:layout_below="@+id/client"
             android:layout_marginTop="16dp"
-            android:background="@color/btn_choose_action"
+            android:background="@drawable/rounded_rectangle"
             android:text="Send Image"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="@android:color/white" />
@@ -98,7 +98,7 @@
             android:layout_alignStart="@+id/server"
             android:layout_below="@+id/server"
             android:layout_marginTop="16dp"
-            android:background="@color/btn_choose_action"
+            android:background="@drawable/rounded_rectangle"
             android:text="Receive Text"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="@android:color/white" />
@@ -113,7 +113,7 @@
             android:layout_alignStart="@+id/clientText"
             android:layout_below="@+id/clientText"
             android:layout_marginTop="16dp"
-            android:background="@color/btn_choose_action"
+            android:background="@drawable/rounded_rectangle"
             android:text="Send Text"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="@android:color/white" />

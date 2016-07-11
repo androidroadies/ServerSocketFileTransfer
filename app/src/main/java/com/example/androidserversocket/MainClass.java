@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import testhotspot.WifiApManager;
@@ -48,7 +49,7 @@ public class MainClass extends Activity {
         clientText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                clientText.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out));
                 Intent in = new Intent(getApplicationContext(), ClientText.class);
                 startActivity(in);
 
@@ -58,7 +59,7 @@ public class MainClass extends Activity {
         serverText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                serverText.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out));
                 hotutil.setHotSpot("SSID", "");
                 inviteFriend(hotutil);
 
@@ -71,7 +72,7 @@ public class MainClass extends Activity {
         client.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                client.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out));
                 Intent in = new Intent(getApplicationContext(), Client.class);
                 startActivity(in);
 
@@ -81,6 +82,7 @@ public class MainClass extends Activity {
         server.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                server.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out));
                 hotutil.setHotSpot("SSID", "");
                 inviteFriend(hotutil);
 

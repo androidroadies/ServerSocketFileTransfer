@@ -43,7 +43,7 @@
             android:id="@+id/connect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/btn_choose_action"
+            android:background="@drawable/rounded_rectangle"
             android:text="Receive Connect..."
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="@android:color/white" />
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@color/btn_choose_action"
+            android:background="@drawable/rounded_rectangle"
             android:text="Join (SSID)"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="@android:color/white" />
