@@ -28,7 +28,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.example.androidserversocket.MainClass"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,28 +38,28 @@
         </activity>
         <activity
             android:name="com.example.androidserversocket.Server"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.androidserversocket.Client"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.androidserversocket.ServerText"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.androidserversocket.ClientText"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name="cropimageview.ViewCropImageSlice"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name="cropimageview.Cropimage"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

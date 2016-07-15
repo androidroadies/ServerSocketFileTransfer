@@ -10,6 +10,7 @@ package com.example.androidserversocket;
 public final class R {
     public static final class anim {
         public static final int fade_in_fade_out=0x7f040000;
+        public static final int zoom_out=0x7f040001;
     }
     public static final class attr {
     }
@@ -62,14 +63,15 @@ public final class R {
         public static final int h_3=0x7f020008;
         public static final int h_4=0x7f020009;
         public static final int ic_launcher=0x7f02000a;
-        public static final int light_black_=0x7f020012;
+        public static final int light_black_=0x7f020013;
         public static final int no_media=0x7f02000b;
         public static final int on_focus_checkbox=0x7f02000c;
-        public static final int screen_4=0x7f02000d;
-        public static final int top_bar=0x7f02000e;
-        public static final int v_2=0x7f02000f;
-        public static final int v_3=0x7f020010;
-        public static final int v_4=0x7f020011;
+        public static final int rounded_rectangle=0x7f02000d;
+        public static final int screen_4=0x7f02000e;
+        public static final int top_bar=0x7f02000f;
+        public static final int v_2=0x7f020010;
+        public static final int v_3=0x7f020011;
+        public static final int v_4=0x7f020012;
     }
     public static final class id {
         public static final int action_settings=0x7f0a0057;

@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:2:1-72:12
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:2:1-74:12
 	package
 		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:3:5-46
 		INJECTED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml
@@ -26,108 +26,122 @@ ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\m
 		INJECTED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml
 		INJECTED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.INTERNET
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:10:5-66
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:11:5-67
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:10:22-64
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:11:22-64
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:11:5-80
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:12:5-81
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:11:22-78
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:12:22-78
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:12:5-79
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:13:5-80
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:12:22-77
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:13:22-77
 uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:14:5-76
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:15:5-76
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:14:22-73
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:15:22-73
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:15:5-79
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:16:5-79
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:15:22-76
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:16:22-76
 uses-permission#android.permission.CHANGE_WIFI_STATE
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:16:5-76
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:17:5-76
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:16:22-73
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:17:22-73
 uses-permission#android.permission.CHANGE_NETWORK_STATE
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:17:5-79
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:18:5-79
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:17:22-76
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:18:22-76
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:19:5-75
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:20:5-75
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:19:22-72
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:20:22-72
 uses-permission#android.permission.WRITE_SETTINGS
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:20:5-73
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:21:5-73
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:20:22-70
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:21:22-70
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:23:5-81
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:24:5-81
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:23:22-78
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:24:22-78
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:24:5-79
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:25:5-79
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:24:22-76
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:25:22-76
 application
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:26:5-70:19
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:27:5-72:19
 	android:label
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:29:9-41
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:30:9-41
 	android:allowBackup
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:27:9-35
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:28:9-35
 	android:icon
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:28:9-45
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:29:9-45
 	android:theme
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:30:9-40
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:31:9-40
 activity#com.example.androidserversocket.MainClass
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:31:9-39:20
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:32:9-41:20
+	android:screenOrientation
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:35:13-49
 	android:label
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:33:13-45
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:34:13-45
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:32:13-38
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:33:13-38
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:34:13-38:29
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:36:13-40:29
 action#android.intent.action.MAIN
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:35:17-69
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:37:17-69
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:35:25-66
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:37:25-66
 category#android.intent.category.LAUNCHER
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:37:17-77
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:39:17-77
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:37:27-74
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:39:27-74
 activity#com.example.androidserversocket.Server
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:41:9-44:20
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:43:9-46:61
+	android:screenOrientation
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:46:13-49
 	android:label
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:43:13-45
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:45:13-45
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:42:13-35
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:44:13-35
 activity#com.example.androidserversocket.Client
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:46:9-49:20
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:48:9-51:61
+	android:screenOrientation
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:51:13-49
 	android:label
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:48:13-45
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:50:13-45
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:47:13-35
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:49:13-35
 activity#com.example.androidserversocket.ServerText
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:51:9-54:20
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:53:9-56:61
+	android:screenOrientation
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:56:13-49
 	android:label
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:53:13-45
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:55:13-45
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:52:13-39
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:54:13-39
 activity#com.example.androidserversocket.ClientText
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:56:9-59:20
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:58:9-61:61
+	android:screenOrientation
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:61:13-49
 	android:label
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:58:13-45
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:60:13-45
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:57:13-39
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:59:13-39
 activity#cropimageview.ViewCropImageSlice
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:61:9-64:20
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:63:9-66:61
+	android:screenOrientation
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:66:13-49
 	android:label
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:63:13-45
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:65:13-45
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:62:13-60
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:64:13-60
 activity#cropimageview.Cropimage
-ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:66:9-69:20
+ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:68:9-71:61
+	android:screenOrientation
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:71:13-49
 	android:label
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:68:13-45
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:70:13-45
 	android:name
-		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:67:13-51
+		ADDED from F:\Multidots\Project Work\Socialli\ServerSocketFileTransfer\app\src\main\AndroidManifest.xml:69:13-51

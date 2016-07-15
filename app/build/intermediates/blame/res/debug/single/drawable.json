@@ -12,6 +12,10 @@
         "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\drawable\\btn_sel.xml"
     },
     {
+        "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\rounded_rectangle.xml",
+        "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\drawable\\rounded_rectangle.xml"
+    },
+    {
         "merged": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\v_4.png",
         "source": "F:\\Multidots\\Project Work\\Socialli\\ServerSocketFileTransfer\\app\\src\\main\\res\\drawable\\v_4.png"
     },
