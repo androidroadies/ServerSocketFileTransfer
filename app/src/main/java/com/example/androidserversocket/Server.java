@@ -110,7 +110,9 @@ public class Server extends Activity {
                 .getMetrics(displayMetrics);
         int heightPixels = displayMetrics.heightPixels;
 
-        if (heightPixels > 855 && heightPixels < 1300) {
+        if (heightPixels > 1000 && heightPixels < 1300) {
+            setImageWidthHeight(imageView, 1050);
+        } else if (heightPixels > 854 && heightPixels < 1000) {
             setImageWidthHeight(imageView, 820);
         } else if (heightPixels > 750 && heightPixels < 855) {
             setImageWidthHeight(imageView, 750);

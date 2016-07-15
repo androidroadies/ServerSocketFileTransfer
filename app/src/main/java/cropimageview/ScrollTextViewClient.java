@@ -129,7 +129,7 @@ public class ScrollTextViewClient extends TextView {
         int scrollingLen = rect.width() + getWidth();
         rect = null;
         System.out.println("111 calculate :" + scrollingLen);
-        return scrollingLen;
+        return scrollingLen+30;
     }
 
     /**

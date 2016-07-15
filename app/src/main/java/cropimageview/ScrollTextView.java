@@ -47,7 +47,7 @@ public class ScrollTextView extends TextView {
     String previouslyEncodedImagep2 = shre1.getString("image_datap2", "");
     String previouslyEncodedImagep3 = shre1.getString("image_datap3", "");
     String previouslyEncodedImagep4 = shre1.getString("image_datap4", "");
-    private boolean isCalled = false;
+    public static boolean isCalled = false;
 
     /*
     * constructor
@@ -142,7 +142,7 @@ public class ScrollTextView extends TextView {
         int scrollingLen = rect.width() + getWidth();
         rect = null;
         System.out.println("111 calculate :" + scrollingLen);
-        return scrollingLen;
+        return scrollingLen+30;
     }
 
     /**

@@ -78,7 +78,7 @@ public class ServerText extends Activity {
     //    SimpleAsynTask mTask;
     wifiAddresses au;
 
-    ScrollTextView scrolltext;
+    public static ScrollTextView scrolltext;
     private TextView tvPleaseSelectDevice;
     private EditText edTextScroll;
     private Button btnNextForText;
@@ -412,7 +412,7 @@ public class ServerText extends Activity {
 
                         scrolltext.setText(selectedText);
                         scrolltext.setTextColor(Color.BLACK);
-                        scrolltext.setTextSize(80);
+                        scrolltext.setTextSize(150);
                         scrolltext.startScroll();
                     } else {
                         Toast.makeText(context, "Please Connect Your Device First.!", Toast.LENGTH_LONG).show();
@@ -546,7 +546,10 @@ public class ServerText extends Activity {
 
     }
 
-
+    public static void startScrollAgain(){
+        scrolltext.startScroll();
+        ScrollTextView.isCalled=false;
+    }
 
     //    private class SocketServerReplyThread extends Thread {
 //

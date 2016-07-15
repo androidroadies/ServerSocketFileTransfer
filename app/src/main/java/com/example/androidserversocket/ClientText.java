@@ -144,7 +144,7 @@ public class ClientText extends Activity {
 
             scrolltext.setText(result);
             scrolltext.setTextColor(Color.BLACK);
-            scrolltext.setTextSize(80);
+            scrolltext.setTextSize(150);
 
             scrolltext.startScroll();
 

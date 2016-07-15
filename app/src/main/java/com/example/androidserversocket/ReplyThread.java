@@ -1,5 +1,8 @@
 package com.example.androidserversocket;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,6 +73,15 @@ public class ReplyThread extends Thread {
                         Appconfig.sendCount++;
                     }else {
                         Appconfig.sendCount=1;
+
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable() {
+                            public void run() {
+                                System.out.println("Called Again...");
+                                ServerText.startScrollAgain();
+                                System.out.println("Again...");
+                            }
+                        });
                     }
 //                        Appconfig.sendCount++;
 //                        if (Appconfig.socketArray.size()==Appconfig.sendCount){}

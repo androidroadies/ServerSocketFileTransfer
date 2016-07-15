@@ -174,7 +174,9 @@ public class Client extends Activity {
                         .getMetrics(displayMetrics);
                 int heightPixels = displayMetrics.heightPixels;
 
-                if (heightPixels > 855 && heightPixels < 1300) {
+                if (heightPixels > 1000 && heightPixels < 1300) {
+                    setImageWidthHeight(imageView, 1050);
+                }else if (heightPixels > 855 && heightPixels < 1000) {
                     if (Integer.parseInt(MyClientTask1.list.get(1)) > heightPixels) {
                         setImageWidthHeight(imageView, heightPixels);
                     } else {
