@@ -34,7 +34,7 @@ public class ScrollTextViewClient extends TextView {
 
     // whether it's being paused
     private boolean mPaused = true;
-    private boolean isCalled=false;
+    public static boolean isCalled=false;
 
     /*
     * constructor

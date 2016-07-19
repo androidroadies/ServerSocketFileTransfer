@@ -1,5 +1,6 @@
 package com.example.androidserversocket;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
@@ -20,8 +22,13 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -82,11 +89,12 @@ public class Client extends Activity {
     private Button btnInformServer;
     public static Boolean isInform = false;
     private TextView tvWaitText;
-
+    private int i=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mContext = Client.this;
 
         editTextAddress = (EditText) findViewById(R.id.address);
@@ -164,6 +172,7 @@ public class Client extends Activity {
                 }
             };
 
+
     MyClientTask1.OnPostCallComplete ao = new MyClientTask1.OnPostCallComplete() {
 
         @Override
@@ -174,18 +183,20 @@ public class Client extends Activity {
                         .getMetrics(displayMetrics);
                 int heightPixels = displayMetrics.heightPixels;
 
+                int serverHeight=Integer.parseInt(MyClientTask1.list.get(MyClientTask1.list.size()-1));
+
                 if (heightPixels > 1000 && heightPixels < 1300) {
                     setImageWidthHeight(imageView, 1050);
                 }else if (heightPixels > 855 && heightPixels < 1000) {
-                    if (Integer.parseInt(MyClientTask1.list.get(1)) > heightPixels) {
+                    if (serverHeight > heightPixels) {
                         setImageWidthHeight(imageView, heightPixels);
                     } else {
-                        setImageWidthHeight(imageView, Integer.parseInt(MyClientTask1.list.get(1)));
+                        setImageWidthHeight(imageView, serverHeight);
                     }
                 } else if (heightPixels > 750 && heightPixels < 855) {
-                    setImageWidthHeight(imageView, Integer.parseInt(MyClientTask1.list.get(1)) - 70);
+                    setImageWidthHeight(imageView, serverHeight - 70);
                 } else {
-                    if (Integer.parseInt(MyClientTask1.list.get(1)) > 750 && Integer.parseInt(MyClientTask1.list.get(1)) < 2200 ) {
+                    if (Integer.parseInt(MyClientTask1.list.get(1)) > 750 && serverHeight < 2200 ) {
                         setImageWidthHeight(imageView, heightPixels - 450);
                     } else {
                         if (heightPixels > 2250 && heightPixels < 2400) {
@@ -207,50 +218,109 @@ public class Client extends Activity {
                 }
             });
 //            setimage(result.toString());
+            lin2.setVisibility(View.VISIBLE);
+            lin1.setVisibility(View.GONE);
+            if (result.equals("1")) {
+                byte[] b2 = Base64.decode(MyClientTask1.list.get(1), Base64.DEFAULT);
+                final Bitmap bitmap = BitmapFactory.decodeByteArray(b2, 0, b2.length);
+                System.out.println("bitmap post:" + decodedByte);
+                tvWaitText.setVisibility(View.GONE);
+                imageView.setImageBitmap(bitmap);
+            }else {
+                tvWaitText.setVisibility(View.GONE);
+                /*CountDownTimer continueAnimation = new CountDownTimer(5000, 2500) {
+                    public void onTick(long millisUntilFinished) {
+                        ObjectAnimator.ofFloat(imageView, View.ALPHA, 1.0f, 0.2f).setDuration(3000).start();
+                        ObjectAnimator.ofFloat(imageView, View.ALPHA, 0.2f, 1.0f).setDuration(3000).start();
+                        if (i == MyClientTask1.list.size()-1){
+                            i =1;
+                        }
+                        byte[] b2 = Base64.decode(MyClientTask1.list.get(i), Base64.DEFAULT);
+                        final Bitmap bitmap = BitmapFactory.decodeByteArray(b2, 0, b2.length);
+                        imageView.setImageBitmap(bitmap);
+                        i++;
+                    }
 
-            byte[] decodedString = Base64.decode(result.toString(), Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    public void onFinish() {
+                        //    showNotification();
+                        start();// here, when your CountDownTimer has finished , we start it again :)
+                    }
+                };*/
 
-            DisplayMetrics metrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-//            DisplayMetrics metrics = context.getApplicationContext().getResources().getDisplayMetrics();
-//            BitmapFactory.Options options = new BitmapFactory.Options();
-//            options.inScreenDensity = metrics.densityDpi;
-//            options.inTargetDensity =  metrics.densityDpi;
-//            options.inDensity = DisplayMetrics.DENSITY_DEFAULT;
-
-            float scaleWidth = metrics.scaledDensity;
-            float scaleHeight = metrics.scaledDensity;
-
-// create a matrix for the manipulation
-            Matrix matrix = new Matrix();
-// resize the bit map
-            matrix.postScale(scaleWidth, scaleHeight);
-            Bitmap finalBitmap = Bitmap.createBitmap(decodedByte, 0, 0, decodedByte.getWidth(), decodedByte.getHeight(), matrix, true);
-
-            System.out.println("bitmap post:" + decodedByte);
-            tvWaitText.setVisibility(View.GONE);
-            imageView.setImageBitmap(decodedByte);
-//            imageView.post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_fade_out);
-//                    imageView.startAnimation(anim);
-//                }
-//            });
-
-            if (decodedByte == null) {
-                lin1.setVisibility(View.VISIBLE);
-                lin2.setVisibility(View.INVISIBLE);
-            } else {
-                lin2.setVisibility(View.VISIBLE);
-                lin1.setVisibility(View.INVISIBLE);
-                imageView.setImageBitmap(decodedByte);
+                String[] images=new String[MyClientTask1.list.size()-2];
+                int j=1;
+                for (int i = 0; i < MyClientTask1.list.size()-2; i++) {
+                    images[i]=MyClientTask1.list.get(j);
+                    j++;
+                }
+                try {
+                    Thread.sleep(5000);
+                    animate(imageView,images,0,true);
+//                    continueAnimation.start();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+//            if (decodedByte == null) {
+//                lin1.setVisibility(View.VISIBLE);
+//                lin2.setVisibility(View.INVISIBLE);
+//            } else {
+//                lin2.setVisibility(View.VISIBLE);
+//                lin1.setVisibility(View.INVISIBLE);
+////                imageView.setImageBitmap(decodedByte);
+//            }
         }
     };
+    private void animate(final ImageView imageView, final String[] images, final int imageIndex, final boolean forever) {
 
+        //imageView <-- The View which displays the images
+        //images[] <-- Holds R references to the images to display
+        //imageIndex <-- index of the first image to show in images[]
+        //forever <-- If equals true then after the last image it starts all over again with the first image resulting in an infinite loop. You have been warned.
+
+        int fadeInDuration = 500; // Configure time values here
+        int timeBetween = 3000;
+        int fadeOutDuration = 1000;
+
+        imageView.setVisibility(View.INVISIBLE);    //Visible or invisible by default - this will apply when the animation ends
+        byte[] b = Base64.decode(images[imageIndex], Base64.DEFAULT);
+        Bitmap bitmap= BitmapFactory.decodeByteArray(b, 0, b.length);
+        imageView.setImageBitmap(bitmap);
+
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator()); // add this
+        fadeIn.setDuration(fadeInDuration);
+
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator()); // and this
+        fadeOut.setStartOffset(fadeInDuration + timeBetween);
+        fadeOut.setDuration(fadeOutDuration);
+
+        AnimationSet animation = new AnimationSet(false); // change to false
+        animation.addAnimation(fadeIn);
+        animation.addAnimation(fadeOut);
+        animation.setRepeatCount(1);
+        imageView.setAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            public void onAnimationEnd(Animation animation) {
+                if (images.length - 1 > imageIndex) {
+                    animate(imageView, images, imageIndex + 1,forever); //Calls itself until it gets to the end of the array
+                }
+                else {
+                    if (forever == true){
+                        animate(imageView, images, 0,forever);  //Calls itself to start the animation all over again in a loop if forever = true
+                    }
+                }
+            }
+            public void onAnimationRepeat(Animation animation) {
+                // TODO Auto-generated method stub
+            }
+            public void onAnimationStart(Animation animation) {
+                // TODO Auto-generated method stub
+            }
+        });
+    }
     public class MyClientTask extends AsyncTask<String, String, String> {
 
         String dstAddress;

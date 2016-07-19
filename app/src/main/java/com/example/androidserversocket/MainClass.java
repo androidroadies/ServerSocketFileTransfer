@@ -36,6 +36,8 @@ public class MainClass extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainclass);
 
+        Appconfig.sendCount=1;
+
         client = (Button) findViewById(R.id.client);
         server = (Button) findViewById(R.id.server);
         clientText = (Button) findViewById(R.id.clientText);
@@ -99,6 +101,7 @@ public class MainClass extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        Appconfig.sendCount=1;
         if (Appconfig.socketArray.size()>0)
             Appconfig.socketArray.clear();
     }

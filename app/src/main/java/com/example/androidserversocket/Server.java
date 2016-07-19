@@ -1,8 +1,10 @@
 package com.example.androidserversocket;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,12 +12,21 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,11 +34,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
@@ -50,20 +63,20 @@ import wifi.datatransfer.WifiSocket;
 
 public class Server extends Activity {
 
+    final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 1;
+    final int PICK_IMAGE_FROM_GALLARY = 5;
+    final int PICK_MULTIPLE_IMAGE_FROM_GALLARY = 2;
     TextView info, infoip, msg;
     String message = "";
     ServerSocket serverSocket;
-    Button btnServerSend, btnSlideShow, btnSelectPhoto, btnCreateGroup, btnOneDevice, btnTwoDevice, btnThreeDevice;
+    Button btnServerSend, btnStartSlideShow, btnSlideShow, btnSelectPhoto, btnCreateGroup, btnOneDevice, btnTwoDevice, btnThreeDevice;
     Button btnL1, btnL2, btnL3, btnDone;
     ImageView img1, img2, img3, imageView;
-
     Boolean isDevice1 = false, isDevice2 = false, isDevice3 = false;
     Boolean isLayout1 = false, isLayout2 = false, isLayout3 = false;
     Socket socket;
     //    ArrayList<Socket> socketArray = new ArrayList<Socket>();
     Context context;
-    final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 1;
-    final int PICK_IMAGE_FROM_GALLARY = 5;
     String path = "";
 
     RelativeLayout relmain1, rel1, rel2, rel3;
@@ -78,11 +91,34 @@ public class Server extends Activity {
     //    SimpleAsynTask mTask;
     wifiAddresses au;
     private TextView tvPleaseSelectDevice;
+    private ArrayList<String> imagesEncodedList;
+    private String imageEncoded;
+    private boolean isSlideShow = false;
+    private ArrayList<String> serverSlideImg;
+    private ArrayList<Object> clientSlideImg1;
+    private ArrayList<Object> clientSlideImg2;
+    private ArrayList<Object> clientSlideImg3;
+    private int i = 0;
+    private int received=0;
+
+    /**
+     * For setting up image width and height
+     *
+     * @param v
+     * @param height
+     */
+    public static void setImageWidthHeight(View v, int height) {
+        ViewGroup.LayoutParams videoLayoutParams = v.getLayoutParams();
+        videoLayoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        videoLayoutParams.height = height;
+        v.setLayoutParams(videoLayoutParams);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.server);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         context = Server.this;
 
@@ -135,15 +171,95 @@ public class Server extends Activity {
         linmain1.setVisibility(View.GONE);
         linmain2.setVisibility(View.GONE);
 
+        serverSlideImg = new ArrayList<>();
+        clientSlideImg1 = new ArrayList<>();
+        clientSlideImg2 = new ArrayList<>();
+        clientSlideImg3 = new ArrayList<>();
+        clientSlideImg1.add("0");
+        clientSlideImg2.add("0");
+        clientSlideImg3.add("0");
+
         btnSlideShow = (Button) findViewById(R.id.btnSlideShow);
         btnSlideShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                isSlideShow = true;
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_MULTIPLE_IMAGE_FROM_GALLARY);
 //                relmain1.setVisibility(View.VISIBLE);
 //                linmain1.setVisibility(View.GONE);
 //                linmain2.setVisibility(View.GONE);
 
+            }
+        });
+
+        btnStartSlideShow = (Button) findViewById(R.id.btnStartSlideShow);
+        btnStartSlideShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < Appconfig.socketArray.size(); i++) {
+                    if (Appconfig.socketArray.size() == 1) {
+                        SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), "1");
+                        socketServerReplyThread.run();
+                    }else if (Appconfig.socketArray.size()==2){
+                        SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), "1");
+                        socketServerReplyThread.run();
+
+                        socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), "2");
+                        socketServerReplyThread.run();
+                    }else if (Appconfig.socketArray.size()==3){
+                        SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(0), "1");
+                        socketServerReplyThread.run();
+
+                        socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(1), "2");
+                        socketServerReplyThread.run();
+
+                        socketServerReplyThread = new SocketServerReplyThread(Appconfig.socketArray.get(2), "3");
+                        socketServerReplyThread.run();
+                    }
+                }
+
+                linmain1.setVisibility(View.GONE);
+                linmain2.setVisibility(View.VISIBLE);
+                relmain1.setVisibility(View.GONE);
+
+                /*CountDownTimer continueAnimation = new CountDownTimer(5000, 2500) {
+                    public void onTick(long millisUntilFinished) {
+                        ObjectAnimator.ofFloat(imageView, View.ALPHA, 1.0f, 0.2f).setDuration(3000).start();
+                        ObjectAnimator.ofFloat(imageView, View.ALPHA, 0.2f, 1.0f).setDuration(3000).start();
+                        if (i==serverSlideImg.size()){
+                            i=0;
+                        }
+                        byte[] b2 = Base64.decode(serverSlideImg.get(i), Base64.DEFAULT);
+                        final Bitmap bitmap = BitmapFactory.decodeByteArray(b2, 0, b2.length);
+                        imageView.setImageBitmap(bitmap);
+                        i++;
+                    }
+
+                    public void onFinish() {
+                        //    showNotification();
+                        start();// here, when your CountDownTimer has finished , we start it again :)
+                    }
+                };
+                try {
+                    Thread.sleep(5000);
+                    continueAnimation.start();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
+                String[] images=new String[serverSlideImg.size()];
+                for (int i = 0; i < serverSlideImg.size(); i++) {
+                    images[i]=serverSlideImg.get(i);
+                }
+                try {
+                    Thread.sleep(5000);
+                    animate(imageView,images,0,true);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -370,7 +486,7 @@ public class Server extends Activity {
         btnSelectPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                isSlideShow = false;
                 picPhoto();
             }
         });
@@ -423,7 +539,7 @@ public class Server extends Activity {
                                 /*imageView.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_fade_out);
+                                        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
                                         imageView.startAnimation(anim);
                                     }
                                 });*/
@@ -460,7 +576,7 @@ public class Server extends Activity {
                                 /* imageView.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_fade_out);
+                                        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
                                         imageView.startAnimation(anim);
                                     }
                                 });*/
@@ -500,7 +616,7 @@ public class Server extends Activity {
                                 /*imageView.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_fade_out);
+                                        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
                                         imageView.startAnimation(anim);
                                     }
                                 });*/
@@ -521,7 +637,56 @@ public class Server extends Activity {
         Thread socketServerThread = new Thread(new SocketServerThread());
         socketServerThread.start();
     }
+    private void animate(final ImageView imageView, final String[] images, final int imageIndex, final boolean forever) {
 
+        //imageView <-- The View which displays the images
+        //images[] <-- Holds R references to the images to display
+        //imageIndex <-- index of the first image to show in images[]
+        //forever <-- If equals true then after the last image it starts all over again with the first image resulting in an infinite loop. You have been warned.
+
+        int fadeInDuration = 500; // Configure time values here
+        int timeBetween = 3000;
+        int fadeOutDuration = 1000;
+
+        imageView.setVisibility(View.INVISIBLE);    //Visible or invisible by default - this will apply when the animation ends
+        byte[] b = Base64.decode(images[imageIndex], Base64.DEFAULT);
+        Bitmap bitmap= BitmapFactory.decodeByteArray(b, 0, b.length);
+        imageView.setImageBitmap(bitmap);
+
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator()); // add this
+        fadeIn.setDuration(fadeInDuration);
+
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator()); // and this
+        fadeOut.setStartOffset(fadeInDuration + timeBetween);
+        fadeOut.setDuration(fadeOutDuration);
+
+        AnimationSet animation = new AnimationSet(false); // change to false
+        animation.addAnimation(fadeIn);
+        animation.addAnimation(fadeOut);
+        animation.setRepeatCount(1);
+        imageView.setAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            public void onAnimationEnd(Animation animation) {
+                if (images.length - 1 > imageIndex) {
+                    animate(imageView, images, imageIndex + 1,forever); //Calls itself until it gets to the end of the array
+                }
+                else {
+                    if (forever == true){
+                        animate(imageView, images, 0,forever);  //Calls itself to start the animation all over again in a loop if forever = true
+                    }
+                }
+            }
+            public void onAnimationRepeat(Animation animation) {
+                // TODO Auto-generated method stub
+            }
+            public void onAnimationStart(Animation animation) {
+                // TODO Auto-generated method stub
+            }
+        });
+    }
     public void setImageWidthHeight(View v) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) Server.this).getWindowManager().getDefaultDisplay()
@@ -562,165 +727,6 @@ public class Server extends Activity {
                 e.printStackTrace();
             }
         }
-    }
-
-    private class SocketServerThread extends Thread {
-
-        static final int SocketServerPORT = 8080;
-        String receivedMessage = "";
-        int count = 0;
-
-        @Override
-        public void run() {
-            try {
-                serverSocket = new ServerSocket(SocketServerPORT);
-                Server.this.runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        info.setText("I'm waiting here: "
-                                + serverSocket.getLocalPort());
-                        System.out.println("test2 server;");
-                    }
-                });
-
-
-                while (true) {
-                    socket = serverSocket.accept();
-
-                    Appconfig.socketArray.add(count, socket);
-                    count++;
-                    message += "#" + count + " from " + socket.getInetAddress()
-                            + ":" + socket.getPort() + " is now connected.\n";
-//                    //                    for receiving message from client
-//                    InputStream is = socket.getInputStream();
-//                    InputStreamReader isr = new InputStreamReader(is);
-//                    BufferedReader br = new BufferedReader(isr);
-//                    receivedMessage = br.readLine();
-//                    System.out.println("Message received..."+receivedMessage);
-
-                    Server.this.runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            msg.setText(message);
-                            tvPleaseSelectDevice.setVisibility(View.GONE);
-                            relmain1.setVisibility(View.GONE);
-                            linmain2.setVisibility(View.GONE);
-                            linmain1.setVisibility(View.VISIBLE);
-                        }
-                    });
-//                    InputStream inputStream = socket.getInputStream();
-//                    InputStreamReader isr = new InputStreamReader(inputStream);
-//                    BufferedReader br = new BufferedReader(isr);
-//                    final String receivedMessage = br.readLine();
-//
-//                    Server.this.runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(Server.this,""+receivedMessage+" by client",Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-
-//					SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(
-//							socket, count);
-//					socketServerReplyThread.run();
-
-                }
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    public class SocketServerReplyThread extends Thread {
-
-        private Socket hostThreadSocket;
-        String strPathSend;
-//		int cnt;
-
-        SocketServerReplyThread(Socket socket, String strPath) {//int c
-            hostThreadSocket = socket;
-            strPathSend = strPath;
-//			cnt = c;
-        }
-
-        @Override
-        public void run() {
-
-            byte[] bytes;
-            byte[] buffer = new byte[8192000];
-            int bytesRead;
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            try {
-                InputStream inputStream = new FileInputStream(path);//You can get an inputStream using any IO API
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    output.write(buffer, 0, bytesRead);
-                    System.out.println("buffer :" + buffer.length);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            bytes = output.toByteArray();
-
-            String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
-
-            OutputStream outputStream;
-//            String msgReply = encodedString;//REmove comment
-            String msgReply = strPathSend;
-
-            System.out.println("test3 ;");
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            ((Activity) Server.this).getWindowManager().getDefaultDisplay()
-                    .getMetrics(displayMetrics);
-            int heightPixels = displayMetrics.heightPixels;
-            System.out.println("height of server:" + heightPixels);
-            if (heightPixels > 855 && heightPixels < 1300) {
-                heightPixels = 800;
-            } else if (heightPixels > 750 && heightPixels < 855) {
-                heightPixels = 800;
-            } else {
-                heightPixels = 800;
-            }
-            try {
-                ArrayList<String> list = new ArrayList<>();
-                list.add(msgReply);
-                list.add(String.valueOf(heightPixels));
-                ObjectOutputStream objectOutput = new ObjectOutputStream(hostThreadSocket.getOutputStream());
-                objectOutput.writeObject(list);
-//                outputStream = hostThreadSocket.getOutputStream();
-//                PrintStream printStream = new PrintStream(outputStream);
-//                printStream.print(msgReply);
-//                printStream.close();
-                message += msgReply;
-                Server.this.runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        msg.setText(message);
-                    }
-                });
-
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                message += "Something wrong! " + e.toString() + "\n";
-            }
-
-            Server.this.runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    msg.setText(message);
-
-                }
-            });
-
-        }
-
-
     }
 
     private String getIpAddress() {
@@ -889,6 +895,75 @@ public class Server extends Activity {
 
                 }
 
+            } else if (requestCode == PICK_MULTIPLE_IMAGE_FROM_GALLARY) {
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                imagesEncodedList = new ArrayList<String>();
+                if (data.getClipData() != null) {
+                    ClipData mClipData = data.getClipData();
+                    ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+                    for (int i = 0; i < mClipData.getItemCount(); i++) {
+                        ClipData.Item item = mClipData.getItemAt(i);
+                        Uri uri = item.getUri();
+                        mArrayUri.add(uri);
+
+                        // Get the cursor
+                        imageEncoded = Utils.getPath(getApplicationContext(), uri);
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imageEncoded);
+//                        ByteArrayOutputStream baosP1 = new ByteArrayOutputStream();
+//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baosP1);
+//                        byte[] bP1 = baosP1.toByteArray();
+//                        String encodedImage= Base64.encodeToString(bP1, Base64.DEFAULT);
+//                        imagesEncodedList.add(encodedImage);
+//                        cursor.close();
+                        System.out.println("SLIDE IMAGE:" + imageEncoded);
+
+//
+                        System.out.println("device1" + isDevice1);
+                        System.out.println("device2" + isDevice2);
+                        System.out.println("device3" + isDevice3);
+
+                        System.out.println("isLayout1" + isLayout1);
+                        System.out.println("isLayout2" + isLayout2);
+                        System.out.println("isLayout3" + isLayout3);
+
+                        if (isDevice1 && isLayout1 == true) {
+                            cropHorizontal2Part(myBitmap);//2 part
+                            btnSelectPhoto.setVisibility(View.GONE);
+                            btnStartSlideShow.setVisibility(View.VISIBLE);
+                        }
+                        if (isDevice1 && isLayout2 == true) {
+                            cropvertical2Part(myBitmap);//2 part
+                            btnStartSlideShow.setVisibility(View.VISIBLE);
+                        }
+                        if (isDevice2 && isLayout1 == true) {
+                            cropHorizontal(myBitmap);//3 part
+                            btnSelectPhoto.setVisibility(View.GONE);
+                            btnStartSlideShow.setVisibility(View.VISIBLE);
+                        }
+                        if (isDevice2 && isLayout2 == true) {
+                            cropvertical(myBitmap);//3 part
+                            btnSelectPhoto.setVisibility(View.GONE);
+                            btnStartSlideShow.setVisibility(View.VISIBLE);
+                        }
+                        if (isDevice3 && isLayout1 == true) {
+                            cropL2(myBitmap);//4 part
+                            btnSelectPhoto.setVisibility(View.GONE);
+                            btnStartSlideShow.setVisibility(View.VISIBLE);
+                        }
+                        if (isDevice3 && isLayout2 == true) {
+                            cropL1(myBitmap);//4 part
+                            btnSelectPhoto.setVisibility(View.GONE);
+                            btnStartSlideShow.setVisibility(View.VISIBLE);
+                        }
+                        if (isDevice3 && isLayout3 == true) {
+                            cropL3(myBitmap);//4 part
+                            btnSelectPhoto.setVisibility(View.GONE);
+                            btnStartSlideShow.setVisibility(View.VISIBLE);
+                        }
+                    }
+                } else {
+
+                }
             }
         }
     }
@@ -902,9 +977,9 @@ public class Server extends Activity {
 
         Bitmap croppedBmp = Bitmap.createBitmap(bitmapOrg, 0, 0, bitmapOrg.getWidth(), bitmapOrg.getHeight() * 1 / 2);
 
-        Matrix matrix=new Matrix();
+        Matrix matrix = new Matrix();
         matrix.postRotate(90);
-        Bitmap finalCroppedBmp=Bitmap.createBitmap(croppedBmp, 0, 0, croppedBmp.getWidth(), croppedBmp.getHeight(), matrix, true);
+        Bitmap finalCroppedBmp = Bitmap.createBitmap(croppedBmp, 0, 0, croppedBmp.getWidth(), croppedBmp.getHeight(), matrix, true);
 
         ByteArrayOutputStream baosP1 = new ByteArrayOutputStream();
         finalCroppedBmp.compress(Bitmap.CompressFormat.JPEG, 100, baosP1);
@@ -917,7 +992,7 @@ public class Server extends Activity {
 //
         Bitmap croppedBmp2 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 1 / 2, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 2);
 
-        Bitmap finalCroppedBmp2=Bitmap.createBitmap(croppedBmp2, 0, 0, croppedBmp2.getWidth(), croppedBmp2.getHeight(), matrix, true);
+        Bitmap finalCroppedBmp2 = Bitmap.createBitmap(croppedBmp2, 0, 0, croppedBmp2.getWidth(), croppedBmp2.getHeight(), matrix, true);
 
         ByteArrayOutputStream baosP2 = new ByteArrayOutputStream();
         finalCroppedBmp2.compress(Bitmap.CompressFormat.JPEG, 100, baosP2);
@@ -932,6 +1007,8 @@ public class Server extends Activity {
 
         edit.commit();
 
+        clientSlideImg1.add(encodedImagep1);
+        serverSlideImg.add(encodedImageP2);
 //        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
 //        startActivity(in);
 
@@ -969,6 +1046,8 @@ public class Server extends Activity {
         edit.putString("image_datap2", encodedImageP2);
         edit.commit();
 
+        clientSlideImg1.add(encodedImagep1);
+        serverSlideImg.add(encodedImageP2);
 //        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
 //        startActivity(in);
     }
@@ -1035,11 +1114,14 @@ public class Server extends Activity {
         edit.putString("image_datap4", encodedImagep4);
         edit.commit();
 
+        clientSlideImg1.add(encodedImagep1);
+        clientSlideImg2.add(encodedImageP2);
+        clientSlideImg3.add(encodedImagep3);
+        serverSlideImg.add(encodedImagep4);
 //        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
 //        startActivity(in);
 
     }
-
 
     /**
      * This method use for slice image for 4 devices.
@@ -1104,10 +1186,13 @@ public class Server extends Activity {
         edit.putString("image_datap4", encodedImagep4);
         edit.commit();
 
+        clientSlideImg1.add(encodedImagep1);
+        clientSlideImg2.add(encodedImageP2);
+        clientSlideImg3.add(encodedImagep3);
+        serverSlideImg.add(encodedImagep4);
 //        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
 //        startActivity(in);
     }
-
 
     /**
      * This method use for slice image for 4 devices.
@@ -1123,10 +1208,10 @@ public class Server extends Activity {
         // 0, 0, image.size.width , image.size.height/4)
 
         Bitmap croppedBmp = Bitmap.createBitmap(bitmapOrg, 0, 0, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 4);
-        Matrix matrix=new Matrix();
+        Matrix matrix = new Matrix();
         matrix.postRotate(90);
 
-        Bitmap finalCroppedBmp=Bitmap.createBitmap(croppedBmp, 0, 0, croppedBmp.getWidth(), croppedBmp.getHeight(), matrix, true);
+        Bitmap finalCroppedBmp = Bitmap.createBitmap(croppedBmp, 0, 0, croppedBmp.getWidth(), croppedBmp.getHeight(), matrix, true);
         ByteArrayOutputStream baosP1 = new ByteArrayOutputStream();
         finalCroppedBmp.compress(Bitmap.CompressFormat.JPEG, 100, baosP1);
         byte[] bP1 = baosP1.toByteArray();
@@ -1137,7 +1222,7 @@ public class Server extends Activity {
 //            // 0, (image.size.height) * 1/4, image.size.width, image.size.height/4.0));
 //
         Bitmap croppedBmp2 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 1 / 4, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 4);
-        Bitmap finalCroppedBmp2=Bitmap.createBitmap(croppedBmp2, 0, 0, croppedBmp2.getWidth(), croppedBmp2.getHeight(), matrix, true);
+        Bitmap finalCroppedBmp2 = Bitmap.createBitmap(croppedBmp2, 0, 0, croppedBmp2.getWidth(), croppedBmp2.getHeight(), matrix, true);
         ByteArrayOutputStream baosP2 = new ByteArrayOutputStream();
         finalCroppedBmp2.compress(Bitmap.CompressFormat.JPEG, 100, baosP2);
         byte[] bp2 = baosP2.toByteArray();
@@ -1148,7 +1233,7 @@ public class Server extends Activity {
 //            // (0, (image.size.height) * 1/2, image.size.width, image.size.height/ 4.0));
 //
         Bitmap croppedBmp3 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 1 / 2, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 4);
-        Bitmap finalCroppedBmp3=Bitmap.createBitmap(croppedBmp3, 0, 0, croppedBmp3.getWidth(), croppedBmp3.getHeight(), matrix, true);
+        Bitmap finalCroppedBmp3 = Bitmap.createBitmap(croppedBmp3, 0, 0, croppedBmp3.getWidth(), croppedBmp3.getHeight(), matrix, true);
         ByteArrayOutputStream baosP3 = new ByteArrayOutputStream();
         finalCroppedBmp3.compress(Bitmap.CompressFormat.JPEG, 100, baosP3);
         byte[] bp3 = baosP3.toByteArray();
@@ -1159,7 +1244,7 @@ public class Server extends Activity {
 //            // (0, (image.size.height) * 3/4, image.size.width, image.size.height/ 4.0));
 //
         Bitmap croppedBmp4 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 3 / 4, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 4);
-        Bitmap finalCroppedBmp4=Bitmap.createBitmap(croppedBmp4, 0, 0, croppedBmp4.getWidth(), croppedBmp4.getHeight(), matrix, true);
+        Bitmap finalCroppedBmp4 = Bitmap.createBitmap(croppedBmp4, 0, 0, croppedBmp4.getWidth(), croppedBmp4.getHeight(), matrix, true);
         ByteArrayOutputStream baosP4 = new ByteArrayOutputStream();
         finalCroppedBmp4.compress(Bitmap.CompressFormat.JPEG, 100, baosP4);
         byte[] bp4 = baosP4.toByteArray();
@@ -1174,10 +1259,13 @@ public class Server extends Activity {
         edit.putString("image_datap4", encodedImagep4);
         edit.commit();
 
+        clientSlideImg1.add(encodedImagep1);
+        clientSlideImg2.add(encodedImageP2);
+        clientSlideImg3.add(encodedImagep3);
+        serverSlideImg.add(encodedImagep4);
 //        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
 //        startActivity(in);
     }
-
 
     /**
      * This method use for slice image for 3 devices.
@@ -1193,10 +1281,10 @@ public class Server extends Activity {
 
         Bitmap croppedBmp = Bitmap.createBitmap(bitmapOrg, 0, 0, bitmapOrg.getWidth(), bitmapOrg.getHeight() * 1 / 3);
 
-        Matrix matrix=new Matrix();
+        Matrix matrix = new Matrix();
         matrix.postRotate(90);
 
-        Bitmap finalCroppedBmp=Bitmap.createBitmap(croppedBmp, 0, 0, croppedBmp.getWidth(), croppedBmp.getHeight(), matrix, true);
+        Bitmap finalCroppedBmp = Bitmap.createBitmap(croppedBmp, 0, 0, croppedBmp.getWidth(), croppedBmp.getHeight(), matrix, true);
         ByteArrayOutputStream baosP1 = new ByteArrayOutputStream();
         finalCroppedBmp.compress(Bitmap.CompressFormat.JPEG, 100, baosP1);
         byte[] bP1 = baosP1.toByteArray();
@@ -1208,7 +1296,7 @@ public class Server extends Activity {
 //
         Bitmap croppedBmp2 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 1 / 3, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 3);
 
-        Bitmap finalCroppedBmp2=Bitmap.createBitmap(croppedBmp2, 0, 0, croppedBmp2.getWidth(), croppedBmp2.getHeight(), matrix, true);
+        Bitmap finalCroppedBmp2 = Bitmap.createBitmap(croppedBmp2, 0, 0, croppedBmp2.getWidth(), croppedBmp2.getHeight(), matrix, true);
         ByteArrayOutputStream baosP2 = new ByteArrayOutputStream();
         finalCroppedBmp2.compress(Bitmap.CompressFormat.JPEG, 100, baosP2);
         byte[] bp2 = baosP2.toByteArray();
@@ -1220,7 +1308,7 @@ public class Server extends Activity {
 //
         Bitmap croppedBmp3 = Bitmap.createBitmap(bitmapOrg, 0, bitmapOrg.getHeight() * 2 / 3, bitmapOrg.getWidth(), bitmapOrg.getHeight() / 3);
 
-        Bitmap finalCroppedBmp3=Bitmap.createBitmap(croppedBmp3, 0, 0, croppedBmp3.getWidth(), croppedBmp3.getHeight(), matrix, true);
+        Bitmap finalCroppedBmp3 = Bitmap.createBitmap(croppedBmp3, 0, 0, croppedBmp3.getWidth(), croppedBmp3.getHeight(), matrix, true);
         ByteArrayOutputStream baosP3 = new ByteArrayOutputStream();
         finalCroppedBmp3.compress(Bitmap.CompressFormat.JPEG, 100, baosP3);
         byte[] bp3 = baosP3.toByteArray();
@@ -1234,21 +1322,11 @@ public class Server extends Activity {
         edit.putString("image_datap3", encodedImagep3);
         edit.commit();
 
+        clientSlideImg1.add(encodedImagep1);
+        clientSlideImg2.add(encodedImageP2);
+        serverSlideImg.add(encodedImagep3);
 //        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
 //        startActivity(in);
-    }
-
-    /**
-     * For setting up image width and height
-     *
-     * @param v
-     * @param height
-     */
-    public static void setImageWidthHeight(View v, int height) {
-        ViewGroup.LayoutParams videoLayoutParams = v.getLayoutParams();
-        videoLayoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        videoLayoutParams.height = height;
-        v.setLayoutParams(videoLayoutParams);
     }
 
     /**
@@ -1301,8 +1379,88 @@ public class Server extends Activity {
         edit.putString("image_datap3", encodedImagep3);
         edit.commit();
 
+        clientSlideImg1.add(encodedImagep1);
+        clientSlideImg2.add(encodedImageP2);
+        serverSlideImg.add(encodedImagep3);
 //        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
 //        startActivity(in);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    private class SocketServerThread extends Thread {
+
+        static final int SocketServerPORT = 8080;
+        String receivedMessage = "";
+        int count = 0;
+
+        @Override
+        public void run() {
+            try {
+                serverSocket = new ServerSocket(SocketServerPORT);
+                Server.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        info.setText("I'm waiting here: "
+                                + serverSocket.getLocalPort());
+                        System.out.println("test2 server;");
+                    }
+                });
+
+
+                while (true) {
+                    socket = serverSocket.accept();
+
+                    Appconfig.socketArray.add(count, socket);
+                    count++;
+                    message += "#" + count + " from " + socket.getInetAddress()
+                            + ":" + socket.getPort() + " is now connected.\n";
+//                    //                    for receiving message from client
+//                    InputStream is = socket.getInputStream();
+//                    InputStreamReader isr = new InputStreamReader(is);
+//                    BufferedReader br = new BufferedReader(isr);
+//                    receivedMessage = br.readLine();
+//                    System.out.println("Message received..."+receivedMessage);
+
+                    Server.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            msg.setText(message);
+                            tvPleaseSelectDevice.setVisibility(View.GONE);
+                            relmain1.setVisibility(View.GONE);
+                            linmain2.setVisibility(View.GONE);
+                            linmain1.setVisibility(View.VISIBLE);
+                        }
+                    });
+//                    InputStream inputStream = socket.getInputStream();
+//                    InputStreamReader isr = new InputStreamReader(inputStream);
+//                    BufferedReader br = new BufferedReader(isr);
+//                    final String receivedMessage = br.readLine();
+//
+//                    Server.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(Server.this,""+receivedMessage+" by client",Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+
+//					SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(
+//							socket, count);
+//					socketServerReplyThread.run();
+
+                }
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
     }
 
 //	private void storeSliceinPref() {
@@ -1318,10 +1476,124 @@ public class Server extends Activity {
 //		startActivity(in);
 //	}
 
+    public class SocketServerReplyThread extends Thread {
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+        String strPathSend;
+        private Socket hostThreadSocket;
+//		int cnt;
+
+        SocketServerReplyThread(Socket socket, String strPath) {//int c
+            hostThreadSocket = socket;
+            strPathSend = strPath;
+//			cnt = c;
+        }
+
+        @Override
+        public void run() {
+
+//            byte[] bytes;
+//            byte[] buffer = new byte[8192000];
+//            int bytesRead;
+//            ByteArrayOutputStream output = new ByteArrayOutputStream();
+//            try {
+//                InputStream inputStream = new FileInputStream(path);//You can get an inputStream using any IO API
+//                while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                    output.write(buffer, 0, bytesRead);
+//                    System.out.println("buffer :" + buffer.length);
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            bytes = output.toByteArray();
+//
+//            String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
+//
+//            OutputStream outputStream;
+//            String msgReply = encodedString;//REmove comment
+            String msgReply = strPathSend;
+
+            System.out.println("test3 ;");
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            ((Activity) Server.this).getWindowManager().getDefaultDisplay()
+                    .getMetrics(displayMetrics);
+            int heightPixels = displayMetrics.heightPixels;
+            System.out.println("height of server:" + heightPixels);
+            if (heightPixels > 855 && heightPixels < 1300) {
+                heightPixels = 800;
+            } else if (heightPixels > 750 && heightPixels < 855) {
+                heightPixels = 800;
+            } else {
+                heightPixels = 800;
+            }
+            try {
+                ArrayList<String> list = new ArrayList<>();
+                list.add(("1"));
+                list.add(msgReply);
+                list.add(String.valueOf(heightPixels));
+                ObjectOutputStream objectOutput = new ObjectOutputStream(hostThreadSocket.getOutputStream());
+                if (isSlideShow) {
+                    System.out.println("IN SLIDE SHOW SOCKET");
+                    if (strPathSend.equals("1")) {
+                        System.out.println("11111");
+                        clientSlideImg1.add(String.valueOf(heightPixels));
+                        objectOutput.writeObject(clientSlideImg1);
+                    }else if (strPathSend.equals("2")){
+                        System.out.println("2222");
+                        clientSlideImg2.add(String.valueOf(heightPixels));
+                        objectOutput.writeObject(clientSlideImg2);
+                    }else{
+                        System.out.println("333");
+                        clientSlideImg3.add(String.valueOf(heightPixels));
+                        objectOutput.writeObject(clientSlideImg3);
+                    }
+                } else {
+                    objectOutput.writeObject(list);
+                }
+
+//                while (true) {
+//                    if (received==Appconfig.socketArray.size()){
+//                        break;
+//                    }
+//                    socket = serverSocket.accept();
+//                    InputStream inputStream = socket.getInputStream();
+//                    System.out.println("INput stream--------");
+//                    InputStreamReader isr = new InputStreamReader(inputStream);
+//                    System.out.println("AFTER INput stream--------");
+//                    BufferedReader br = new BufferedReader(isr);
+//                    System.out.println("RECEIVED TEXT--------:" + br.readLine());
+//                    br.close();
+//                    received++;
+//                }
+//                outputStream = hostThreadSocket.getOutputStream();
+//                PrintStream printStream = new PrintStream(outputStream);
+//                printStream.print(msgReply);
+//                printStream.close();
+//                message += msgReply;
+//                Server.this.runOnUiThread(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        msg.setText(message);
+//                    }
+//                });
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                message += "Something wrong! " + e.toString() + "\n";
+            }
+
+            Server.this.runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    msg.setText(message);
+
+                }
+            });
+
+        }
+
+
     }
 }

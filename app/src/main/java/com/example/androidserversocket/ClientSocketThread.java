@@ -1,12 +1,7 @@
 package com.example.androidserversocket;
 
-import android.widget.Toast;
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
@@ -37,18 +32,19 @@ public class ClientSocketThread extends Thread {
             String sendMessage = "true";
             bw.write(sendMessage);
             bw.flush();
+            bw.close();
             System.out.println("Message sent to the server : " + sendMessage);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (socket != null) {
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
+//            if (socket != null) {
+//                try {
+//                    socket.close();
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//            }
         }
     }
 }

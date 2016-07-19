@@ -14,9 +14,10 @@ import java.net.Socket;
 
 public class ReplyThread extends Thread {
 
-    private Socket hostThreadSocket;
     //    int cnt;
     String strPathSend;
+    private Socket hostThreadSocket;
+    private boolean isCalled=false;
 
     public ReplyThread(Socket socket, String strPath) {
         hostThreadSocket = socket;
@@ -31,11 +32,14 @@ public class ReplyThread extends Thread {
         Appconfig.TEXTSTRING = msgReply;
         System.out.println("111 reply thread");
         try {
-            outputStream = hostThreadSocket.getOutputStream();
-            PrintStream printStream = new PrintStream(outputStream);
-            printStream.print(msgReply);
-            printStream.close();
-
+//            if (Appconfig.sendCount!=0) {
+//            if (!isCalled) {
+//                isCalled = true;
+                outputStream = hostThreadSocket.getOutputStream();
+                PrintStream printStream = new PrintStream(outputStream);
+                printStream.print(msgReply);
+                printStream.close();
+//            }
             new Thread(new ReceiveFromClient()).start();
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -61,6 +65,7 @@ public class ReplyThread extends Thread {
                     System.out.println("AFTER INput stream--------");
                     BufferedReader br = new BufferedReader(isr);
                     System.out.println("RECEIVED TEXT--------:" + br.readLine());
+                    br.close();
 //                    if (br.readLine().equals("true")) {
                     System.out.println(Appconfig.socketArray.size() + ":" + Appconfig.sendCount);
                     if (Appconfig.sendCount < Appconfig.socketArray.size()) {
@@ -71,9 +76,10 @@ public class ReplyThread extends Thread {
                         printStream.print(Appconfig.TEXTSTRING);
                         printStream.close();
                         Appconfig.sendCount++;
-                    }else {
-                        Appconfig.sendCount=1;
-
+                    } else {
+                        Appconfig.sendCount = 1;
+                        hostThreadSocket.close();
+                        ReplyThread.currentThread().interrupt();
                         Handler handler = new Handler(Looper.getMainLooper());
                         handler.post(new Runnable() {
                             public void run() {

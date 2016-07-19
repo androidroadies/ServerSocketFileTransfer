@@ -21,10 +21,10 @@ import java.util.ArrayList;
  */
 public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
 
+    public static ArrayList<String> list = new ArrayList<>();
     String dstAddress;
     int dstPort;
     String response = "";
-    public static ArrayList<String> list = new ArrayList<>();
     private OnPostCallComplete onpostcallcomplete;
 
     MyClientTask1(String addr, int port, OnPostCallComplete onPostCallComplete) {
@@ -70,7 +70,7 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
 //            System.out.println("total :" + total);
 
             if (Client.isFromClientImage) {
-                Client.isFromClientImage=false;
+                Client.isFromClientImage = false;
                 ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream()); //Error Line!
                 try {
                     Object object = objectInput.readObject();
@@ -80,31 +80,25 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
                 }
 //            response = total.toString();
                 response = list.get(0);
-                System.out.println("height received :" + list.get(1));
+                System.out.println("height received :" + list.get(list.size() - 1));
 
-//                while (true) {
-//                    if (Client.isInform) {
-//                        Client.isInform = false;
-//                        //send message to server...
-//                        OutputStream os = socket.getOutputStream();
-//                        OutputStreamWriter osw = new OutputStreamWriter(os);
-//                        BufferedWriter bw = new BufferedWriter(osw);
-//                        String msgReply = "Image received";
-//                        bw.write(msgReply);
-//                        bw.flush();
-//                        System.out.println("message sent to server...");
-//                        break;
-////                    }
-//                }
-            }else if (ClientText.isFromClientText){
-                ClientText.isFromClientText=false;
+//                OutputStream os = socket.getOutputStream();
+//                OutputStreamWriter osw = new OutputStreamWriter(os);
+//                BufferedWriter bw = new BufferedWriter(osw);
+//                String sendMessage = "true";
+//                bw.write(sendMessage);
+//                bw.flush();
+//                bw.close();
+//                System.out.println("Sent message to server...");
+            } else if (ClientText.isFromClientText) {
+                ClientText.isFromClientText = false;
 
                 //Receive message from server
                 InputStream inputStream = socket.getInputStream();
                 InputStreamReader isr = new InputStreamReader(inputStream);
                 BufferedReader br = new BufferedReader(isr);
                 response = br.readLine();
-
+                socket.getChannel();
 //                //send message to server...
 //                Socket textSocket = new Socket(dstAddress, 9000);
 //                OutputStream os = textSocket.getOutputStream();
