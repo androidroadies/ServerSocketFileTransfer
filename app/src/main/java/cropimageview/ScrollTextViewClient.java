@@ -10,6 +10,7 @@ import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.example.androidserversocket.ClientSocketThread;
+import com.example.androidserversocket.ClientText;
 
 import static com.example.androidserversocket.Appconfig.socketArray;
 

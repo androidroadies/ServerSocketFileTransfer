@@ -27,6 +27,7 @@ import android.widget.Toast;
 import java.net.Socket;
 import java.util.List;
 
+import cropimageview.ScrollTextView;
 import cropimageview.ScrollTextViewClient;
 import testhotspot.WifiApManager;
 import wifi.api.WifiStatus;
@@ -40,11 +41,12 @@ import wifi.datatransfer.WifiSocket;
  */
 public class ClientText extends Activity {
 
+    private static ClientText mContext;
     TextView textResponse;
     EditText editTextAddress, editTextPort;
     Button buttonConnect, buttonClear, btnJoinGroup;
     ImageView imageView;
-    MyClientTask1 myClientTask1;
+    public static MyClientTask1 myClientTask1;
     Bitmap decodedByte;
 
     wifiHotSpots hotutil;
@@ -65,6 +67,8 @@ public class ClientText extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_text);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        mContext =ClientText.this;
 
         editTextAddress = (EditText) findViewById(R.id.address);
         editTextPort = (EditText) findViewById(R.id.port);
@@ -139,7 +143,6 @@ public class ClientText extends Activity {
 
         @Override
         public void response(final String result) {
-
             tvWaitText.setVisibility(View.GONE);
             System.out.println("result final :" + result.toString());
             textResponse.setText(result);
@@ -158,10 +161,12 @@ public class ClientText extends Activity {
                 lin1.setVisibility(View.INVISIBLE);
 //                imageView.setImageBitmap(decodedByte);
             }
-
         }
     };
-
+    public static void startScrollAgain(){
+        Appconfig.calledAgain=true;
+        ScrollTextViewClient.isCalled=false;
+    }
 
     /**
      * Using this methos user can find our Network and join automatically or you can connect our network from wifi. Our Netwrok name is " SSID ".

@@ -98,7 +98,7 @@ public class ServerText extends Activity {
 //        scrolltext.setTextColor(Color.WHITE);
 //        scrolltext.setTextSize(80);
 //        scrolltext.startScroll();
-//
+
         hotutil = new wifiHotSpots(getApplicationContext());
         wifiStatus = new WifiStatus(getApplicationContext());
         wifiApManager = new WifiApManager(this);
@@ -549,7 +549,11 @@ public class ServerText extends Activity {
     }
 
     public static void startScrollAgain(){
+        Appconfig.calledAgain=true;
         scrolltext.startScroll();
+//        Thread thread = new Thread(new ReceiveFromClient());
+//        thread.start();
+        ScrollTextView.secondTime=true;
         ScrollTextView.isCalled=false;
     }
 

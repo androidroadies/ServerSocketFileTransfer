@@ -3,6 +3,8 @@ package cropimageview;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -11,7 +13,14 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 import android.widget.TextView;
 
+import com.example.androidserversocket.Appconfig;
+import com.example.androidserversocket.ClientSocketThread;
+import com.example.androidserversocket.ReceiveFromClient;
 import com.example.androidserversocket.ReplyThread;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 import static com.example.androidserversocket.Appconfig.socketArray;
 
@@ -20,34 +29,29 @@ import static com.example.androidserversocket.Appconfig.socketArray;
  */
 public class ScrollTextView extends TextView {
 
+    public static boolean isCalled = false;
     // scrolling feature
     public Scroller mSlr;
     int scrollingLen;
-    Boolean isFirstTime = true;
 //    Display mDisplay = getContext().getWindowManager().getDefaultDisplay();
 //    final int width  = mDisplay.getWidth();
 //    final int height = mDisplay.getHeight();
-
+    Boolean isFirstTime = true;
     DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
     int width = displayMetrics.widthPixels;
     int height = displayMetrics.heightPixels;
-
-    // milliseconds for a round of scrolling
-    private int mRndDuration = 5000;
-
-    // the X offset when paused
-    private int mXPaused = 0;
-
-    // whether it's being paused
-    private boolean mPaused = true;
-
     SharedPreferences shre1 = PreferenceManager.getDefaultSharedPreferences(getContext());
-
     String previouslyEncodedImagep1 = shre1.getString("image_datap1", "");
     String previouslyEncodedImagep2 = shre1.getString("image_datap2", "");
     String previouslyEncodedImagep3 = shre1.getString("image_datap3", "");
     String previouslyEncodedImagep4 = shre1.getString("image_datap4", "");
-    public static boolean isCalled = false;
+    // milliseconds for a round of scrolling
+    private int mRndDuration = 5000;
+    // the X offset when paused
+    private int mXPaused = 0;
+    // whether it's being paused
+    private boolean mPaused = true;
+    public static boolean secondTime=false;
 
     /*
     * constructor
@@ -142,7 +146,7 @@ public class ScrollTextView extends TextView {
         int scrollingLen = rect.width() + getWidth();
         rect = null;
         System.out.println("111 calculate :" + scrollingLen);
-        return scrollingLen+30;
+        return scrollingLen + 30;
     }
 
     /**
@@ -181,8 +185,20 @@ public class ScrollTextView extends TextView {
             if (mSlr.getCurrX() == 0 || mSlr.getCurrX() == 1 || mSlr.getCurrX() == 2 || mSlr.getCurrX() == 3 || mSlr.getCurrX() == 4 || mSlr.getCurrX() == -1 || mSlr.getCurrX() == -2 || mSlr.getCurrX() == -3 || mSlr.getCurrX() == -4) {
                 isCalled = true;
                 System.out.println("IN SCROLLING");
-                ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(0), getText().toString());
-                socketServerReplyThread.run();
+//                if (Appconfig.calledAgain) {
+//                    Appconfig.calledAgain = false;
+//                } else {
+                if (!secondTime) {
+                    System.out.println("Reply thread running...");
+                    ReplyThread socketServerReplyThread = new ReplyThread(socketArray.get(0), getText().toString());
+                    socketServerReplyThread.run();
+                }else {
+                    System.out.println("Client thread running...");
+                    Thread thread = new Thread(new ReceiveFromClient());
+                    thread.start();
+                }
+//                }
+                    secondTime =true;
             }
         }
         if (mSlr.getCurrX() == scrollingLen) {

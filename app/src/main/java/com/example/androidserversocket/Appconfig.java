@@ -186,6 +186,7 @@ public class Appconfig {
     public static String gender_type = "";
     public static String sample_type = "";
     public static String blood = "";
+    public static boolean calledAgain=false;
 
 
     //    public static ArrayList<InterestresponsePollStatusList> allInterests;

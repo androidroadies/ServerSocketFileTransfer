@@ -98,7 +98,8 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
                 InputStreamReader isr = new InputStreamReader(inputStream);
                 BufferedReader br = new BufferedReader(isr);
                 response = br.readLine();
-                socket.getChannel();
+                inputStream.close();
+//                socket.getChannel();
 //                //send message to server...
 //                Socket textSocket = new Socket(dstAddress, 9000);
 //                OutputStream os = textSocket.getOutputStream();
@@ -129,14 +130,14 @@ public class MyClientTask1 extends AsyncTask<Void, Void, Void> {
             e.printStackTrace();
             response = "IOException: " + e.toString();
         } finally {
-            if (socket != null) {
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
+//            if (socket != null) {
+//                try {
+//                    socket.close();
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//            }
         }
         return null;
     }
