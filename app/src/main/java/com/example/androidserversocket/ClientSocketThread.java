@@ -9,8 +9,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-import cropimageview.ScrollTextViewClient;
-
 /**
  * Created by multidots on 07-Jul-16.
  */
@@ -36,9 +34,7 @@ public class ClientSocketThread extends Thread {
             BufferedWriter bw = new BufferedWriter(osw);
             String sendMessage = "true";
             bw.write(sendMessage);
-            bw.flush();
             bw.close();
-            os.flush();
             os.close();
             System.out.println("Message sent to the server : " + sendMessage);
             Handler handler = new Handler(Looper.getMainLooper());

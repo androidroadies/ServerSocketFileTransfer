@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.androidserversocket.ClientSocketThread;
 import com.example.androidserversocket.ClientText;
+import com.example.androidserversocket.ServerText;
 
 import static com.example.androidserversocket.Appconfig.socketArray;
 
@@ -164,11 +165,13 @@ public class ScrollTextViewClient extends TextView {
         super.computeScroll();
 
         System.out.println("111 compute" + mSlr.getCurrX());
+        if (mSlr.getCurrX()>=scrollingLen){
+//            new ClientText().refresh();
+        }
+
         if (!isCalled) {
             if (mSlr.getCurrX() == 0 || mSlr.getCurrX() == 1 || mSlr.getCurrX() == 2 || mSlr.getCurrX() == 3 || mSlr.getCurrX() == 4 || mSlr.getCurrX() == -1 || mSlr.getCurrX() == -2 || mSlr.getCurrX() == -3 || mSlr.getCurrX() == -4) {
                 isCalled = true;
-                System.out.println("Socket Array:" + socketArray.toString());
-                System.out.println("Socket Array Size:" + socketArray.size());
                 Thread thread = new Thread(new ClientSocketThread("192.168.43.1", 9000));
                 thread.start();
             }

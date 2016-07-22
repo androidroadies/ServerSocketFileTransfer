@@ -17,6 +17,7 @@ import com.example.androidserversocket.Appconfig;
 import com.example.androidserversocket.ClientSocketThread;
 import com.example.androidserversocket.ReceiveFromClient;
 import com.example.androidserversocket.ReplyThread;
+import com.example.androidserversocket.ServerText;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -180,6 +181,10 @@ public class ScrollTextView extends TextView {
         super.computeScroll();
 
         System.out.println("111 compute" + mSlr.getCurrX());
+
+        if (mSlr.getCurrX()>=scrollingLen){
+//            new ServerText().refresh();
+        }
 //        System.out.println("111 compute socket" +socketArray.size());
         if (!isCalled) {
             if (mSlr.getCurrX() == 0 || mSlr.getCurrX() == 1 || mSlr.getCurrX() == 2 || mSlr.getCurrX() == 3 || mSlr.getCurrX() == 4 || mSlr.getCurrX() == -1 || mSlr.getCurrX() == -2 || mSlr.getCurrX() == -3 || mSlr.getCurrX() == -4) {

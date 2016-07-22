@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -24,7 +25,6 @@ public class ReceiveFromClient extends Thread {
         super.run();
         try {
             socketServer = new ServerSocket(9000);
-            socketServer.setReuseAddress(true);
             System.out.println("OUTER-----------");
             while (true) {
                 System.out.println("Control in while..");
@@ -36,6 +36,7 @@ public class ReceiveFromClient extends Thread {
                 System.out.println("AFTER INput stream--------");
                 BufferedReader br = new BufferedReader(isr);
                 System.out.println("RECEIVED TEXT--------:" + br.readLine());
+                br.close();
 
                 System.out.println(Appconfig.socketArray.size() + ":" + Appconfig.sendCount);
                 if (Appconfig.sendCount < Appconfig.socketArray.size()) {
@@ -63,8 +64,6 @@ public class ReceiveFromClient extends Thread {
         } finally {
             if (socketServer != null) {
                 try {
-                    socket.shutdownOutput();
-                    socket.shutdownInput();
                     socketServer.close();
                 } catch (IOException e) {
                     e.printStackTrace();

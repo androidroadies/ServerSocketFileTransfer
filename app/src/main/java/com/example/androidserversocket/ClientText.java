@@ -6,14 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -24,10 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.net.Socket;
 import java.util.List;
 
-import cropimageview.ScrollTextView;
 import cropimageview.ScrollTextViewClient;
 import testhotspot.WifiApManager;
 import wifi.api.WifiStatus;
@@ -166,10 +161,20 @@ public class ClientText extends Activity {
     public static void startScrollAgain(){
         Appconfig.calledAgain=true;
         ScrollTextViewClient.isCalled=false;
+//        Thread thread=new Thread(new ClientSocketThread("192.168.43.1",9000));
+//        thread.start();
+    }
+    public void refresh() {
+        finish();
+        startActivity(getIntent());
     }
 
+    private void refreshActivity() {
+        startActivity(new Intent(ClientText.this,ClientText.class));
+        finish();
+    }
     /**
-     * Using this methos user can find our Network and join automatically or you can connect our network from wifi. Our Netwrok name is " SSID ".
+     * Using this methods user can find our Network and join automatically or you can connect our network from wifi. Our Netwrok name is " SSID ".
      *
      * @param wifiStatus
      * @param hotutil

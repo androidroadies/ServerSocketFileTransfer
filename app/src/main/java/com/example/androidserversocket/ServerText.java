@@ -51,39 +51,53 @@ import wifi.datatransfer.WifiSocket;
 
 public class ServerText extends Activity {
 
+    public static ScrollTextView scrolltext;
+    final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 1;
+    final int PICK_IMAGE_FROM_GALLARY = 5;
     TextView info, infoip, msg;
     String message = "";
     ServerSocket serverSocket;
     Button btnServerSend, btnChoose, btnSelectPhoto, btnCreateGroup, btnOneDevice, btnTwoDevice, btnThreeDevice;
     Button btnL1, btnL2, btnL3, btnDone;
     ImageView img1, img2, img3, imageView;
-
     Boolean isDevice1 = false, isDevice2 = false, isDevice3 = false;
     Boolean isLayout1 = false, isLayout2 = false, isLayout3 = false;
     Socket socket;
     //    ArrayList<Socket> socketArray = new ArrayList<Socket>();
     Context context;
-    final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 1;
-    final int PICK_IMAGE_FROM_GALLARY = 5;
     String path = "";
-
     RelativeLayout relmain1, rel1, rel2, rel3;
     LinearLayout linmain1, linmain2;
-
     wifiHotSpots hotutil;
     WifiStatus wifiStatus;
     BroadcastReceiver receiver;
     WifiSocket ws = new WifiSocket(this);
     WifiApManager wifiApManager;
-
     //    SimpleAsynTask mTask;
     wifiAddresses au;
-
-    public static ScrollTextView scrolltext;
     private TextView tvPleaseSelectDevice;
     private EditText edTextScroll;
     private Button btnNextForText;
     private String selectedText = "";
+
+    public static void startScrollAgain() {
+        Appconfig.calledAgain = true;
+        scrolltext.startScroll();
+//        Thread thread = new Thread(new ReceiveFromClient());
+//        thread.start();
+        ScrollTextView.secondTime = true;
+        ScrollTextView.isCalled = false;
+    }
+
+    public void refresh() {
+        finish();
+        startActivity(getIntent());
+    }
+
+    private void refreshActivity() {
+        startActivity(new Intent(ServerText.this,ServerText.class));
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -419,7 +433,7 @@ public class ServerText extends Activity {
                     } else {
                         Toast.makeText(context, "Please Connect Your Device First.!", Toast.LENGTH_LONG).show();
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "Please Enter Some Text First.!", Toast.LENGTH_LONG).show();
                 }
             }
@@ -480,212 +494,6 @@ public class ServerText extends Activity {
                 e.printStackTrace();
             }
         }
-    }
-
-    private class SocketServerThread extends Thread {
-
-        static final int SocketServerPORT = 8080;
-        int count = 0;
-
-        @Override
-        public void run() {
-            try {
-                serverSocket = new ServerSocket(SocketServerPORT);
-                ServerText.this.runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        info.setText("I'm waiting here: "
-                                + serverSocket.getLocalPort());
-                        System.out.println("test2 server text;");
-                    }
-                });
-
-                while (true) {
-                    socket = serverSocket.accept();
-
-                    Appconfig.socketArray.add(count, socket);
-                    count++;
-                    message += "#" + count + " from " + socket.getInetAddress()
-                            + ":" + socket.getPort() + " is now connected.\n";
-
-                    ServerText.this.runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            msg.setText(message);
-//                            if (tvPleaseSelectDevice.getVisibility() == View.VISIBLE) {
-                            tvPleaseSelectDevice.setVisibility(View.GONE);
-                            relmain1.setVisibility(View.GONE);
-                            linmain2.setVisibility(View.GONE);
-                            linmain1.setVisibility(View.VISIBLE);
-//                            }
-                        }
-                    });
-
-//                    InputStream inputStream = socket.getInputStream();
-//                    InputStreamReader isr = new InputStreamReader(inputStream);
-//                    BufferedReader br = new BufferedReader(isr);
-//                    final String receivedMessage = br.readLine();
-//                    System.out.println("Received message from client:"+receivedMessage);
-//
-//                    ServerText.this.runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(ServerText.this,""+receivedMessage+" by client Text",Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//					SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(
-//							socket, count);
-//					socketServerReplyThread.run();
-
-                }
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    public static void startScrollAgain(){
-        Appconfig.calledAgain=true;
-        scrolltext.startScroll();
-//        Thread thread = new Thread(new ReceiveFromClient());
-//        thread.start();
-        ScrollTextView.secondTime=true;
-        ScrollTextView.isCalled=false;
-    }
-
-    //    private class SocketServerReplyThread extends Thread {
-//
-//        private Socket hostThreadSocket;
-//        String strPathSend;
-////		int cnt;
-//
-//        SocketServerReplyThread(Socket socket, String strPath) {//int c
-//            hostThreadSocket = socket;
-//            strPathSend = strPath;
-////			cnt = c;
-//        }
-//
-//        @Override
-//        public void run() {
-//
-//
-//            byte[] bytes;
-//            byte[] buffer = new byte[8192000];
-//            int bytesRead;
-//            ByteArrayOutputStream output = new ByteArrayOutputStream();
-//            try {
-//                InputStream inputStream = new FileInputStream(path);//You can get an inputStream using any IO API
-//                while ((bytesRead = inputStream.read(buffer)) != -1) {
-//                    output.write(buffer, 0, bytesRead);
-//                    System.out.println("buffer :" + buffer.length);
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            bytes = output.toByteArray();
-//
-//            String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
-//
-//            OutputStream outputStream;
-////            String msgReply = encodedString;//REmove comment
-//            String msgReply = strPathSend;
-//
-//            System.out.println("test3 ;");
-//            try {
-//                outputStream = hostThreadSocket.getOutputStream();
-//                PrintStream printStream = new PrintStream(outputStream);
-//                printStream.print(msgReply);
-//                printStream.close();
-//
-//                message += msgReply;
-//
-//                ServerText.this.runOnUiThread(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        msg.setText(message);
-//
-//                    }
-//                });
-//
-//            } catch (IOException e) {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//                message += "Something wrong! " + e.toString() + "\n";
-//            }
-//
-//            ServerText.this.runOnUiThread(new Runnable() {
-//
-//                @Override
-//                public void run() {
-//                    msg.setText(message);
-//
-//                }
-//            });
-//
-//        }
-//
-//
-//    }
-    private class SocketServerReplyThread extends Thread {
-
-        private Socket hostThreadSocket;
-        //    int cnt;
-        String strPathSend;
-
-        SocketServerReplyThread(Socket socket, String strPath) {
-            hostThreadSocket = socket;
-//        cnt = c;
-            strPathSend = strPath;
-        }
-
-        @Override
-        public void run() {
-            OutputStream outputStream;
-            String msgReply = "Hello from Android, you are #";
-
-            SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            SharedPreferences.Editor edit = shre.edit();
-            edit.putString("image_datap1", msgReply);
-            edit.putString("image_datap2", msgReply);
-            edit.putString("image_datap3", msgReply);
-            edit.putString("image_datap4", msgReply);
-            edit.commit();
-            try {
-                outputStream = hostThreadSocket.getOutputStream();
-                PrintStream printStream = new PrintStream(outputStream);
-                printStream.print(msgReply);
-                printStream.close();//Remove comment
-
-                message += "replayed: " + msgReply + "\n";
-
-                ServerText.this.runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        msg.setText(message);
-                    }
-                });
-
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                message += "Something wrong! " + e.toString() + "\n";
-            }
-
-            ServerText.this.runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    msg.setText(message);
-                }
-            });
-        }
-
     }
 
     private String getIpAddress() {
@@ -999,7 +807,6 @@ public class ServerText extends Activity {
 
     }
 
-
     /**
      * This method use for slice image for 4 devices.
      *
@@ -1067,7 +874,6 @@ public class ServerText extends Activity {
 //        startActivity(in);
     }
 
-
     /**
      * This method use for slice image for 4 devices.
      *
@@ -1134,7 +940,6 @@ public class ServerText extends Activity {
 //        startActivity(in);
     }
 
-
     /**
      * This method use for slice image for 3 devices.
      *
@@ -1187,7 +992,6 @@ public class ServerText extends Activity {
 //        Intent in = new Intent(getApplicationContext(), ViewCropImageSlice.class);
 //        startActivity(in);
     }
-
 
     /**
      * This method use for slice image for 3 devices.
@@ -1247,5 +1051,202 @@ public class ServerText extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    private class SocketServerThread extends Thread {
+
+        static final int SocketServerPORT = 8080;
+        int count = 0;
+
+        @Override
+        public void run() {
+            try {
+                serverSocket = new ServerSocket(SocketServerPORT);
+                ServerText.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        info.setText("I'm waiting here: "
+                                + serverSocket.getLocalPort());
+                        System.out.println("test2 server text;");
+                    }
+                });
+
+                while (true) {
+                    socket = serverSocket.accept();
+
+                    Appconfig.socketArray.add(count, socket);
+                    count++;
+                    message += "#" + count + " from " + socket.getInetAddress()
+                            + ":" + socket.getPort() + " is now connected.\n";
+
+                    ServerText.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            msg.setText(message);
+//                            if (tvPleaseSelectDevice.getVisibility() == View.VISIBLE) {
+                            tvPleaseSelectDevice.setVisibility(View.GONE);
+                            relmain1.setVisibility(View.GONE);
+                            linmain2.setVisibility(View.GONE);
+                            linmain1.setVisibility(View.VISIBLE);
+//                            }
+                        }
+                    });
+
+//                    InputStream inputStream = socket.getInputStream();
+//                    InputStreamReader isr = new InputStreamReader(inputStream);
+//                    BufferedReader br = new BufferedReader(isr);
+//                    final String receivedMessage = br.readLine();
+//                    System.out.println("Received message from client:"+receivedMessage);
+//
+//                    ServerText.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(ServerText.this,""+receivedMessage+" by client Text",Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//					SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(
+//							socket, count);
+//					socketServerReplyThread.run();
+
+                }
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    //    private class SocketServerReplyThread extends Thread {
+//
+//        private Socket hostThreadSocket;
+//        String strPathSend;
+////		int cnt;
+//
+//        SocketServerReplyThread(Socket socket, String strPath) {//int c
+//            hostThreadSocket = socket;
+//            strPathSend = strPath;
+////			cnt = c;
+//        }
+//
+//        @Override
+//        public void run() {
+//
+//
+//            byte[] bytes;
+//            byte[] buffer = new byte[8192000];
+//            int bytesRead;
+//            ByteArrayOutputStream output = new ByteArrayOutputStream();
+//            try {
+//                InputStream inputStream = new FileInputStream(path);//You can get an inputStream using any IO API
+//                while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                    output.write(buffer, 0, bytesRead);
+//                    System.out.println("buffer :" + buffer.length);
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            bytes = output.toByteArray();
+//
+//            String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
+//
+//            OutputStream outputStream;
+////            String msgReply = encodedString;//REmove comment
+//            String msgReply = strPathSend;
+//
+//            System.out.println("test3 ;");
+//            try {
+//                outputStream = hostThreadSocket.getOutputStream();
+//                PrintStream printStream = new PrintStream(outputStream);
+//                printStream.print(msgReply);
+//                printStream.close();
+//
+//                message += msgReply;
+//
+//                ServerText.this.runOnUiThread(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        msg.setText(message);
+//
+//                    }
+//                });
+//
+//            } catch (IOException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//                message += "Something wrong! " + e.toString() + "\n";
+//            }
+//
+//            ServerText.this.runOnUiThread(new Runnable() {
+//
+//                @Override
+//                public void run() {
+//                    msg.setText(message);
+//
+//                }
+//            });
+//
+//        }
+//
+//
+//    }
+    private class SocketServerReplyThread extends Thread {
+
+        //    int cnt;
+        String strPathSend;
+        private Socket hostThreadSocket;
+
+        SocketServerReplyThread(Socket socket, String strPath) {
+            hostThreadSocket = socket;
+//        cnt = c;
+            strPathSend = strPath;
+        }
+
+        @Override
+        public void run() {
+            OutputStream outputStream;
+            String msgReply = "Hello from Android, you are #";
+
+            SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor edit = shre.edit();
+            edit.putString("image_datap1", msgReply);
+            edit.putString("image_datap2", msgReply);
+            edit.putString("image_datap3", msgReply);
+            edit.putString("image_datap4", msgReply);
+            edit.commit();
+            try {
+                outputStream = hostThreadSocket.getOutputStream();
+                PrintStream printStream = new PrintStream(outputStream);
+                printStream.print(msgReply);
+                printStream.close();//Remove comment
+
+                message += "replayed: " + msgReply + "\n";
+
+                ServerText.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        msg.setText(message);
+                    }
+                });
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                message += "Something wrong! " + e.toString() + "\n";
+            }
+
+            ServerText.this.runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    msg.setText(message);
+                }
+            });
+        }
+
     }
 }
